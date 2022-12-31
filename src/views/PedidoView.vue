@@ -14,9 +14,9 @@ const form = reactive({
 
 function submit() {
   api
-    .post("/", form)
+    .post("/pedidos", form)
     .then((res) => {
-      console.log(res.data);
+      console.log(res.status);
     })
     .catch((error) => {
       console.log("Ops, ocorreu algum erro: " + error);
