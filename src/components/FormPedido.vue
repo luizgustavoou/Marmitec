@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { InputsForm1 } from "@/components";
 import { reactive, ref, watch } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 
@@ -73,12 +74,10 @@ const resetForm = (formEl: FormInstance | undefined) => {
     :hide-required-asterisk="true"
     class="d-flex flex-column h-100"
   >
-    <el-form-item label="Descrição" prop="desc">
-      <el-input v-model="ruleForm.desc" type="textarea" autocomplete="off" />
-    </el-form-item>
-    <el-form-item label="Qtde proteínas" prop="amountProtein">
-      <el-input-number v-model="ruleForm.amountProtein" :min="1" :max="3" />
-    </el-form-item>
+    <InputsForm1
+      :model-value="ruleForm"
+      @update:model-value="(newForm) => Object.assign(ruleForm, newForm)"
+    ></InputsForm1>
     <el-form-item class="mt-auto">
       <el-button type="primary" @click="submitForm(ruleFormRef)"
         >Enviar pedido</el-button

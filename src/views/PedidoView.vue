@@ -29,6 +29,7 @@ onMounted(() => {
 </script>
 
 <template>
+  {{ form }}
   <div class="d-flex justify-content-center align-items-center container h-100">
     <div class="card w-75 h-50" style="background-color: #e9e9eb">
       <div class="card-header">Fazer pedido</div>
