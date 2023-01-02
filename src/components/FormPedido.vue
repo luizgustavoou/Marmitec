@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { InputsForm1 } from "@/components";
-import { reactive, ref, watch } from "vue";
+import { ProteinInput } from "@/components";
+import { computed, reactive, ref, watch } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 
 const props = defineProps<{
@@ -49,7 +49,8 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      props.submit();
+      //props.submit();
+      next();
     } else {
       console.log("error submit!");
       return false;
@@ -61,9 +62,32 @@ const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.resetFields();
 };
+
+const active = ref(0);
+
+const next = () => {
+  if (active.value++ > 2) active.value = 0;
+};
+
+const forms = [ProteinInput];
+
+const currentForm = computed(() => {
+  return forms[active.value];
+});
+// const flag = ref(false);
 </script>
 
 <template>
+  {{ currentForm }}
+  <!-- <button @click="() => (flag = !flag)">teste</button>
+  {{ flag }} -->
+  <el-steps :active="active" finish-status="success">
+    <el-step title="Proteínas" />
+    <el-step title="Feijão" />
+    <el-step title="Mais" />
+  </el-steps>
+  {{ active }}
+
   <el-form
     size="large"
     :label-position="'top'"
@@ -74,20 +98,24 @@ const resetForm = (formEl: FormInstance | undefined) => {
     :hide-required-asterisk="true"
     class="d-flex flex-column h-100"
   >
-    <InputsForm1
+    <!-- <InputsForm1
       :model-value="ruleForm"
       @update:model-value="(newForm) => Object.assign(ruleForm, newForm)"
-    ></InputsForm1>
-    <el-form-item class="mt-auto">
+    ></InputsForm1> -->
+
+    <component
+      :is="currentForm"
+      :model-value="ruleForm"
+      @update:model-value="(newForm) => Object.assign(ruleForm, newForm)"
+    ></component>
+
+    <el-form-item class="mt-auto ms-auto">
+      <el-button @click="resetForm(ruleFormRef)">Resetar pedido</el-button>
       <el-button type="primary" @click="submitForm(ruleFormRef)"
         >Enviar pedido</el-button
       >
-      <el-button @click="resetForm(ruleFormRef)">Resetar pedido</el-button>
     </el-form-item>
   </el-form>
 </template>
 
-<style>
-.demo-ruleForm {
-}
-</style>
+<style></style>

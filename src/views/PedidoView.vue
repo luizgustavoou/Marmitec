@@ -31,7 +31,7 @@ onMounted(() => {
 <template>
   {{ form }}
   <div class="d-flex justify-content-center align-items-center container h-100">
-    <div class="card w-75 h-50" style="background-color: #e9e9eb">
+    <div class="card" style="background-color: #e9e9eb; min-width: 75%">
       <div class="card-header">Fazer pedido</div>
       <div class="card-body">
         <FormPedido
