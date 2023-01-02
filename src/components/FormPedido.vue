@@ -2,6 +2,7 @@
 import { ProteinInput } from "@/components";
 import { computed, reactive, ref, watch } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
+import type { Form } from "@/types/Forms";
 
 const props = defineProps<{
   setDesc: any;
@@ -12,6 +13,9 @@ const props = defineProps<{
 const ruleFormRef = ref<FormInstance>();
 
 const ruleForm = reactive({
+  proteinas: [],
+  feijao: [],
+  acompanhamentos: [],
   desc: "",
   amountProtein: 1,
 });
@@ -78,7 +82,7 @@ const currentForm = computed(() => {
 </script>
 
 <template>
-  {{ currentForm }}
+  <!-- {{ currentForm }} -->
   <!-- <button @click="() => (flag = !flag)">teste</button>
   {{ flag }} -->
   <el-steps :active="active" finish-status="success">
@@ -106,7 +110,7 @@ const currentForm = computed(() => {
     <component
       :is="currentForm"
       :model-value="ruleForm"
-      @update:model-value="(newForm) => Object.assign(ruleForm, newForm)"
+      @update:model-value="(newForm: Form) =>  Object.assign(ruleForm, newForm)"
     ></component>
 
     <el-form-item class="mt-auto ms-auto">

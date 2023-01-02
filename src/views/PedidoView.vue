@@ -5,9 +5,14 @@ import api from "@/services/api";
 import { reactive, ref } from "vue";
 import { onMounted } from "vue";
 
-const emits = defineEmits(["changeShowMenu"]);
+const emit = defineEmits<{
+  (e: "changeShowMenu", change: boolean): void;
+}>();
 
 const form = reactive({
+  proteinas: [],
+  feijoes: [],
+  acompanhamentos: [],
   desc: "",
   amountProtein: 1,
 });
@@ -24,7 +29,7 @@ function submit() {
 }
 
 onMounted(() => {
-  emits("changeShowMenu", true);
+  emit("changeShowMenu", true);
 });
 </script>
 

@@ -1,23 +1,21 @@
 <script setup lang="ts">
+import type { Form } from "@/types/Forms";
 import { computed, ref } from "vue";
-
-interface Form {
-  desc: string;
-  amountProtein: number;
-}
 
 const props = defineProps<{
   modelValue: Form;
 }>();
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits<{
+  (e: "update:modelValue", newForm: Form): void;
+}>();
 
 const desc = computed({
   get() {
     return props.modelValue.desc;
   },
   set(value) {
-    const newForm = { ...props.modelValue };
+    const newForm: Form = { ...props.modelValue };
 
     newForm.desc = value;
 
@@ -30,7 +28,7 @@ const amountProtein = computed({
     return props.modelValue.amountProtein;
   },
   set(value) {
-    const newForm = { ...props.modelValue };
+    const newForm: Form = { ...props.modelValue };
 
     newForm.amountProtein = value;
 
