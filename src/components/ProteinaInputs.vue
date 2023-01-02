@@ -1,34 +1,44 @@
 <script setup lang="ts">
 import type { Form } from "@/types/Forms";
-import { computed, ref } from "vue";
+import { computed, reactive, ref, watch } from "vue";
+import proteinas from "@/utils/proteinas";
 
 const props = defineProps<{
   modelValue: Form;
 }>();
 
+const proteinForm = reactive({
+  fra_milanesa: 0,
+  fra_assado: 0,
+  figa_ace: 0,
+  bis_sui_ace: 0,
+  fra_molho: 0,
+});
+
 const emit = defineEmits<{
   (e: "update:modelValue", newForm: Form): void;
 }>();
 
-const feijao = computed({
-  get() {
-    return props.modelValue.feijao;
-  },
-  set(value: number) {
-    const newForm: Form = { ...props.modelValue };
+const proteinasFormated = computed(() => {
+  return Object.entries(proteinas);
+});
 
-    newForm.feijao = value;
-    emit("update:modelValue", newForm);
-  },
+watch(proteinForm, (obj) => {
+  let newForm: Form = props.modelValue;
+
+  Object.assign(newForm, proteinForm);
+  emit("update:modelValue", newForm);
 });
 </script>
 <template>
-  <div>
-    <div class="d-flex">
-      <el-form-item label="Frango frito">
-        <el-input-number :min="1" :max="10" />
-      </el-form-item>
+  <el-form-item>
+    <div
+      class="d-flex justify-content-between w-100 mb-3"
+      v-for="[key, label] in proteinasFormated"
+    >
+      <label>{{ label }}</label>
+      <el-input-number v-model="proteinForm[key]" :min="0" :max="10" />
     </div>
-  </div>
+  </el-form-item>
 </template>
-<style lang=""></style>
+<style></style>

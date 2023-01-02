@@ -5,8 +5,7 @@ import type { FormInstance, FormRules } from "element-plus";
 import type { Form } from "@/types/Forms";
 
 const props = defineProps<{
-  setDesc: any;
-  setFeijao: any;
+  setForm: any;
   submit: any;
 }>();
 
@@ -15,25 +14,10 @@ const inputsForm = [ProteinaInputs, MaisInputs, FeijaoInputs];
 const ruleFormRef = ref<FormInstance>();
 
 const ruleForm = reactive({
-  proteinas: [],
   feijao: 1,
   acompanhamentos: [],
   desc: "",
 });
-
-watch(
-  () => ruleForm.desc,
-  (desc) => {
-    props.setDesc(desc);
-  }
-);
-
-watch(
-  () => ruleForm.feijao,
-  (value) => {
-    props.setFeijao(value);
-  }
-);
 
 const rules = reactive<FormRules>({
   desc: [
@@ -95,7 +79,6 @@ const currentForm = computed(() => {
 
   <el-form
     size="large"
-    :label-position="'top'"
     ref="ruleFormRef"
     :model="ruleForm"
     status-icon
@@ -103,11 +86,12 @@ const currentForm = computed(() => {
     :hide-required-asterisk="true"
     class="d-flex flex-column h-100"
   >
+    <!--     :label-position="'top'" -->
     <transition name="translate" mode="out-in">
       <component
         :is="currentForm"
         :model-value="ruleForm"
-        @update:model-value="(newForm: Form) =>  Object.assign(ruleForm, newForm)"
+        @update:model-value="(newForm: Form) =>  props.setForm(Object.assign(ruleForm, newForm))"
       ></component>
     </transition>
 
