@@ -24,13 +24,11 @@ const feijao = computed({
 </script>
 <template>
   <div>
-    <el-form-item label="Tipo de Feijão" prop="desc">
-      <el-radio-group v-model="feijao" class="ml-4">
-        <el-radio :label="1" border>Feijão Branco</el-radio>
-        <el-radio :label="2" border>Feijão Marrom</el-radio>
-        <el-radio :label="3" border>Feijão Preto</el-radio>
-      </el-radio-group>
-    </el-form-item>
+    <div class="d-flex">
+      <el-form-item label="Frango frito">
+        <el-input-number :min="1" :max="10" />
+      </el-form-item>
+    </div>
   </div>
 </template>
 <style lang=""></style>

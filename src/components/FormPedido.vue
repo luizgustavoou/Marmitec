@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ProteinInput, FeijaoInput } from "@/components";
+import { FeijaoInputs, MaisInputs, ProteinaInputs } from "@/components";
 import { computed, reactive, ref, watch } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 import type { Form } from "@/types/Forms";
@@ -9,6 +9,8 @@ const props = defineProps<{
   setFeijao: any;
   submit: any;
 }>();
+
+const inputsForm = [ProteinaInputs, MaisInputs, FeijaoInputs];
 
 const ruleFormRef = ref<FormInstance>();
 
@@ -77,8 +79,6 @@ const prev = () => {
 
   if (active.value < 0) active.value = 0;
 };
-
-const inputsForm = [ProteinInput, FeijaoInput];
 
 const currentForm = computed(() => {
   return inputsForm[active.value];

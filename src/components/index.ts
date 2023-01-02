@@ -1,6 +1,7 @@
-import FeijaoInput from "./FeijaoInput.vue";
+import FeijaoInputs from "./FeijaoInputs.vue";
 import FormPedido from "./FormPedido.vue";
-import ProteinInput from "./ProteinInput.vue";
+import MaisInputs from "./MaisInputs.vue";
+import ProteinaInputs from "./ProteinaInputs.vue";
 import TheMenu from "./TheMenu.vue";
 
-export { FeijaoInput, FormPedido, ProteinInput, TheMenu };
+export { FeijaoInputs, FormPedido, MaisInputs, ProteinaInputs, TheMenu };
