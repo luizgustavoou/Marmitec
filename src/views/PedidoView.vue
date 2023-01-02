@@ -11,10 +11,9 @@ const emit = defineEmits<{
 
 const form = reactive({
   proteinas: [],
-  feijoes: [],
+  feijao: 1,
   acompanhamentos: [],
   desc: "",
-  amountProtein: 1,
 });
 
 function submit() {
@@ -41,7 +40,7 @@ onMounted(() => {
       <div class="card-body">
         <FormPedido
           :set-desc="(value: string) => form.desc = value"
-          :set-amount-protein="(value: number) => form.amountProtein = value"
+          :set-feijao="(value: number) => form.feijao = value"
           :submit="submit"
         ></FormPedido>
       </div>

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ProteinInput } from "@/components";
+import { ProteinInput, FeijaoInput } from "@/components";
 import { computed, reactive, ref, watch } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 import type { Form } from "@/types/Forms";
 
 const props = defineProps<{
   setDesc: any;
-  setAmountProtein: any;
+  setFeijao: any;
   submit: any;
 }>();
 
@@ -14,10 +14,9 @@ const ruleFormRef = ref<FormInstance>();
 
 const ruleForm = reactive({
   proteinas: [],
-  feijao: [],
+  feijao: 1,
   acompanhamentos: [],
   desc: "",
-  amountProtein: 1,
 });
 
 watch(
@@ -28,9 +27,9 @@ watch(
 );
 
 watch(
-  () => ruleForm.amountProtein,
-  (amount) => {
-    props.setAmountProtein(amount);
+  () => ruleForm.feijao,
+  (value) => {
+    props.setFeijao(value);
   }
 );
 
@@ -42,24 +41,23 @@ const rules = reactive<FormRules>({
       trigger: "blur",
     },
   ],
-  amountProtein: {
-    required: true,
-    message: "Por favor insira quantidade de proteínas",
-    trigger: "blur",
-  },
 });
 
-const submitForm = (formEl: FormInstance | undefined) => {
+const submitForm = (formEl: FormInstance | undefined, num: number = 1) => {
   if (!formEl) return;
-  formEl.validate((valid) => {
-    if (valid) {
-      //props.submit();
-      next();
-    } else {
-      console.log("error submit!");
-      return false;
-    }
-  });
+
+  if (num <= -1) {
+    prev();
+  } else {
+    formEl.validate((valid) => {
+      if (valid) {
+        next();
+      } else {
+        console.log("error submit!");
+        return false;
+      }
+    });
+  }
 };
 
 const resetForm = (formEl: FormInstance | undefined) => {
@@ -70,27 +68,30 @@ const resetForm = (formEl: FormInstance | undefined) => {
 const active = ref(0);
 
 const next = () => {
-  if (active.value++ > 2) active.value = 0;
+  active.value++;
+  if (active.value > 3) active.value = 0;
 };
 
-const forms = [ProteinInput];
+const prev = () => {
+  active.value--;
+
+  if (active.value < 0) active.value = 0;
+};
+
+const inputsForm = [ProteinInput, FeijaoInput];
 
 const currentForm = computed(() => {
-  return forms[active.value];
+  return inputsForm[active.value];
 });
 // const flag = ref(false);
 </script>
 
 <template>
-  <!-- {{ currentForm }} -->
-  <!-- <button @click="() => (flag = !flag)">teste</button>
-  {{ flag }} -->
-  <el-steps :active="active" finish-status="success">
+  <el-steps class="mb-4" :active="active" finish-status="success">
     <el-step title="Proteínas" />
     <el-step title="Feijão" />
     <el-step title="Mais" />
   </el-steps>
-  {{ active }}
 
   <el-form
     size="large"
@@ -102,24 +103,34 @@ const currentForm = computed(() => {
     :hide-required-asterisk="true"
     class="d-flex flex-column h-100"
   >
-    <!-- <InputsForm1
-      :model-value="ruleForm"
-      @update:model-value="(newForm) => Object.assign(ruleForm, newForm)"
-    ></InputsForm1> -->
-
-    <component
-      :is="currentForm"
-      :model-value="ruleForm"
-      @update:model-value="(newForm: Form) =>  Object.assign(ruleForm, newForm)"
-    ></component>
+    <transition name="translate" mode="out-in">
+      <component
+        :is="currentForm"
+        :model-value="ruleForm"
+        @update:model-value="(newForm: Form) =>  Object.assign(ruleForm, newForm)"
+      ></component>
+    </transition>
 
     <el-form-item class="mt-auto ms-auto">
-      <el-button @click="resetForm(ruleFormRef)">Resetar pedido</el-button>
-      <el-button type="primary" @click="submitForm(ruleFormRef)"
-        >Enviar pedido</el-button
+      <el-button v-if="active > 0" @click="submitForm(ruleFormRef, -1)"
+        >Voltar</el-button
       >
+      <el-button type="primary" @click="submitForm(ruleFormRef)">{{
+        active > inputsForm.length ? "Fazer pedido" : "Próximo"
+      }}</el-button>
     </el-form-item>
   </el-form>
 </template>
 
-<style></style>
+<style>
+.translate-enter-active,
+.translate-leave-active {
+  transition: all 0.2s ease;
+}
+
+.translate-enter-from,
+.translate-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+</style>

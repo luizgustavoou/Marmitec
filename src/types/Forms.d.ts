@@ -1,7 +1,6 @@
 export interface Form {
   proteinas: Array<string>;
-  feijoes: Array<string>;
+  feijao: number;
   acompanhamentos: Array<string>;
   desc: string;
-  amountProtein: number;
 }

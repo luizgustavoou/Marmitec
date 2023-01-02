@@ -10,23 +10,26 @@ const emit = defineEmits<{
   (e: "update:modelValue", newForm: Form): void;
 }>();
 
-const desc = computed({
+const feijao = computed({
   get() {
-    return props.modelValue.desc;
+    return props.modelValue.feijao;
   },
-  set(value) {
+  set(value: number) {
     const newForm: Form = { ...props.modelValue };
 
-    newForm.desc = value;
-
+    newForm.feijao = value;
     emit("update:modelValue", newForm);
   },
 });
 </script>
 <template>
   <div>
-    <el-form-item label="Descrição" prop="desc">
-      <el-input v-model="desc" type="textarea" autocomplete="off" />
+    <el-form-item label="Tipo de Feijão" prop="desc">
+      <el-radio-group v-model="feijao" class="ml-4">
+        <el-radio :label="1" border>Feijão Branco</el-radio>
+        <el-radio :label="2" border>Feijão Marrom</el-radio>
+        <el-radio :label="3" border>Feijão Preto</el-radio>
+      </el-radio-group>
     </el-form-item>
   </div>
 </template>
