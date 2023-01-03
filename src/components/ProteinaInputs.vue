@@ -26,7 +26,8 @@ const proteinasFormated = computed(() => {
 watch(proteinForm, (obj) => {
   let newForm: Form = props.modelValue;
 
-  Object.assign(newForm, proteinForm);
+  newForm.proteinas = { ...obj };
+
   emit("update:modelValue", newForm);
 });
 </script>

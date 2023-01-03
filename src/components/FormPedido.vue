@@ -5,7 +5,7 @@ import type { FormInstance, FormRules } from "element-plus";
 import type { Form } from "@/types/Forms";
 
 const props = defineProps<{
-  setForm: any;
+  setForm: (f: Form) => void;
   submit: any;
 }>();
 
@@ -14,6 +14,13 @@ const inputsForm = [ProteinaInputs, MaisInputs, FeijaoInputs];
 const ruleFormRef = ref<FormInstance>();
 
 const ruleForm = reactive({
+  proteinas: {
+    fra_milanesa: 0,
+    fra_assado: 0,
+    figa_ace: 0,
+    bis_sui_ace: 0,
+    fra_molho: 0,
+  },
   feijao: 1,
   acompanhamentos: [],
   desc: "",
@@ -67,7 +74,6 @@ const prev = () => {
 const currentForm = computed(() => {
   return inputsForm[active.value];
 });
-// const flag = ref(false);
 </script>
 
 <template>

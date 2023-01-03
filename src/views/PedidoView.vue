@@ -11,11 +11,13 @@ const emit = defineEmits<{
 }>();
 
 const form = reactive({
-  fra_milanesa: 0,
-  fra_assado: 0,
-  figa_ace: 0,
-  bis_sui_ace: 0,
-  fra_molho: 0,
+  proteinas: {
+    fra_milanesa: 0,
+    fra_assado: 0,
+    figa_ace: 0,
+    bis_sui_ace: 0,
+    fra_molho: 0,
+  },
   feijao: 1,
   acompanhamentos: [],
   desc: "",
