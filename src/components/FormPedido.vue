@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import { FeijaoInputs, MaisInputs, ProteinaInputs } from "@/components";
-import { computed, reactive, ref, watch } from "vue";
+import {
+  FeijaoInputs,
+  MaisInputs,
+  ProgressForm,
+  ProteinaInputs,
+} from "@/components";
+import { computed, onMounted, reactive, ref, watch } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 import type { Form, Proteinas } from "@/types/Forms";
 
@@ -9,7 +14,18 @@ const props = defineProps<{
   submit: any;
 }>();
 
-const inputsForm = [ProteinaInputs, FeijaoInputs, MaisInputs];
+const objectComponent = (component: any, label: string) => {
+  return {
+    component,
+    label,
+  };
+};
+
+const inputsForm = [
+  objectComponent(ProteinaInputs, "Proteínas"),
+  objectComponent(FeijaoInputs, "Feijão"),
+  objectComponent(MaisInputs, "Mais"),
+];
 
 const ruleFormRef = ref<FormInstance>();
 
@@ -93,16 +109,16 @@ const prev = () => {
 };
 
 const currentForm = computed(() => {
-  return inputsForm[active.value];
+  return inputsForm[active.value].component;
+});
+
+onMounted(() => {
+  console.log(currentForm.value);
 });
 </script>
 
 <template>
-  <el-steps class="mb-4" :active="active" finish-status="success">
-    <el-step title="Proteínas" />
-    <el-step title="Feijão" />
-    <el-step title="Mais" />
-  </el-steps>
+  <ProgressForm :components="inputsForm" :active="active"></ProgressForm>
 
   <el-form
     size="large"
