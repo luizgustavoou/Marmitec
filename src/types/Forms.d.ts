@@ -8,7 +8,7 @@ import proteinas from "@/utils/proteinas";
 
 // const t3: t2;
 
-type Proteinas = {
+export type Proteinas = {
   [Property in keyof typeof proteinas]: number;
 };
 

@@ -26,33 +26,35 @@ const ruleForm = reactive({
   desc: "",
 });
 
-// const teste = (rule: any, value: Proteinas, callback: any) => {
-//   const sum = Object.values(value).reduce(
-//     (previous, current) => previous + current,
-//     0
-//   );
+const validatorAmountProtein = (rule: any, value: Proteinas, callback: any) => {
+  const sum = Object.values(value).reduce(
+    (previous, current) => previous + current,
+    0
+  );
 
-//   if (sum <= 0) {
-//     callback(new Error("Insere pelo menos uma proteína."));
-//   } else {
-//     callback();
-//   }
-// };
+  console.log(sum);
+
+  if (sum <= 0) {
+    callback(new Error("Insere pelo menos uma proteína."));
+  } else {
+    callback();
+  }
+};
 const rules = reactive<FormRules>({
   desc: [
     {
       required: true,
-      message: "Por favor insira uma descrição do pedido.",
+      message: "Insire uma descrição do pedido.",
       trigger: "blur",
     },
   ],
-  // proteinas: [
-  //   {
-  //     validator: teste,
-  //     message: "Insire pelo menos uma proteína!",
-  //     trigger: "blur",
-  //   },
-  // ],
+  proteinas: [
+    {
+      validator: validatorAmountProtein,
+      message: "Insire pelo menos uma proteína!",
+      trigger: "blur",
+    },
+  ],
 });
 
 const submitForm = (formEl: FormInstance | undefined, num: number = 1) => {
