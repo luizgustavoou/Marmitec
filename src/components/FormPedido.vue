@@ -2,14 +2,14 @@
 import { FeijaoInputs, MaisInputs, ProteinaInputs } from "@/components";
 import { computed, reactive, ref, watch } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
-import type { Form } from "@/types/Forms";
+import type { Form, Proteinas } from "@/types/Forms";
 
 const props = defineProps<{
   setForm: (f: Form) => void;
   submit: any;
 }>();
 
-const inputsForm = [ProteinaInputs, MaisInputs, FeijaoInputs];
+const inputsForm = [ProteinaInputs, FeijaoInputs, MaisInputs];
 
 const ruleFormRef = ref<FormInstance>();
 
@@ -26,6 +26,18 @@ const ruleForm = reactive({
   desc: "",
 });
 
+// const teste = (rule: any, value: Proteinas, callback: any) => {
+//   const sum = Object.values(value).reduce(
+//     (previous, current) => previous + current,
+//     0
+//   );
+
+//   if (sum <= 0) {
+//     callback(new Error("Insere pelo menos uma proteína."));
+//   } else {
+//     callback();
+//   }
+// };
 const rules = reactive<FormRules>({
   desc: [
     {
@@ -34,6 +46,13 @@ const rules = reactive<FormRules>({
       trigger: "blur",
     },
   ],
+  // proteinas: [
+  //   {
+  //     validator: teste,
+  //     message: "Insire pelo menos uma proteína!",
+  //     trigger: "blur",
+  //   },
+  // ],
 });
 
 const submitForm = (formEl: FormInstance | undefined, num: number = 1) => {

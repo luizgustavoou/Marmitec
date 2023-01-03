@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Form } from "@/types/Forms";
-import { computed, reactive, ref, watch } from "vue";
+import { computed, onMounted, reactive, ref, watch } from "vue";
 import proteinas from "@/utils/proteinas";
 
 const props = defineProps<{
@@ -30,9 +30,13 @@ watch(proteinForm, (obj) => {
 
   emit("update:modelValue", newForm);
 });
+
+onMounted(() => {
+  Object.assign(proteinForm, props.modelValue.proteinas);
+});
 </script>
 <template>
-  <el-form-item>
+  <el-form-item prop="proteinas">
     <div
       class="d-flex justify-content-between w-100 mb-3"
       v-for="[key, label] in proteinasFormated"
