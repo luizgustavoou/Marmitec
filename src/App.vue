@@ -9,12 +9,18 @@ const showMenu = ref(false);
 onMounted(() => {});
 </script>
 <template>
-  <div class="vh-100" style="height: 400px; background-color: #e6e8eb">
-    <TheMenu v-if="showMenu"></TheMenu>
-    <RouterView
-      @change-show-menu="(change: boolean) => (showMenu = change)"
-    ></RouterView>
-  </div>
+  <TheMenu v-if="showMenu"></TheMenu>
+  <RouterView
+    @change-show-menu="(change: boolean) => (showMenu = change)"
+  ></RouterView>
 </template>
 
-<style></style>
+<style>
+#app {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #e6e8eb;
+}
+</style>
