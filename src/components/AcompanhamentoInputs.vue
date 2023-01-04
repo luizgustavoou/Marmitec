@@ -5,6 +5,7 @@ import acompanhamentos from "@/utils/acompanhamentos";
 
 const props = defineProps<{
   modelValue: Form;
+  desc: string;
 }>();
 
 const acompanhamentosForm = reactive({
@@ -15,6 +16,8 @@ const acompanhamentosForm = reactive({
   sala_crua: 0,
   maca_cozida: 0,
 });
+
+const desc = ref("");
 
 const emit = defineEmits<{
   (e: "update:modelValue", newForm: Form): void;
@@ -32,19 +35,38 @@ watch(acompanhamentosForm, (obj) => {
   emit("update:modelValue", newForm);
 });
 
+watch(desc, (newDesc) => {
+  let newForm: Form = props.modelValue;
+
+  newForm.desc = newDesc;
+
+  emit("update:modelValue", newForm);
+});
+
 onMounted(() => {
   Object.assign(acompanhamentosForm, props.modelValue.acompanhamentos);
 });
 </script>
 <template>
-  <el-form-item prop="acompanhamentos">
-    <div
-      class="d-flex justify-content-between w-100 mb-3"
-      v-for="[key, label] in acompanhamentosFormated"
-    >
-      <label>{{ label }}</label>
-      <el-input-number v-model="acompanhamentosForm[key]" :min="0" :max="10" />
-    </div>
-  </el-form-item>
+  <div>
+    <el-form-item prop="acompanhamentos">
+      <div
+        class="d-flex justify-content-between w-100 mb-3"
+        v-for="[key, label] in acompanhamentosFormated"
+      >
+        <label>{{ label }}</label>
+        <el-input-number
+          v-model="acompanhamentosForm[key]"
+          :min="0"
+          :max="10"
+        />
+      </div>
+    </el-form-item>
+
+    <el-form-item>
+      <label for="">Descrição</label>
+      <el-input v-model="desc" type="textarea" />
+    </el-form-item>
+  </div>
 </template>
 <style></style>

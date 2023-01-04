@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {
   FeijaoInputs,
-  MaisInputs,
+  AcompanhamentoInputs,
   ProgressForm,
   ProteinaInputs,
 } from "@/components";
@@ -24,7 +24,7 @@ const objectComponent = (component: any, label: string) => {
 const inputsForm = [
   objectComponent(ProteinaInputs, "Proteínas"),
   objectComponent(FeijaoInputs, "Feijão"),
-  objectComponent(MaisInputs, "Mais"),
+  objectComponent(AcompanhamentoInputs, "Acompanhamentos"),
 ];
 
 const ruleFormRef = ref<FormInstance>();
@@ -46,7 +46,7 @@ const ruleForm = reactive({
     sala_crua: 0,
     maca_cozida: 0,
   },
-  desc: "",
+  desc: "cu e buceta",
 });
 
 const validatorAmountProtein = (rule: any, value: Proteinas, callback: any) => {
@@ -79,13 +79,6 @@ const validatorAmountAcompanhamento = (
   }
 };
 const rules = reactive<FormRules>({
-  desc: [
-    {
-      required: true,
-      message: "Insire uma descrição do pedido.",
-      trigger: "blur",
-    },
-  ],
   proteinas: [
     {
       validator: validatorAmountProtein,
@@ -156,9 +149,6 @@ onMounted(() => {
     :hide-required-asterisk="true"
     class="d-flex flex-column h-100"
   >
-    <!--     :label-position="'top'" -->
-    <!-- {{ currentForm }}
-    {{ active }} / {{ inputsForm.length }} -->
     <transition name="translate" mode="out-in">
       <component
         :is="currentForm"

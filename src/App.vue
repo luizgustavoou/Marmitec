@@ -23,4 +23,9 @@ onMounted(() => {});
   height: 100vh;
   background-color: #e6e8eb;
 }
+
+label {
+  font-size: 1rem;
+  font-weight: 500;
+}
 </style>

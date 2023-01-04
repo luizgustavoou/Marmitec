@@ -6,7 +6,12 @@ const props = defineProps<{
 </script>
 
 <template>
-  <el-steps class="mb-4" :active="props.active" finish-status="success">
+  <el-steps
+    class="mb-4"
+    :active="props.active"
+    finish-status="success"
+    align-center
+  >
     <el-step v-for="obj in props.components" :title="obj.label" />
   </el-steps>
 </template>
