@@ -19,7 +19,14 @@ const form = reactive({
     fra_molho: 0,
   },
   feijao: 1,
-  acompanhamentos: [],
+  acompanhamentos: {
+    arroz_refogado: 0,
+    arroz_leite: 0,
+    macarrao: 0,
+    leg_salteados: 0,
+    sala_crua: 0,
+    maca_cozida: 0,
+  },
   desc: "",
 });
 
@@ -43,7 +50,7 @@ onMounted(() => {
   {{ form }}
   <div class="d-flex justify-content-center align-items-center container h-100">
     <div class="card" style="background-color: #e9e9eb; min-width: 75%">
-      <div class="card-header">Fazer pedido</div>
+      <div class="card-header text-center"><h2>Pedido</h2></div>
       <div class="card-body">
         <FormPedido
           :set-form="(newForm: Form) => Object.assign(form, newForm)"

@@ -38,7 +38,14 @@ const ruleForm = reactive({
     fra_molho: 0,
   },
   feijao: 1,
-  acompanhamentos: [],
+  acompanhamentos: {
+    arroz_refogado: 0,
+    arroz_leite: 0,
+    macarrao: 0,
+    leg_salteados: 0,
+    sala_crua: 0,
+    maca_cozida: 0,
+  },
   desc: "",
 });
 
@@ -47,8 +54,6 @@ const validatorAmountProtein = (rule: any, value: Proteinas, callback: any) => {
     (previous, current) => previous + current,
     0
   );
-
-  console.log(sum);
 
   if (sum <= 0) {
     callback(new Error("Insere pelo menos uma proteína."));
@@ -73,21 +78,19 @@ const rules = reactive<FormRules>({
   ],
 });
 
-const submitForm = (formEl: FormInstance | undefined, num: number = 1) => {
+const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
 
-  if (num <= -1) {
-    prev();
-  } else {
-    formEl.validate((valid) => {
-      if (valid) {
-        next();
-      } else {
-        console.log("error submit!");
-        return false;
-      }
-    });
-  }
+  formEl.validate((valid) => {
+    if (valid && active.value < inputsForm.length - 1) {
+      next();
+    } else if (valid) {
+      console.log("Submit!");
+    } else {
+      console.log("error!");
+      return false;
+    }
+  });
 };
 
 const resetForm = (formEl: FormInstance | undefined) => {
@@ -113,7 +116,7 @@ const currentForm = computed(() => {
 });
 
 onMounted(() => {
-  console.log(currentForm.value);
+  // console.log(currentForm.value);
 });
 </script>
 
@@ -130,6 +133,8 @@ onMounted(() => {
     class="d-flex flex-column h-100"
   >
     <!--     :label-position="'top'" -->
+    <!-- {{ currentForm }}
+    {{ active }} / {{ inputsForm.length }} -->
     <transition name="translate" mode="out-in">
       <component
         :is="currentForm"
@@ -139,11 +144,9 @@ onMounted(() => {
     </transition>
 
     <el-form-item class="mt-auto ms-auto">
-      <el-button v-if="active > 0" @click="submitForm(ruleFormRef, -1)"
-        >Voltar</el-button
-      >
+      <el-button v-if="active > 0" @click="prev">Voltar</el-button>
       <el-button type="primary" @click="submitForm(ruleFormRef)">{{
-        active > inputsForm.length ? "Fazer pedido" : "Próximo"
+        active >= inputsForm.length - 1 ? "Fazer pedido" : "Próximo"
       }}</el-button>
     </el-form-item>
   </el-form>
