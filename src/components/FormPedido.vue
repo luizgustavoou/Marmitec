@@ -7,7 +7,7 @@ import {
 } from "@/components";
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
-import type { Form, Proteinas } from "@/types/Forms";
+import type { Acompanhamentos, Form, Proteinas } from "@/types/Forms";
 
 const props = defineProps<{
   setForm: (f: Form) => void;
@@ -61,6 +61,23 @@ const validatorAmountProtein = (rule: any, value: Proteinas, callback: any) => {
     callback();
   }
 };
+
+const validatorAmountAcompanhamento = (
+  rule: any,
+  value: Acompanhamentos,
+  callback: any
+) => {
+  const sum = Object.values(value).reduce(
+    (previous, current) => previous + current,
+    0
+  );
+
+  if (sum <= 0) {
+    callback(new Error("Insere pelo menos um acompanhamento."));
+  } else {
+    callback();
+  }
+};
 const rules = reactive<FormRules>({
   desc: [
     {
@@ -73,6 +90,13 @@ const rules = reactive<FormRules>({
     {
       validator: validatorAmountProtein,
       message: "Insire pelo menos uma proteína!",
+      trigger: "blur",
+    },
+  ],
+  acompanhamentos: [
+    {
+      validator: validatorAmountAcompanhamento,
+      message: "Insire pelo menos um acompanhamento!",
       trigger: "blur",
     },
   ],
