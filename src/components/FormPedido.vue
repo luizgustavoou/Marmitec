@@ -55,8 +55,8 @@ const validatorAmountProtein = (rule: any, value: Proteinas, callback: any) => {
     0
   );
 
-  if (sum <= 0) {
-    callback(new Error("Insere pelo menos uma proteína."));
+  if (sum < 3) {
+    callback(new Error("Insere o mínimo de proteínas."));
   } else {
     callback();
   }
@@ -82,7 +82,6 @@ const rules = reactive<FormRules>({
   proteinas: [
     {
       validator: validatorAmountProtein,
-      message: "Insire pelo menos uma proteína!",
       trigger: "blur",
     },
   ],
