@@ -31,14 +31,17 @@ const form = reactive({
 });
 
 function submit() {
-  api
-    .post("/pedidos", form)
-    .then((res) => {
-      console.log(res.status);
-    })
-    .catch((error) => {
-      console.log("Ops, ocorreu algum erro: " + error);
-    });
+  //console.log(form);
+
+  const req = api.post("/pedidos", form);
+
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      req.finally(() => {
+        res("cu");
+      });
+    }, 2000);
+  });
 }
 
 onMounted(() => {

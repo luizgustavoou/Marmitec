@@ -21,7 +21,7 @@ onMounted(() => {});
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #e6e8eb;
+  background-color: #e6e8eb; /*#e6e8eb; */
 }
 
 label {

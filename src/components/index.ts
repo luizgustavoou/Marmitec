@@ -1,17 +1,19 @@
+import AcompanhamentoInputs from "./AcompanhamentoInputs.vue";
 import FeijaoInputs from "./FeijaoInputs.vue";
 import FormPedido from "./FormPedido.vue";
-import AcompanhamentoInputs from "./AcompanhamentoInputs.vue";
-import ShowChosen from "./ShowChosen.vue";
+import LoadingReq from "./LoadingReq.vue";
 import ProgressForm from "./ProgressForm.vue";
 import ProteinaInputs from "./ProteinaInputs.vue";
+import ShowChosen from "./ShowChosen.vue";
 import TheMenu from "./TheMenu.vue";
 
 export {
+  AcompanhamentoInputs,
   FeijaoInputs,
   FormPedido,
-  AcompanhamentoInputs,
-  ShowChosen,
+  LoadingReq,
   ProgressForm,
   ProteinaInputs,
+  ShowChosen,
   TheMenu,
 };

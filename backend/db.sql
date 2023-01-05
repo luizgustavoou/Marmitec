@@ -42,6 +42,30 @@ INSERT INTO `tbEntregador` VALUES (1,'Diogo','888888888888','22222222222');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tbFeijao`
+--
+
+DROP TABLE IF EXISTS `tbFeijao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tbFeijao` (
+  `idFeijao` int NOT NULL AUTO_INCREMENT,
+  `nomeFeijao` varchar(255) NOT NULL,
+  PRIMARY KEY (`idFeijao`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbFeijao`
+--
+
+LOCK TABLES `tbFeijao` WRITE;
+/*!40000 ALTER TABLE `tbFeijao` DISABLE KEYS */;
+INSERT INTO `tbFeijao` VALUES (1,'Feijão Branco'),(2,'Feijão Marrom'),(3,'Feijão Preto');
+/*!40000 ALTER TABLE `tbFeijao` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbPedido`
 --
 
@@ -51,17 +75,30 @@ DROP TABLE IF EXISTS `tbPedido`;
 CREATE TABLE `tbPedido` (
   `idPedido` int NOT NULL AUTO_INCREMENT,
   `idUsuario` int NOT NULL,
-  `idEntregador` int DEFAULT NULL,
-  `descPedido` varchar(255) NOT NULL,
-  `qtdeProteina` int NOT NULL,
-  `statusPedido` int NOT NULL DEFAULT '1',
-  `canceladoPedido` int NOT NULL DEFAULT '0',
+  `idEntregador` int NOT NULL,
+  `descPedido` varchar(255) DEFAULT NULL,
+  `fraMilanesa` int DEFAULT '0',
+  `fraAssado` int DEFAULT '0',
+  `figaAce` int DEFAULT '0',
+  `bisSuiAce` int DEFAULT '0',
+  `fraMolho` int DEFAULT '0',
+  `arrozRefo` int DEFAULT '0',
+  `arrozLeite` int DEFAULT '0',
+  `macarrao` int DEFAULT '0',
+  `legSalte` int DEFAULT '0',
+  `salaCrua` int DEFAULT '0',
+  `macaCozida` int DEFAULT '0',
+  `feijao` int DEFAULT NULL,
+  `statusPedido` int DEFAULT '1',
+  `canceladoPedido` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`idPedido`),
   KEY `tbPedido_fk0` (`idUsuario`),
   KEY `tbPedido_fk1` (`idEntregador`),
+  KEY `tbPedido_fk2` (`feijao`),
   CONSTRAINT `tbPedido_fk0` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`idUsuario`),
-  CONSTRAINT `tbPedido_fk1` FOREIGN KEY (`idEntregador`) REFERENCES `tbEntregador` (`idEntregador`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `tbPedido_fk1` FOREIGN KEY (`idEntregador`) REFERENCES `tbEntregador` (`idEntregador`),
+  CONSTRAINT `tbPedido_fk2` FOREIGN KEY (`feijao`) REFERENCES `tbFeijao` (`idFeijao`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,4 +146,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-31 15:47:13
+-- Dump completed on 2023-01-05 16:19:30

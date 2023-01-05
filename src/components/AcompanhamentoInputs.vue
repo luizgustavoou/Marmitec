@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ShowChosen } from "@/components";
 import type { Form } from "@/types/Forms";
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import acompanhamentos from "@/utils/acompanhamentos";
@@ -58,7 +59,10 @@ onMounted(() => {
 </script>
 <template>
   <div>
-    {{ acompanhamentosChosen }}
+    <ShowChosen
+      :all="acompanhamentoLimit"
+      :chosen="acompanhamentosChosen"
+    ></ShowChosen>
     <el-form-item prop="acompanhamentos">
       <div
         class="d-flex justify-content-between w-100 mb-3"
