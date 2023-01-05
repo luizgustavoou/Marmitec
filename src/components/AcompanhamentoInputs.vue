@@ -5,7 +5,6 @@ import acompanhamentos from "@/utils/acompanhamentos";
 
 const props = defineProps<{
   modelValue: Form;
-  desc: string;
 }>();
 
 const acompanhamentosForm = reactive({

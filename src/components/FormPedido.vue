@@ -46,7 +46,7 @@ const ruleForm = reactive({
     sala_crua: 0,
     maca_cozida: 0,
   },
-  desc: "cu e buceta",
+  desc: "",
 });
 
 const validatorAmountProtein = (rule: any, value: Proteinas, callback: any) => {
