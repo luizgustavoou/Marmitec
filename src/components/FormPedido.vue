@@ -9,6 +9,10 @@ import { computed, onMounted, reactive, ref, watch } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 import type { Acompanhamentos, Form, Proteinas } from "@/types/Forms";
 
+//TODO: Passar isso por meio de props e pegar esse valor e passar como props aos componentes de ProteinaInputs e AcompanhamentoInputs
+const proteinLimit = 3;
+const acompanhamentoLimit = 6;
+
 const props = defineProps<{
   setForm: (f: Form) => void;
   submit: any;
@@ -55,8 +59,8 @@ const validatorAmountProtein = (rule: any, value: Proteinas, callback: any) => {
     0
   );
 
-  if (sum < 3) {
-    callback(new Error("Insere o mínimo de proteínas."));
+  if (sum < proteinLimit) {
+    callback(new Error("Insere o mínimo de proteína."));
   } else {
     callback();
   }
@@ -72,8 +76,8 @@ const validatorAmountAcompanhamento = (
     0
   );
 
-  if (sum <= 0) {
-    callback(new Error("Insere pelo menos um acompanhamento."));
+  if (sum < acompanhamentoLimit) {
+    callback(new Error("Insere o mínimo de acompanhamento."));
   } else {
     callback();
   }
@@ -88,7 +92,6 @@ const rules = reactive<FormRules>({
   acompanhamentos: [
     {
       validator: validatorAmountAcompanhamento,
-      message: "Insire pelo menos um acompanhamento!",
       trigger: "blur",
     },
   ],
