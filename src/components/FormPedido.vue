@@ -14,25 +14,17 @@ import { AxiosResponse } from "axios";
 //TODO: Passar isso por meio de props e pegar esse valor e passar como props aos componentes de ProteinaInputs e AcompanhamentoInputs
 const proteinLimit = 3;
 const acompanhamentoLimit = 6;
+//FIM TODO
 
 const props = defineProps<{
   loading: boolean;
+  active: number;
+  inputsForms: Array<{ component: any; label: string }>;
   setForm: (f: Form) => void;
   submit: () => void;
 }>();
 
-const objectComponent = (component: any, label: string) => {
-  return {
-    component,
-    label,
-  };
-};
-
-const inputsForm = [
-  objectComponent(ProteinaInputs, "Proteínas"),
-  objectComponent(FeijaoInputs, "Feijão"),
-  objectComponent(AcompanhamentoInputs, "Acompanhamentos"),
-];
+const emit = defineEmits(["update:active"]);
 
 const ruleFormRef = ref<FormInstance>();
 
@@ -55,6 +47,10 @@ const ruleForm = reactive({
   },
   desc: "",
 });
+
+function updateActiveProps(num: number) {
+  emit("update:active", num);
+}
 
 const validatorAmountProtein = (rule: any, value: Proteinas, callback: any) => {
   const sum = Object.values(value).reduce(
@@ -104,7 +100,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
 
   formEl.validate((valid) => {
-    if (valid && active.value < inputsForm.length - 1) {
+    if (valid && props.active < props.inputsForms.length - 1) {
       next();
     } else if (valid) {
       props.submit();
@@ -120,21 +116,18 @@ const resetForm = (formEl: FormInstance | undefined) => {
   formEl.resetFields();
 };
 
-const active = ref(0);
-
 const next = () => {
-  active.value++;
-  if (active.value > 3) active.value = 0;
+  updateActiveProps(props.active + 1);
+  if (props.active > 3) updateActiveProps(0);
 };
 
 const prev = () => {
-  active.value--;
-
-  if (active.value < 0) active.value = 0;
+  updateActiveProps(props.active - 1);
+  if (props.active < 0) updateActiveProps(0);
 };
 
 const currentForm = computed(() => {
-  return inputsForm[active.value].component;
+  return props.inputsForms[props.active].component;
 });
 
 onMounted(() => {
@@ -145,8 +138,8 @@ onMounted(() => {
 <template>
   <ProgressForm
     v-if="!props.loading"
-    :components="inputsForm"
-    :active="active"
+    :components="props.inputsForms"
+    :active="props.active"
   ></ProgressForm>
 
   <el-form
@@ -168,9 +161,11 @@ onMounted(() => {
     <LoadingReq v-else></LoadingReq>
 
     <el-form-item class="mt-auto ms-auto" v-if="!props.loading">
-      <el-button v-if="active > 0" @click="prev">Voltar</el-button>
+      <el-button v-if="props.active > 0" @click="prev">Voltar</el-button>
       <el-button type="primary" @click="submitForm(ruleFormRef)">{{
-        active >= inputsForm.length - 1 ? "Fazer pedido" : "Próximo"
+        props.active >= props.inputsForms.length - 1
+          ? "Fazer pedido"
+          : "Próximo"
       }}</el-button>
     </el-form-item>
   </el-form>

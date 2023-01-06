@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import {
+  AcompanhamentoInputs,
+  FeijaoInputs,
+  ProteinaInputs,
+} from "@/components";
 import { ElMessage } from "element-plus";
 import axios, { AxiosError } from "axios";
 import { FormPedido } from "@/components";
@@ -8,9 +13,24 @@ import { Form } from "@/types/Forms";
 import { reactive, ref } from "vue";
 import { onMounted } from "vue";
 
+const active = ref(0);
+
 const emit = defineEmits<{
   (e: "changeShowMenu", change: boolean): void;
 }>();
+
+const objectComponent = (component: any, label: string) => {
+  return {
+    component,
+    label,
+  };
+};
+
+const inputsForm = [
+  objectComponent(ProteinaInputs, "Proteínas"),
+  objectComponent(FeijaoInputs, "Feijão"),
+  objectComponent(AcompanhamentoInputs, "Acompanhamentos"),
+];
 
 const openMsg = (
   msg: string,
@@ -52,6 +72,8 @@ async function submit() {
     const req = await api.post("/pedidos", form);
 
     openMsg("Pedido cadastrado com sucesso.", "success");
+
+    active.value = 0;
   } catch (error) {
     openMsg("Ocorreu algum error no cadastro do pedido.", "error");
     if (error.response) {
@@ -88,6 +110,8 @@ onMounted(() => {
       <div class="card-body">
         <FormPedido
           :loading="loading"
+          v-model:active="active"
+          :inputsForms="inputsForm"
           :set-form="(newForm: Form) => Object.assign(form, newForm)"
           :submit="submit"
         ></FormPedido>
