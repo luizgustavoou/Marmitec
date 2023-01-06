@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ElMessage } from "element-plus";
+import axios, { AxiosError } from "axios";
 import { FormPedido } from "@/components";
 import api from "@/services/api";
 import { Form } from "@/types/Forms";
@@ -9,6 +11,18 @@ import { onMounted } from "vue";
 const emit = defineEmits<{
   (e: "changeShowMenu", change: boolean): void;
 }>();
+
+const openMsg = (
+  msg: string,
+  type: "success" | "warning" | "info" | "error"
+) => {
+  ElMessage({
+    message: msg,
+    type: type,
+    showClose: true,
+  });
+};
+const loading = ref(false);
 
 const form = reactive({
   proteinas: {
@@ -30,32 +44,50 @@ const form = reactive({
   desc: "",
 });
 
-function submit() {
-  //console.log(form);
+async function submit() {
+  // console.log(form);
 
-  const req = api.post("/pedidos", form);
+  try {
+    loading.value = true;
+    const req = await api.post("/pedidos", form);
 
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      req.finally(() => {
-        res("cu");
-      });
-    }, 2000);
-  });
+    openMsg("Pedido cadastrado com sucesso.", "success");
+  } catch (error) {
+    openMsg("Ocorreu algum error no cadastro do pedido.", "error");
+    if (error.response) {
+      // Request made but the server responded with an error
+      //console.log(error.response.data);
+      // console.log(error.response.status);
+      // console.log(error.response.headers);
+    } else if (error.request) {
+      // Request made but no response is received from the server.
+
+      console.log(error.request as XMLHttpRequest);
+    } else {
+      // Error occured while setting up the request
+      console.log("Error", error.message);
+    }
+  } finally {
+    loading.value = false;
+  }
 }
 
 onMounted(() => {
   emit("changeShowMenu", true);
 });
+
+//error.response.status
 </script>
 
 <template>
   {{ form }}
+
   <div class="d-flex justify-content-center align-items-center container h-100">
     <div class="card w-100" style="background-color: #e9e9eb">
       <div class="card-header text-center"><h2>Pedido</h2></div>
       <div class="card-body">
         <FormPedido
+          :loading="loading"
           :set-form="(newForm: Form) => Object.assign(form, newForm)"
           :submit="submit"
         ></FormPedido>

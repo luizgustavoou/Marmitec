@@ -9,14 +9,16 @@ import {
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 import type { Acompanhamentos, Form, Proteinas } from "@/types/Forms";
+import { AxiosResponse } from "axios";
 
 //TODO: Passar isso por meio de props e pegar esse valor e passar como props aos componentes de ProteinaInputs e AcompanhamentoInputs
 const proteinLimit = 3;
 const acompanhamentoLimit = 6;
 
 const props = defineProps<{
+  loading: boolean;
   setForm: (f: Form) => void;
-  submit: () => Promise<string>;
+  submit: () => void;
 }>();
 
 const objectComponent = (component: any, label: string) => {
@@ -31,8 +33,6 @@ const inputsForm = [
   objectComponent(FeijaoInputs, "Feijão"),
   objectComponent(AcompanhamentoInputs, "Acompanhamentos"),
 ];
-
-const loading = ref(false);
 
 const ruleFormRef = ref<FormInstance>();
 
@@ -107,15 +107,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (valid && active.value < inputsForm.length - 1) {
       next();
     } else if (valid) {
-      loading.value = true;
-      props
-        .submit()
-        .then((res) => {
-          console.log(res);
-        })
-        .finally(() => {
-          loading.value = false;
-        });
+      props.submit();
     } else {
       console.log("error!");
       return false;
@@ -152,7 +144,7 @@ onMounted(() => {
 
 <template>
   <ProgressForm
-    v-if="!loading"
+    v-if="!props.loading"
     :components="inputsForm"
     :active="active"
   ></ProgressForm>
@@ -166,7 +158,7 @@ onMounted(() => {
     :hide-required-asterisk="true"
     class="d-flex flex-column h-100"
   >
-    <transition name="translate" mode="out-in" v-if="!loading">
+    <transition name="translate" mode="out-in" v-if="!props.loading">
       <component
         :is="currentForm"
         :model-value="ruleForm"
@@ -175,7 +167,7 @@ onMounted(() => {
     </transition>
     <LoadingReq v-else></LoadingReq>
 
-    <el-form-item class="mt-auto ms-auto" v-if="!loading">
+    <el-form-item class="mt-auto ms-auto" v-if="!props.loading">
       <el-button v-if="active > 0" @click="prev">Voltar</el-button>
       <el-button type="primary" @click="submitForm(ruleFormRef)">{{
         active >= inputsForm.length - 1 ? "Fazer pedido" : "Próximo"
