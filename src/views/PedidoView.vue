@@ -76,7 +76,7 @@ async function submit(resetForm: () => void) {
     resetForm();
     active.value = 0;
   } catch (error) {
-    openMsg("Ocorreu algum error no cadastro do pedido.", "error");
+    openMsg("Ocorreu algum error ao cadastrar o pedido.", "error");
     // if (error.response) {
     //   // Request made but the server responded with an error
     //   //console.log(error.response.data);
