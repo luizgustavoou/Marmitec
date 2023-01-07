@@ -41,6 +41,7 @@ const openMsg = (
     message: msg,
     type: type,
     showClose: true,
+    duration: 3500,
   });
 };
 const loading = ref(false);
@@ -72,8 +73,12 @@ async function submit(resetForm: () => void) {
     loading.value = true;
     const req = await api.post("/pedidos", form);
 
-    openMsg("Pedido cadastrado com sucesso.", "success");
-    resetForm();
+    if (req.status == 200) {
+      openMsg("Pedido cadastrado com sucesso.", "success");
+      resetForm();
+    }
+    console.log(req);
+
     active.value = 0;
   } catch (error) {
     openMsg("Ocorreu algum error ao cadastrar o pedido.", "error");
@@ -104,7 +109,7 @@ onMounted(() => {
 
 <template>
   <!-- <Teste></Teste> -->
-  {{ form }}
+  <!-- {{ form }} -->
 
   <div class="d-flex justify-content-center align-items-center container h-100">
     <div class="card w-100" style="background-color: #e9e9eb">

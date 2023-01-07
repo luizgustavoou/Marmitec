@@ -15,10 +15,12 @@ const props = defineProps<{
   active: number;
   inputsForms: Array<{ component: any; label: string }>;
   setForm: (f: Form) => void;
-  submit: () => void;
+  submit: (cb: () => void) => void;
 }>();
 
-const emit = defineEmits(["update:active"]);
+const emit = defineEmits<{
+  (e: "update:active", num: number): void;
+}>();
 
 const ruleFormRef = ref<FormInstance>();
 
