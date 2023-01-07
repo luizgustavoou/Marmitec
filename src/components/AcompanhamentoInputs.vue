@@ -20,8 +20,6 @@ const acompanhamentosForm = reactive({
   maca_cozida: 0,
 });
 
-const desc = ref("");
-
 const emit = defineEmits<{
   (e: "update:modelValue", newForm: Form): void;
 }>();
@@ -38,12 +36,15 @@ watch(acompanhamentosForm, (obj) => {
   emit("update:modelValue", newForm);
 });
 
-watch(desc, (newDesc) => {
-  let newForm: Form = props.modelValue;
-
-  newForm.desc = newDesc;
-
-  emit("update:modelValue", newForm);
+const desc = computed({
+  get() {
+    return props.modelValue.desc;
+  },
+  set(newDesc) {
+    let newForm = { ...props.modelValue };
+    newForm.desc = newDesc;
+    emit("update:modelValue", newForm);
+  },
 });
 
 const acompanhamentosChosen = computed(() => {
@@ -51,6 +52,11 @@ const acompanhamentosChosen = computed(() => {
     (previous, currentValue) => previous + currentValue,
     0
   );
+});
+
+watch(props.modelValue, (newProps) => {
+  desc.value = props.modelValue.desc;
+  Object.assign(acompanhamentosForm, newProps.acompanhamentos);
 });
 
 onMounted(() => {
@@ -81,7 +87,7 @@ onMounted(() => {
       </div>
     </el-form-item>
 
-    <el-form-item>
+    <el-form-item prop="desc">
       <label for="">Descrição</label>
       <el-input v-model="desc" type="textarea" />
     </el-form-item>

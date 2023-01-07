@@ -3,6 +3,7 @@ import {
   AcompanhamentoInputs,
   FeijaoInputs,
   ProteinaInputs,
+  Teste,
 } from "@/components";
 import { ElMessage } from "element-plus";
 import axios, { AxiosError } from "axios";
@@ -52,7 +53,6 @@ const form = reactive({
     bis_sui_ace: 0,
     fra_molho: 0,
   },
-  feijao: 1,
   acompanhamentos: {
     arroz_refogado: 0,
     arroz_leite: 0,
@@ -61,10 +61,11 @@ const form = reactive({
     sala_crua: 0,
     maca_cozida: 0,
   },
+  feijao: 1,
   desc: "",
 });
 
-async function submit() {
+async function submit(resetForm: () => void) {
   // console.log(form);
 
   try {
@@ -72,23 +73,23 @@ async function submit() {
     const req = await api.post("/pedidos", form);
 
     openMsg("Pedido cadastrado com sucesso.", "success");
-
+    resetForm();
     active.value = 0;
   } catch (error) {
     openMsg("Ocorreu algum error no cadastro do pedido.", "error");
-    if (error.response) {
-      // Request made but the server responded with an error
-      //console.log(error.response.data);
-      // console.log(error.response.status);
-      // console.log(error.response.headers);
-    } else if (error.request) {
-      // Request made but no response is received from the server.
+    // if (error.response) {
+    //   // Request made but the server responded with an error
+    //   //console.log(error.response.data);
+    //   // console.log(error.response.status);
+    //   // console.log(error.response.headers);
+    // } else if (error.request) {
+    //   // Request made but no response is received from the server.
 
-      console.log(error.request as XMLHttpRequest);
-    } else {
-      // Error occured while setting up the request
-      console.log("Error", error.message);
-    }
+    //   console.log(error.request as XMLHttpRequest);
+    // } else {
+    //   // Error occured while setting up the request
+    //   console.log("Error", error.message);
+    // }
   } finally {
     loading.value = false;
   }
@@ -102,6 +103,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <!-- <Teste></Teste> -->
   {{ form }}
 
   <div class="d-flex justify-content-center align-items-center container h-100">

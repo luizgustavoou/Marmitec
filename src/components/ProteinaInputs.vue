@@ -35,15 +35,19 @@ watch(proteinForm, (obj) => {
   emit("update:modelValue", newForm);
 });
 
-onMounted(() => {
-  Object.assign(proteinForm, props.modelValue.proteinas);
-});
-
 const proteinsChosen = computed(() => {
   return Object.values(proteinForm).reduce(
     (previous, currentValue) => previous + currentValue,
     0
   );
+});
+
+watch(props.modelValue, (newProps) => {
+  Object.assign(proteinForm, newProps.proteinas);
+});
+
+onMounted(() => {
+  Object.assign(proteinForm, props.modelValue.proteinas);
 });
 </script>
 <template>

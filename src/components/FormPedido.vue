@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import {
-  AcompanhamentoInputs,
-  FeijaoInputs,
-  LoadingReq,
-  ProteinaInputs,
-  ProgressForm,
-} from "@/components";
+import { LoadingReq, ProgressForm } from "@/components";
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 import type { Acompanhamentos, Form, Proteinas } from "@/types/Forms";
@@ -36,7 +30,6 @@ const ruleForm = reactive({
     bis_sui_ace: 0,
     fra_molho: 0,
   },
-  feijao: 1,
   acompanhamentos: {
     arroz_refogado: 0,
     arroz_leite: 0,
@@ -45,6 +38,7 @@ const ruleForm = reactive({
     sala_crua: 0,
     maca_cozida: 0,
   },
+  feijao: 1,
   desc: "",
 });
 
@@ -103,17 +97,33 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (valid && props.active < props.inputsForms.length - 1) {
       next();
     } else if (valid) {
-      props.submit();
+      props.submit(resetForm);
     } else {
-      console.log("error!");
       return false;
     }
   });
 };
 
-const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.resetFields();
+// const resetForm = (formEl: FormInstance | undefined) => {
+//   if (!formEl) return;
+
+//   console.log(formEl);
+
+//   formEl.resetFields();
+//   props.setForm(ruleForm);
+// };
+
+const resetForm = () => {
+  ruleForm.desc = "";
+  ruleForm.feijao = 1;
+
+  Object.keys(ruleForm).forEach((key_) => {
+    if (key_ != "desc" && key_ != "feijao") {
+      Object.keys(ruleForm[key_]).forEach((key) => {
+        ruleForm[key_][key] = 0;
+      });
+    }
+  });
 };
 
 const next = () => {
@@ -161,7 +171,8 @@ onMounted(() => {
     <LoadingReq v-else></LoadingReq>
 
     <el-form-item class="mt-auto ms-auto" v-if="!props.loading">
-      <el-button v-if="props.active > 0" @click="prev">Voltar</el-button>
+      <!-- <el-button @click="resetForm">Reset</el-button> -->
+      <el-button v-if="props.active > 0" @click="prev">Anterior</el-button>
       <el-button type="primary" @click="submitForm(ruleFormRef)">{{
         props.active >= props.inputsForms.length - 1
           ? "Fazer pedido"

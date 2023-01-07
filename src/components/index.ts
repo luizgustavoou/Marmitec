@@ -6,8 +6,10 @@ import ProgressForm from "./ProgressForm.vue";
 import ProteinaInputs from "./ProteinaInputs.vue";
 import ShowChosen from "./ShowChosen.vue";
 import TheMenu from "./TheMenu.vue";
+import Teste from "./Teste.vue";
 
 export {
+  Teste,
   AcompanhamentoInputs,
   FeijaoInputs,
   FormPedido,
