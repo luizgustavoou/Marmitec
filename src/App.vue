@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TheMenu } from "@/components";
+import { TheMenu, Layout, Footer } from "@/components";
 
 import api from "@/services/api";
 import { onMounted, ref } from "vue";
@@ -9,25 +9,19 @@ const showMenu = ref(false);
 onMounted(() => {});
 </script>
 <template>
-  <div class="d-flex flex-column h-100">
-    <header>
+  <Layout>
+    <template #header>
       <TheMenu v-if="showMenu"></TheMenu>
-    </header>
-    <main class="flex-grow-1">
+    </template>
+    <template #main>
       <RouterView
         @change-show-menu="(change: boolean) => (showMenu = change)"
       ></RouterView>
-    </main>
-    <footer
-      class="d-flex flex-column justify-content-center align-items-center text-white p-3"
-    >
-      <label> Feito por Luiz Gustavo </label>
-      <div>
-        <i class="bi bi-instagram me-2"></i>
-        <a href="https://www.instagram.com/luizgustavoou/" style="text-decoration: none; color: white;" target="_blank">luizgustavoou</a>
-      </div>
-    </footer>
-  </div>
+    </template>
+    <template #footer>
+      <Footer></Footer>
+    </template>
+  </Layout>
 </template>
 
 <style>
@@ -41,11 +35,6 @@ body {
 
 #app {
   height: 100%;
-}
-
-footer {
-  background-color: #36454fa2;
-
 }
 
 label {
