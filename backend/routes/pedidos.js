@@ -49,4 +49,18 @@ router.post("/", (req, res) => {
   );
 });
 
+router.get("/", (req, res) => {
+  conn.query(
+    {
+      sql: "SELECT * FROM tbPedido",
+    },
+    (error, results, fields) => {
+      if (error) {
+        res.statusCode = 500;
+        res.send();
+      } else res.send(results);
+    }
+  );
+});
+
 module.exports = router;

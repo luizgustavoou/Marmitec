@@ -28,7 +28,7 @@ const feijao = computed({
       <div class="d-flex flex-column">
         <label>Tipo de feijão</label>
 
-        <el-radio-group v-model="feijao" class="ml-4">
+        <el-radio-group text-color="#F56C6C" v-model="feijao" class="ml-4">
           <el-radio :label="1" border>Feijão Branco</el-radio>
           <el-radio :label="2" border>Feijão Marrom</el-radio>
           <el-radio :label="3" border>Feijão Preto</el-radio>

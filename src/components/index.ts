@@ -7,6 +7,7 @@ import LoadingReq from "./LoadingReq.vue";
 import ProgressForm from "./ProgressForm.vue";
 import ProteinaInputs from "./ProteinaInputs.vue";
 import ShowChosen from "./ShowChosen.vue";
+import StatusPedido from "./StatusPedido.vue";
 import TheMenu from "./TheMenu.vue";
 import Teste from "./Teste.vue";
 
@@ -21,5 +22,6 @@ export {
   ProgressForm,
   ProteinaInputs,
   ShowChosen,
+  StatusPedido,
   TheMenu,
 };

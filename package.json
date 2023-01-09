@@ -16,7 +16,8 @@
     "cors": "^2.8.5",
     "element-plus": "^2.2.27",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "vue3-draggable": "^2.0.9"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",
