@@ -1,6 +1,13 @@
 <script setup lang="ts">
-const emits = defineEmits(["changeShowMenu"]);
-emits("changeShowMenu", true);
+import { onMounted } from "vue";
+
+const emit = defineEmits<{
+  (e: "changeShowMenu", change: boolean): void;
+}>();
+
+onMounted(() => {
+  emit("changeShowMenu", true);
+});
 </script>
 
 <template>

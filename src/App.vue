@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TheMenu } from "@/components";
+import { TheMenu, Layout, Footer } from "@/components";
 
 import api from "@/services/api";
 import { onMounted, ref } from "vue";
@@ -9,12 +9,36 @@ const showMenu = ref(false);
 onMounted(() => {});
 </script>
 <template>
-  <div class="vh-100" style="height: 400px; background-color: #E6E8EB;">
-    <TheMenu v-if="showMenu"></TheMenu>
-    <RouterView
-      @change-show-menu="(change: boolean) => (showMenu = change)"
-    ></RouterView>
-  </div>
+  <Layout>
+    <template #header>
+      <TheMenu v-if="showMenu"></TheMenu>
+    </template>
+    <template #main>
+      <RouterView
+        @change-show-menu="(change: boolean) => (showMenu = change)"
+      ></RouterView>
+    </template>
+    <template #footer>
+      <Footer></Footer>
+    </template>
+  </Layout>
 </template>
 
-<style></style>
+<style>
+html,
+body {
+  background-color: #e6e8eb;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#app {
+  height: 100%;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+</style>

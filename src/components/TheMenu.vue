@@ -22,7 +22,14 @@ const handleSelect = (key: string, keyPath: string[]) => {
       <router-link to="/home" style="text-decoration: none">Home</router-link>
     </el-menu-item>
     <el-menu-item index="addpedidos">
-      <router-link to="/addpedidos" style="text-decoration: none">Fazer pedido</router-link>
+      <router-link to="/addpedidos" style="text-decoration: none"
+        >Fazer pedido</router-link
+      >
+    </el-menu-item>
+    <el-menu-item index="pedidos">
+      <router-link to="/pedidos" style="text-decoration: none"
+        >Pedidos</router-link
+      >
     </el-menu-item>
   </el-menu>
 </template>
