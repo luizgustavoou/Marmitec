@@ -1,6 +1,15 @@
 <script setup lang="ts">
+import { InfoUser } from "@/components";
 import type { IPedidos } from "@/types/Pedidos";
 import { More } from "@element-plus/icons-vue";
+
+import { ref, unref } from "vue";
+import { ClickOutside as vClickOutside } from "element-plus";
+const buttonRef = ref();
+const popoverRef = ref();
+const onClickOutside = () => {
+  unref(popoverRef).popperRef?.delayHide?.();
+};
 
 const props = defineProps<{
   pedidos: IPedidos | [];
@@ -23,8 +32,13 @@ const props = defineProps<{
             <el-icon><Avatar /></el-icon>
             {{ pedido.nomeUsuario }}
           </div>
-          <el-button type="info" :icon="More" circle />
+
+          <InfoUser
+            :adress="pedido.endUsuario"
+            :tel="pedido.telUsuario"
+          ></InfoUser>
         </div>
+
         <div class="card-body">
           <h5 class="card-title">Light card title</h5>
           <p class="card-text">

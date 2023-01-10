@@ -2,6 +2,7 @@ import AcompanhamentoInputs from "./AcompanhamentoInputs.vue";
 import FeijaoInputs from "./FeijaoInputs.vue";
 import FormPedido from "./FormPedido.vue";
 import Footer from "./Footer.vue";
+import InfoUser from "./InfoUser.vue";
 import Layout from "./Layout.vue";
 import LoadingReq from "./LoadingReq.vue";
 import ProgressForm from "./ProgressForm.vue";
@@ -17,6 +18,7 @@ export {
   FeijaoInputs,
   FormPedido,
   Footer,
+  InfoUser,
   Layout,
   LoadingReq,
   ProgressForm,
