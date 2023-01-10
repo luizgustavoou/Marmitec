@@ -1,25 +1,36 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { IPedidos } from "@/types/Pedidos";
+import { More } from "@element-plus/icons-vue";
+
+const props = defineProps<{
+  pedidos: IPedidos | [];
+}>();
+</script>
 
 <template>
-  <div class="row">
-    <div v-for="i in [1,2,3 ]" class="col" style="height: 300px">
+  <div class="col" style="height: 100%">
+    <div
+      class="box d-flex p-3 flex-column align-items-center border"
+      style="overflow: scroll; height: 100%"
+    >
       <div
-        class="box d-flex px-3 py-2 flex-column align-items-center border"
-        style="overflow: scroll; height: 100%"
+        v-for="pedido in props.pedidos"
+        class="card text-bg-light mb-3"
+        style="width: 100%"
       >
-        <div
-          v-for="i in [1,1,1,1,1]"
-          class="card text-bg-light mb-3"
-          
-        >
-          <div class="card-header">Header</div>
-          <div class="card-body">
-            <h5 class="card-title">Light card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
+        <div class="card-header d-flex">
+          <div class="me-auto">
+            <el-icon><Avatar /></el-icon>
+            {{ pedido.nomeUsuario }}
           </div>
+          <el-button type="info" :icon="More" circle />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Light card title</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
         </div>
       </div>
     </div>
@@ -30,8 +41,5 @@
 .box {
   border-radius: 10px;
   background-color: rgba(181, 181, 255, 0.575);
-}
-.draggable-item-list-move {
-  transition: transform 0.5s;
 }
 </style>

@@ -1,24 +1,25 @@
 import type { Form } from "@/types/Forms";
 
-interface IPedido {
+export interface IPedido {
+  nomeEntregador: string;
+  statusPedido: 1 | 2 | 3;
+  canceladoPedido: 0 | 1;
+  descPedido: string;
+  nomeUsuario: string;
+  endUsuario: string;
+  telUsuario: string;
   arrozLeite: number;
   arrozRefo: number;
   bisSuiAce: number;
-  canceladoPedido: number;
-  descPedido: string;
   feijao: number;
   figaAce: number;
   fraAssado: number;
   fraMilanesa: number;
   fraMolho: number;
-  idEntregador: number;
-  idPedido: number;
-  idUsuario: number;
   legSalte: number;
   macaCozida: number;
   macarrao: number;
   salaCrua: number;
-  statusPedido: number;
 }
 
 export type IPedidos = Array<IPedido>;

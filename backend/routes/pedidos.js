@@ -52,7 +52,7 @@ router.post("/", (req, res) => {
 router.get("/", (req, res) => {
   conn.query(
     {
-      sql: "SELECT * FROM tbPedido",
+      sql: "CALL sp_ShowPedidos();",
     },
     (error, results, fields) => {
       if (error) {

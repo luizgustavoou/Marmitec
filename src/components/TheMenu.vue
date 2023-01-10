@@ -2,7 +2,7 @@
 import { ref } from "vue";
 
 const activeIndex = ref("home");
-const activeIndex2 = ref("addpedidos");
+const activeIndex2 = ref("pedidos");
 const handleSelect = (key: string, keyPath: string[]) => {
   //console.log(key, keyPath);
 };

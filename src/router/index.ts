@@ -6,7 +6,7 @@ import PedidosView from "../views/PedidosView.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    redirect: "addpedidos",
+    redirect: "pedidos",
   },
   {
     path: "/pedidos",

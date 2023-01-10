@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import { StatusPedido } from "@/components";
 import Draggable from "vue3-draggable";
-import type { IPedidos } from "@/types/Pedidos";
+import type { IPedido, IPedidos } from "@/types/Pedidos";
 import api from "@/services/api";
-import { Ref, onMounted, ref } from "vue";
+import { Ref, computed, onMounted, ref } from "vue";
 
 const emit = defineEmits<{
   (e: "changeShowMenu", change: boolean): void;
 }>();
 
 const tableData: Ref<IPedidos | []> = ref([]);
+
+const requestedPedidos: Ref<IPedidos | []> = ref([]);
+
+const processPedidos: Ref<IPedidos | []> = ref([]);
+
+const finishPedidos: Ref<IPedidos | []> = ref([]);
 
 const items = ref([
   { title: "Item 1" },
@@ -21,19 +27,22 @@ const items = ref([
 const items2 = ref([{ title: "Item 5" }]);
 onMounted(async () => {
   emit("changeShowMenu", true);
+
   try {
     const res = await api.get("/pedidos");
 
-    const data: IPedidos | [] = res.data;
+    const data: IPedidos | [] = res.data[0];
+
+    requestedPedidos.value = data.filter((pedido) => pedido.statusPedido == 1);
+
+    processPedidos.value = data.filter((pedido) => pedido.statusPedido == 2);
+
+    finishPedidos.value = data.filter((pedido) => pedido.statusPedido == 3);
 
     tableData.value = data;
   } catch (error) {
     console.log("Ocorreu um erro!");
   }
-});
-
-onMounted(() => {
-  console.log("Teste");
 });
 </script>
 
@@ -48,7 +57,11 @@ onMounted(() => {
     </template>
   </Draggable> -->
 
-  <StatusPedido></StatusPedido>
+  <div class="row p-4" style="height: 750px">
+    <StatusPedido :pedidos="requestedPedidos"></StatusPedido>
+    <StatusPedido :pedidos="requestedPedidos"></StatusPedido>
+    <StatusPedido :pedidos="requestedPedidos"></StatusPedido>
+  </div>
 </template>
 
 <style>
