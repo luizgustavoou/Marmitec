@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <el-popover placement="bottom" width="auto" trigger="hover" >
+  <el-popover placement="right" width="auto" trigger="hover" >
     <template #reference>
       <el-button type="info" :icon="More" circle />
     </template>

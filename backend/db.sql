@@ -98,7 +98,7 @@ CREATE TABLE `tbPedido` (
   CONSTRAINT `tbPedido_fk0` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`idUsuario`),
   CONSTRAINT `tbPedido_fk1` FOREIGN KEY (`idEntregador`) REFERENCES `tbEntregador` (`idEntregador`),
   CONSTRAINT `tbPedido_fk2` FOREIGN KEY (`feijao`) REFERENCES `tbFeijao` (`idFeijao`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,6 +107,7 @@ CREATE TABLE `tbPedido` (
 
 LOCK TABLES `tbPedido` WRITE;
 /*!40000 ALTER TABLE `tbPedido` DISABLE KEYS */;
+INSERT INTO `tbPedido` VALUES (1,1,1,'Por favor tirar o molho das proteínas!',1,1,1,0,0,1,1,1,1,1,1,3,1,0),(2,1,1,'',3,0,0,0,0,2,2,2,0,0,0,2,2,0),(3,1,1,'Tirar cebola do feijao por favor!',0,0,1,1,1,2,0,2,1,0,1,1,3,0);
 /*!40000 ALTER TABLE `tbPedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,6 +137,37 @@ LOCK TABLES `tbUsuario` WRITE;
 INSERT INTO `tbUsuario` VALUES (1,'Luiz Gustavo','99999999999','Rua Aeroporto de Navegantes 249','1111111111');
 /*!40000 ALTER TABLE `tbUsuario` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'marmitaria'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ShowPedidos` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ShowPedidos`()
+BEGIN
+	SELECT
+	e.nomeEntregador, p.statusPedido, p.canceladoPedido, p.descPedido, u.nomeUsuario, u.endUsuario,
+	u.telUsuario, p.arrozLeite, p.arrozRefo, p.bisSuiAce, p.feijao, p.figaAce, p.fraAssado,
+	p.fraMilanesa, p.fraMolho, p.legSalte, p.macaCozida, p.macarrao, p.salaCrua
+	FROM tbPedido as p         
+	INNER JOIN tbUsuario as u
+	ON p.idUsuario = u.idUsuario
+	INNER JOIN tbEntregador as e
+	ON p.idEntregador = e.idEntregador;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -146,4 +178,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-05 16:19:30
+-- Dump completed on 2023-01-10 19:22:41
