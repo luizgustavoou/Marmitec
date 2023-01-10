@@ -3,13 +3,7 @@ import { InfoUser } from "@/components";
 import type { IPedidos, IPedido } from "@/types/Pedidos";
 import { More } from "@element-plus/icons-vue";
 
-import { computed, ref, unref } from "vue";
-import { ClickOutside as vClickOutside } from "element-plus";
-const buttonRef = ref();
-const popoverRef = ref();
-const onClickOutside = () => {
-  unref(popoverRef).popperRef?.delayHide?.();
-};
+import { computed } from "vue";
 
 const props = defineProps<{
   pedidos: IPedidos | [];
@@ -54,7 +48,24 @@ const pedidosFormated = computed(() => {
         </div>
 
         <div class="card-body">
-          {{ pedidosFormated }}
+          <div v-for="key of Object.keys(pedido)">
+            <div
+              v-if="
+                key != 'nomeEntregador' &&
+                key != 'statusPedido' &&
+                key != 'endUsuario' &&
+                key != 'telUsuario' &&
+                key != 'nomeUsuario' &&
+                key != 'descPedido'
+              "
+              class="d-flex mb-3 justify-content-between"
+            >
+              <label>{{ key }} </label>
+              <label>{{ pedido[key] }}</label>
+            </div>
+          </div>
+
+          <!-- {{ pedido }} -->
         </div>
       </div>
     </div>

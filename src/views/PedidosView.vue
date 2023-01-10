@@ -59,8 +59,8 @@ onMounted(async () => {
 
   <div class="row p-4" style="height: 750px">
     <StatusPedido :pedidos="requestedPedidos"></StatusPedido>
-    <StatusPedido :pedidos="requestedPedidos"></StatusPedido>
-    <StatusPedido :pedidos="requestedPedidos"></StatusPedido>
+    <StatusPedido :pedidos="processPedidos"></StatusPedido>
+    <StatusPedido :pedidos="finishPedidos"></StatusPedido>
   </div>
 </template>
 
