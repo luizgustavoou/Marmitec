@@ -31,6 +31,10 @@ onMounted(async () => {
     console.log("Ocorreu um erro!");
   }
 });
+
+onMounted(() => {
+  console.log("Teste");
+});
 </script>
 
 <template>
@@ -48,7 +52,6 @@ onMounted(async () => {
 </template>
 
 <style>
-
 .draggable-item-list-move {
   transition: transform 0.5s;
 }
