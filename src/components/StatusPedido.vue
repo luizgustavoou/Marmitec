@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { InfoUser } from "@/components";
-import type { IPedidos } from "@/types/Pedidos";
+import type { IPedidos, IPedido } from "@/types/Pedidos";
 import { More } from "@element-plus/icons-vue";
 
-import { ref, unref } from "vue";
+import { computed, ref, unref } from "vue";
 import { ClickOutside as vClickOutside } from "element-plus";
 const buttonRef = ref();
 const popoverRef = ref();
@@ -14,6 +14,20 @@ const onClickOutside = () => {
 const props = defineProps<{
   pedidos: IPedidos | [];
 }>();
+
+const pedidosFormated = computed(() => {
+  return props.pedidos.map((pedido) => {
+    let obj: Partial<IPedido> = {};
+
+    Object.keys(pedido).forEach((key) => {
+      if (pedido[key as keyof IPedido] != 0)
+        (obj[key as keyof IPedido] as IPedido[keyof IPedido]) =
+          pedido[key as keyof IPedido];
+    });
+
+    return obj;
+  });
+});
 </script>
 
 <template>
@@ -23,7 +37,7 @@ const props = defineProps<{
       style="overflow: scroll; height: 100%"
     >
       <div
-        v-for="pedido in props.pedidos"
+        v-for="pedido in pedidosFormated"
         class="card text-bg-light mb-3"
         style="width: 100%"
       >
@@ -34,17 +48,13 @@ const props = defineProps<{
           </div>
 
           <InfoUser
-            :adress="pedido.endUsuario"
-            :tel="pedido.telUsuario"
+            :adress="(pedido.endUsuario as string)"
+            :tel="(pedido.telUsuario as string)"
           ></InfoUser>
         </div>
 
         <div class="card-body">
-          <h5 class="card-title">Light card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+          {{ pedidosFormated }}
         </div>
       </div>
     </div>

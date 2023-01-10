@@ -23,3 +23,4 @@ export interface IPedido {
 }
 
 export type IPedidos = Array<IPedido>;
+export type IPPedidos = Array<Partial<IPedido>>;
