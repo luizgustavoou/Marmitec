@@ -7,8 +7,11 @@ import { More } from "@element-plus/icons-vue";
 
 const props = defineProps<{
   pedidos: IPedidos | [];
+  change: (e: any) => void;
   title: string;
 }>();
+
+
 </script>
 
 <template>
@@ -22,6 +25,7 @@ const props = defineProps<{
         class="w-100 h-100"
         :list="props.pedidos"
         group="pedidos"
+        @change="props.change"
         item-key="Pedidos"
       >
         <template #item="{ element }">

@@ -37,6 +37,25 @@ onMounted(async () => {
     console.log("Ocorreu um erro!");
   }
 });
+
+function changeStatusPedido(id: number, newStatus: 1 | 2 | 3) {
+  console.log(`id ${id} change to ${newStatus}!`);
+}
+
+const changeRequest = (e: any) => {
+  if (Object.prototype.hasOwnProperty.call(e, "added"))
+    changeStatusPedido(1, 1);
+};
+
+const changeProcess = (e: any) => {
+  if (Object.prototype.hasOwnProperty.call(e, "added"))
+    changeStatusPedido(1, 2);
+};
+
+const changeFinish = (e: any) => {
+  if (Object.prototype.hasOwnProperty.call(e, "added"))
+    changeStatusPedido(1, 3);
+};
 </script>
 
 <template>
@@ -46,10 +65,19 @@ onMounted(async () => {
     <div class="row gy-5 p-4" style="height: 750px">
       <StatusPedido
         title="Solicitado"
+        :change="changeRequest"
         :pedidos="requestedPedidos"
       ></StatusPedido>
-      <StatusPedido title="Andamento" :pedidos="processPedidos"></StatusPedido>
-      <StatusPedido title="Finalizado" :pedidos="finishPedidos"></StatusPedido>
+      <StatusPedido
+        :change="changeProcess"
+        title="Andamento"
+        :pedidos="processPedidos"
+      ></StatusPedido>
+      <StatusPedido
+        :change="changeFinish"
+        title="Finalizado"
+        :pedidos="finishPedidos"
+      ></StatusPedido>
     </div>
   </div>
 </template>
