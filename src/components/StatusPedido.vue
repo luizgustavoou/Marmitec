@@ -12,7 +12,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="col text-center" style="height: 100%">
+  <div class="flex-fill text-center" style="height: 100%">
     <label class="fs-4">{{ props.title }}</label>
     <div
       class="box d-flex p-3 flex-column align-items-center border"

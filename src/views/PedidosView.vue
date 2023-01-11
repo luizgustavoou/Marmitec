@@ -64,7 +64,7 @@ const changeFinish = (e: objChange, id: number) => {
   <div>
     <!-- style="overflow-y: scroll;" -->
 
-    <div class="row gy-5 p-4" style="height: 750px; overflow-y: scroll;">
+    <div class="d-flex gap-3 p-4" style="height: 750px; overflow-y: scroll;">
       <StatusPedido
         title="Solicitado"
         :change="changeRequest"
