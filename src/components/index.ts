@@ -1,4 +1,5 @@
 import AcompanhamentoInputs from "./AcompanhamentoInputs.vue";
+import CardPedido from "./CardPedido.vue";
 import FeijaoInputs from "./FeijaoInputs.vue";
 import FormPedido from "./FormPedido.vue";
 import Footer from "./Footer.vue";
@@ -15,6 +16,7 @@ import Teste from "./Teste.vue";
 export {
   Teste,
   AcompanhamentoInputs,
+  CardPedido,
   FeijaoInputs,
   FormPedido,
   Footer,

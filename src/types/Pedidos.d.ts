@@ -6,7 +6,7 @@ export interface IPedido {
   canceladoPedido: 0 | 1;
   descPedido: string;
   nomeUsuario: string;
-  endUsuario: string;
+  endUsuario: string;''
   telUsuario: string;
   arrozLeite: number;
   arrozRefo: number;
@@ -23,4 +23,4 @@ export interface IPedido {
 }
 
 export type IPedidos = Array<IPedido>;
-export type IPPedidos = Array<Partial<IPedido>>;
+

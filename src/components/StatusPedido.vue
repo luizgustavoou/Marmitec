@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { InfoUser } from "@/components";
+import { InfoUser, CardPedido } from "@/components";
 import type { IPedidos, IPedido } from "@/types/Pedidos";
 import { More } from "@element-plus/icons-vue";
 
@@ -30,44 +30,10 @@ const pedidosFormated = computed(() => {
       class="box d-flex p-3 flex-column align-items-center border"
       style="overflow: scroll; height: 100%"
     >
-      <div
+      <CardPedido
         v-for="pedido in pedidosFormated"
-        class="card text-bg-light mb-3"
-        style="width: 100%"
-      >
-        <div class="card-header d-flex">
-          <div class="me-auto">
-            <el-icon><Avatar /></el-icon>
-            {{ pedido.nomeUsuario }}
-          </div>
-
-          <InfoUser
-            :adress="(pedido.endUsuario as string)"
-            :tel="(pedido.telUsuario as string)"
-          ></InfoUser>
-        </div>
-
-        <div class="card-body">
-          <div v-for="key of Object.keys(pedido)">
-            <div
-              v-if="
-                key != 'nomeEntregador' &&
-                key != 'statusPedido' &&
-                key != 'endUsuario' &&
-                key != 'telUsuario' &&
-                key != 'nomeUsuario' &&
-                key != 'descPedido'
-              "
-              class="d-flex mb-3 justify-content-between"
-            >
-              <label>{{ key }} </label>
-              <label>{{ pedido[key] }}</label>
-            </div>
-          </div>
-
-          <!-- {{ pedido }} -->
-        </div>
-      </div>
+        :pedido="pedido"
+      ></CardPedido>
     </div>
   </div>
 </template>
