@@ -98,7 +98,7 @@ CREATE TABLE `tbPedido` (
   CONSTRAINT `tbPedido_fk0` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`idUsuario`),
   CONSTRAINT `tbPedido_fk1` FOREIGN KEY (`idEntregador`) REFERENCES `tbEntregador` (`idEntregador`),
   CONSTRAINT `tbPedido_fk2` FOREIGN KEY (`feijao`) REFERENCES `tbFeijao` (`idFeijao`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +107,7 @@ CREATE TABLE `tbPedido` (
 
 LOCK TABLES `tbPedido` WRITE;
 /*!40000 ALTER TABLE `tbPedido` DISABLE KEYS */;
-INSERT INTO `tbPedido` VALUES (1,1,1,'Por favor tirar o molho das proteínas!',1,1,1,0,0,1,1,1,1,1,1,3,1,0),(2,1,1,'',3,0,0,0,0,2,2,2,0,0,0,2,2,0),(3,1,1,'Tirar cebola do feijao por favor!',0,0,1,1,1,2,0,2,1,0,1,1,3,0);
+INSERT INTO `tbPedido` VALUES (1,1,1,'Por favor tirar o molho das proteínas!',1,1,1,0,0,1,1,1,1,1,1,3,1,0),(2,1,1,'',3,0,0,0,0,2,2,2,0,0,0,2,2,0),(3,1,1,'Tirar cebola do feijao por favor!',0,0,1,1,1,2,0,2,1,0,1,1,3,0),(4,1,1,'',0,1,0,1,1,1,1,0,1,1,2,3,1,0),(5,1,1,'',3,0,0,0,0,0,0,6,0,0,0,1,1,0),(6,1,1,'',3,0,0,0,0,0,0,0,0,6,0,1,1,0),(7,1,1,'',0,0,0,0,3,0,0,0,6,0,0,1,1,0);
 /*!40000 ALTER TABLE `tbPedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,7 +154,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ShowPedidos`()
 BEGIN
 	SELECT
-	e.nomeEntregador, p.statusPedido, p.canceladoPedido, p.descPedido, u.nomeUsuario, u.endUsuario,
+	p.idPedido, e.nomeEntregador, p.statusPedido, p.canceladoPedido, p.descPedido, u.nomeUsuario, u.endUsuario,
 	u.telUsuario, p.arrozLeite, p.arrozRefo, p.bisSuiAce, p.feijao, p.figaAce, p.fraAssado,
 	p.fraMilanesa, p.fraMolho, p.legSalte, p.macaCozida, p.macarrao, p.salaCrua
 	FROM tbPedido as p         
@@ -178,4 +178,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-10 19:22:41
+-- Dump completed on 2023-01-11 19:01:58
