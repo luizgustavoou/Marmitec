@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { StatusPedido, Teste } from "@/components";
+import { ElMessage } from "element-plus";
 // import Draggable from "vue3-draggable";
 import draggable from "vuedraggable";
-import type { IPedidos, objChange, teste} from "@/types/Pedidos";
+import type { IPedidos, objChange, teste } from "@/types/Pedidos";
 import api from "@/services/api";
 import { Ref, computed, onMounted, ref } from "vue";
 
@@ -17,6 +18,18 @@ const requestedPedidos: Ref<IPedidos | []> = ref([]);
 const processPedidos: Ref<IPedidos | []> = ref([]);
 
 const finishPedidos: Ref<IPedidos | []> = ref([]);
+
+const openMsg = (
+  msg: string,
+  type: "success" | "warning" | "info" | "error"
+) => {
+  ElMessage({
+    message: msg,
+    type: type,
+    showClose: true,
+    duration: 3500,
+  });
+};
 
 onMounted(async () => {
   emit("changeShowMenu", true);
@@ -38,8 +51,18 @@ onMounted(async () => {
   }
 });
 
-function changeStatusPedido(id: number, newStatus: 1 | 2 | 3) {
-  console.log(`id ${id} change to ${newStatus}!`);
+async function changeStatusPedido(id: number, newStatus: 1 | 2 | 3) {
+  // console.log(`id ${id} change to ${newStatus}!`);
+
+  try {
+    const req = await api.put(`/pedidos/status/${id}`, { newStatus });
+
+    console.log("Trocado!");
+  } catch (error) {
+    console.log("Ocorreu um erro!");
+    
+    openMsg("Ocorreu algum error ao atualizar o status do pedido.", "error");
+  }
 }
 
 const changeRequest = (e: objChange, id: number) => {
@@ -55,8 +78,6 @@ const changeProcess = (e: objChange, id: number) => {
 const changeFinish = (e: objChange, id: number) => {
   if (Object.prototype.hasOwnProperty.call(e, "added"))
     changeStatusPedido(e.added.element.idPedido, 3);
-  
-  
 };
 </script>
 
@@ -64,7 +85,7 @@ const changeFinish = (e: objChange, id: number) => {
   <div>
     <!-- style="overflow-y: scroll;" -->
 
-    <div class="d-flex gap-3 p-4" style="height: 750px; overflow-y: scroll;">
+    <div class="d-flex gap-3 p-4" style="height: 750px; overflow-y: scroll">
       <StatusPedido
         title="Solicitado"
         :change="changeRequest"

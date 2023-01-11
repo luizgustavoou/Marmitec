@@ -63,4 +63,22 @@ router.get("/", (req, res) => {
   );
 });
 
+router.put("/status/:id", (req, res) => {
+  const id = req.params.id;
+  const newStatus = req.body.newStatus;
+
+  conn.query(
+    {
+      sql: "UPDATE tbPedido SET statusPedido = ? WHERE idPedido = ?",
+      values: [newStatus, id],
+    },
+    (error, results, fields) => {
+      if (error) {
+        res.statusCode = 500;
+        res.send();
+      } else res.send(results);
+    }
+  );
+});
+
 module.exports = router;
