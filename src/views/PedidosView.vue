@@ -2,7 +2,7 @@
 import { StatusPedido, Teste } from "@/components";
 // import Draggable from "vue3-draggable";
 import draggable from "vuedraggable";
-import type { IPedido, IPedidos } from "@/types/Pedidos";
+import type { IPedidos, objChange, teste} from "@/types/Pedidos";
 import api from "@/services/api";
 import { Ref, computed, onMounted, ref } from "vue";
 
@@ -42,19 +42,21 @@ function changeStatusPedido(id: number, newStatus: 1 | 2 | 3) {
   console.log(`id ${id} change to ${newStatus}!`);
 }
 
-const changeRequest = (e: any) => {
+const changeRequest = (e: objChange, id: number) => {
   if (Object.prototype.hasOwnProperty.call(e, "added"))
-    changeStatusPedido(1, 1);
+    changeStatusPedido(e.added.element.idPedido, 1);
 };
 
-const changeProcess = (e: any) => {
+const changeProcess = (e: objChange, id: number) => {
   if (Object.prototype.hasOwnProperty.call(e, "added"))
-    changeStatusPedido(1, 2);
+    changeStatusPedido(e.added.element.idPedido, 2);
 };
 
-const changeFinish = (e: any) => {
+const changeFinish = (e: objChange, id: number) => {
   if (Object.prototype.hasOwnProperty.call(e, "added"))
-    changeStatusPedido(1, 3);
+    changeStatusPedido(e.added.element.idPedido, 3);
+  
+  
 };
 </script>
 

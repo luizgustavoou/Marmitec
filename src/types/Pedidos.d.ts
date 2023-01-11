@@ -1,12 +1,13 @@
 import type { Form } from "@/types/Forms";
 
 export interface IPedido {
+  idPedido: number;
   nomeEntregador: string;
   statusPedido: 1 | 2 | 3;
   canceladoPedido: 0 | 1;
   descPedido: string;
   nomeUsuario: string;
-  endUsuario: string;''
+  endUsuario: string;
   telUsuario: string;
   arrozLeite: number;
   arrozRefo: number;
@@ -22,5 +23,18 @@ export interface IPedido {
   salaCrua: number;
 }
 
-export type IPedidos = Array<IPedido>;
+type nameAction = "added" | "removed" | "moved";
 
+interface objAction {
+  element: IPedido;
+  newIndex?: number;
+  oldIndex?: number;
+}
+
+export type objChange = Record<nameAction, objAction>;
+
+const t: objChange;
+
+const t2: teste;
+
+export type IPedidos = Array<IPedido>;

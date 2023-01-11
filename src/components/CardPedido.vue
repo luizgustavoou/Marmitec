@@ -63,6 +63,7 @@ const props = defineProps<{
             key != 'nomeUsuario' &&
             key != 'descPedido' &&
             key != 'canceladoPedido' &&
+           
             pedido[key] != 0
           "
           class="d-flex mb-3 justify-content-between"
