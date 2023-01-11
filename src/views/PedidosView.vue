@@ -57,7 +57,7 @@ onMounted(async () => {
     </template>
   </Draggable> -->
 
-  <div class="row p-4" style="height: 750px">
+  <div class="row gy-5 p-4" style="height: 750px; overflow-y: scroll; ">
     <StatusPedido title="Solicitado" :pedidos="requestedPedidos"></StatusPedido>
     <StatusPedido title="Andamento" :pedidos="processPedidos"></StatusPedido>
     <StatusPedido title="Finalizado" :pedidos="finishPedidos"></StatusPedido>
