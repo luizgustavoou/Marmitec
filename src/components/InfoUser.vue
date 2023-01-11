@@ -10,7 +10,8 @@ const props = defineProps<{
 <template>
   <el-popover placement="right" width="auto" trigger="hover" >
     <template #reference>
-      <el-button type="info" :icon="More" circle />
+      <el-icon size="22"><More /></el-icon>
+      <!-- <el-button type="info" :icon="More" circle /> -->
     </template>
     <div class="d-flex flex-column">
       <div>

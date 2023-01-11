@@ -7,6 +7,7 @@ import { computed } from "vue";
 
 const props = defineProps<{
   pedidos: IPedidos | [];
+  title: string;
 }>();
 
 const pedidosFormated = computed(() => {
@@ -25,7 +26,8 @@ const pedidosFormated = computed(() => {
 </script>
 
 <template>
-  <div class="col" style="height: 100%">
+  <div class="col text-center" style="height: 100%">
+    <label>{{ props.title }}</label>
     <div
       class="box d-flex p-3 flex-column align-items-center border"
       style="overflow: scroll; height: 100%"

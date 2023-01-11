@@ -58,9 +58,9 @@ onMounted(async () => {
   </Draggable> -->
 
   <div class="row p-4" style="height: 750px">
-    <StatusPedido :pedidos="requestedPedidos"></StatusPedido>
-    <StatusPedido :pedidos="processPedidos"></StatusPedido>
-    <StatusPedido :pedidos="finishPedidos"></StatusPedido>
+    <StatusPedido title="Solicitado" :pedidos="requestedPedidos"></StatusPedido>
+    <StatusPedido title="Andamento" :pedidos="processPedidos"></StatusPedido>
+    <StatusPedido title="Finalizado" :pedidos="finishPedidos"></StatusPedido>
   </div>
 </template>
 
