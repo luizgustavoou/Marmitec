@@ -30,7 +30,7 @@ const pedidosFormated = computed(() => {
     <label class="fs-4">{{ props.title }}</label>
     <div
       class="box d-flex p-3 flex-column align-items-center border"
-      style="overflow: scroll; height: 100%"
+      style="overflow-y: scroll; height: 100%"
     >
       <CardPedido
         v-for="pedido in pedidosFormated"

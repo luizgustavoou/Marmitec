@@ -7,7 +7,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <el-card shadow="hover" style="width: 100%">
+  <!-- <el-card class="mb-3" shadow="hover" style="width: 100%;">
     <template #header>
       <div class="d-flex justify-content-center align-items-center">
         <div class="d-flex me-auto">
@@ -38,7 +38,39 @@ const props = defineProps<{
         <label>{{ props.pedido[key] }}</label>
       </div>
     </div>
-  </el-card>
+  </el-card> -->
+  <div class="card text-bg-light mb-3" style="width: 100%">
+    <div class="card-header d-flex">
+      <div class="me-auto">
+        <el-icon><Avatar /></el-icon>
+        {{ pedido.nomeUsuario }}
+      </div>
+
+      <InfoUser
+        :adress="(pedido.endUsuario as string)"
+        :tel="(pedido.telUsuario as string)"
+      ></InfoUser>
+    </div>
+
+    <div class="card-body">
+      <div v-for="key of Object.keys(pedido)">
+        <div
+          v-if="
+            key != 'nomeEntregador' &&
+            key != 'statusPedido' &&
+            key != 'endUsuario' &&
+            key != 'telUsuario' &&
+            key != 'nomeUsuario' &&
+            key != 'descPedido'
+          "
+          class="d-flex mb-3 justify-content-between"
+        >
+          <label>{{ key }} </label>
+          <label>{{ pedido[key] }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style></style>

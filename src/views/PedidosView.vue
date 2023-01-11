@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { StatusPedido } from "@/components";
+import { StatusPedido, Teste } from "@/components";
 import Draggable from "vue3-draggable";
 import type { IPedido, IPedidos } from "@/types/Pedidos";
 import api from "@/services/api";
@@ -23,6 +23,8 @@ const items = ref([
   { title: "Item 3" },
   { title: "Item 4" },
 ]);
+
+
 
 const items2 = ref([{ title: "Item 5" }]);
 onMounted(async () => {
@@ -48,16 +50,20 @@ onMounted(async () => {
 
 <template>
   <!-- {{ items }} <br />
-  {{ items2 }} -->
-  <!-- <Draggable v-model="items" transition="300">
+  {{ items2 }}
+  <Draggable v-model="items" transition="300">
     <template #item="{ item }">
       <div>
         {{ item.title }}
       </div>
     </template>
-  </Draggable> -->
+  </Draggable>
 
-  <div class="row gy-5 p-4" style="height: 750px; overflow-y: scroll; ">
+  <hr>
+  <Teste v-model="items2"></Teste> -->
+
+
+  <div class="row gy-5 p-4" style="height: 750px; ">
     <StatusPedido title="Solicitado" :pedidos="requestedPedidos"></StatusPedido>
     <StatusPedido title="Andamento" :pedidos="processPedidos"></StatusPedido>
     <StatusPedido title="Finalizado" :pedidos="finishPedidos"></StatusPedido>
