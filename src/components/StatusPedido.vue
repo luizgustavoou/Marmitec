@@ -1,28 +1,14 @@
 <script setup lang="ts">
-import { InfoUser, CardPedido } from "@/components";
+import draggable from "vuedraggable";
+
+import { CardPedido, Teste } from "@/components";
 import type { IPedidos, IPedido } from "@/types/Pedidos";
 import { More } from "@element-plus/icons-vue";
-
-import { computed } from "vue";
 
 const props = defineProps<{
   pedidos: IPedidos | [];
   title: string;
 }>();
-
-const pedidosFormated = computed(() => {
-  return props.pedidos.map((pedido) => {
-    let obj: Partial<IPedido> = {};
-
-    Object.keys(pedido).forEach((key) => {
-      if (pedido[key as keyof IPedido] != 0)
-        (obj[key as keyof IPedido] as IPedido[keyof IPedido]) =
-          pedido[key as keyof IPedido];
-    });
-
-    return obj;
-  });
-});
 </script>
 
 <template>
@@ -32,10 +18,19 @@ const pedidosFormated = computed(() => {
       class="box d-flex p-3 flex-column align-items-center border"
       style="overflow-y: scroll; height: 100%"
     >
-      <CardPedido
-        v-for="pedido in pedidosFormated"
-        :pedido="pedido"
-      ></CardPedido>
+      <draggable
+        class="w-100 h-100"
+        :list="props.pedidos"
+        group="pedidos"
+        item-key="Pedidos"
+      >
+        <template #item="{ element }">
+          <div>
+            <CardPedido :pedido="element"></CardPedido>
+          </div>
+        </template>
+      </draggable>
+      <hr />
     </div>
   </div>
 </template>
@@ -45,4 +40,8 @@ const pedidosFormated = computed(() => {
   border-radius: 10px;
   background-color: rgba(181, 181, 255, 0.575);
 }
+
+/* .flip-list-move {
+  transition: transform 0.5s;
+} */
 </style>

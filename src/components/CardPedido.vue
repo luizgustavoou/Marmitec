@@ -39,7 +39,7 @@ const props = defineProps<{
       </div>
     </div>
   </el-card> -->
-  <div class="card text-bg-light mb-3" style="width: 100%">
+  <div class="card text-bg-light mb-3" style=" cursor: pointer">
     <div class="card-header d-flex">
       <div class="me-auto">
         <el-icon><Avatar /></el-icon>
@@ -61,7 +61,9 @@ const props = defineProps<{
             key != 'endUsuario' &&
             key != 'telUsuario' &&
             key != 'nomeUsuario' &&
-            key != 'descPedido'
+            key != 'descPedido' &&
+            key != 'canceladoPedido' &&
+            pedido[key] != 0
           "
           class="d-flex mb-3 justify-content-between"
         >
