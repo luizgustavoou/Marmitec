@@ -56,11 +56,7 @@ async function changeStatusPedido(id: number, newStatus: 1 | 2 | 3) {
 
   try {
     const req = await api.put(`/pedidos/status/${id}`, { newStatus });
-
-    console.log("Trocado!");
   } catch (error) {
-    console.log("Ocorreu um erro!");
-    
     openMsg("Ocorreu algum error ao atualizar o status do pedido.", "error");
   }
 }

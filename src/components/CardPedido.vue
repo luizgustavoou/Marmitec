@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { InfoUser } from "@/components";
+import { IPedido } from "@/types/Pedidos";
 
 const props = defineProps<{
-  pedido: any;
+  pedido: IPedido;
 }>();
 </script>
 
