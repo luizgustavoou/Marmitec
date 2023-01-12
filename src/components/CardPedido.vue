@@ -7,7 +7,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <!-- <el-card class="mb-3" shadow="hover" style="width: 100%;">
+  <el-card class="mb-3" shadow="hover" style="cursor: pointer">
     <template #header>
       <div class="d-flex justify-content-center align-items-center">
         <div class="d-flex me-auto">
@@ -30,7 +30,9 @@ const props = defineProps<{
           key != 'endUsuario' &&
           key != 'telUsuario' &&
           key != 'nomeUsuario' &&
-          key != 'descPedido'
+          key != 'descPedido' &&
+          key != 'canceladoPedido' &&
+          pedido[key] != 0
         "
         class="d-flex mb-3 justify-content-between"
       >
@@ -38,8 +40,8 @@ const props = defineProps<{
         <label>{{ props.pedido[key] }}</label>
       </div>
     </div>
-  </el-card> -->
-  <div class="card text-bg-light mb-3" style=" cursor: pointer">
+  </el-card>
+  <!-- <div class="card text-bg-light mb-3" style=" cursor: pointer">
     <div class="card-header d-flex">
       <div class="me-auto">
         <el-icon><Avatar /></el-icon>
@@ -73,7 +75,7 @@ const props = defineProps<{
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <style></style>
