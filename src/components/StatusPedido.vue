@@ -38,6 +38,7 @@ const props = defineProps<{
 
 <style>
 .box {
+  min-width: 300px;
   border-radius: 10px;
   background-color: rgba(181, 181, 255, 0.575);
 }

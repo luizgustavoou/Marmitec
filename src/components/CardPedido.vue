@@ -40,6 +40,7 @@ const show = ref(true);
           key != 'nomeUsuario' &&
           key != 'descPedido' &&
           key != 'canceladoPedido' &&
+          key != 'idPedido' &&
           pedido[key] != 0
         "
         class="d-flex mb-3 justify-content-between"
