@@ -1,32 +1,7 @@
-const conn = require("./conn");
-const pedidos = require("./routes/pedidos");
-const express = require("express");
-const cors = require("cors");
-const app = express();
+//index.js: responsável por subir nosso servidor;
+require("dotenv").config();
+const app = require("./app");
 
-const corsOptions = {
-  origin: "*",
-};
-
-//INICÍO Configuração
-app.use("/pedidos", pedidos);
-
-app.use(express.json());
-
-app.use(cors(corsOptions));
-//FIM CONFIGURAÇÃO
-
-app.post("/", (req, res) => {
-  res.send(req.body);
-});
-
-app.listen(8124, () => {
-  console.log("Servidor conectado: http://localhost:8124");
-
-  // conn.query("SELECT * FROM tbUsuario", (error, results, fields) => {
-  //   if (error) throw error;
-
-  //   console.log(results);
-  //   console.log(results[0].nomeUsuario);
-  // });
+app.listen(process.env.PORT || 8124, () => {
+  console.log(`Servidor conectado: http://${process.env.DB_HOST}:8124`);
 });

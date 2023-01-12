@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { TheMenu, Layout, Footer } from "@/components";
 
-import api from "@/services/api";
 import { onMounted, ref } from "vue";
 
 const showMenu = ref(false);
