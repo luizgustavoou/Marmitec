@@ -26,6 +26,7 @@ module.exports = (app) => {
         excludedSchemas: {
           mysql: true,
         },
+        serverId: Date.now(),
       });
 
       await instance.start();

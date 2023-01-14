@@ -5,7 +5,7 @@ import { ElMessage } from "element-plus";
 import draggable from "vuedraggable";
 import type { IPedidos, objChange, teste } from "@/types/Pedidos";
 import api from "@/services/api";
-import { Ref, computed, onMounted, ref } from "vue";
+import { Ref, computed, onMounted, onUnmounted, ref } from "vue";
 
 const emit = defineEmits<{
   (e: "changeShowMenu", change: boolean): void;
@@ -33,7 +33,15 @@ const openMsg = (
 
 onMounted(async () => {
   emit("changeShowMenu", true);
+  const ws = new WebSocket("ws://localhost:8124/pedidos");
 
+  ws.onopen = (e) => {
+    console.log("Conexão estabelecida com o socket.");
+  };
+
+  // ws.close();
+
+  // ws.close();
   try {
     const res = await api.get("/pedidos");
 
@@ -50,6 +58,8 @@ onMounted(async () => {
     console.log("Ocorreu um erro!");
   }
 });
+
+onUnmounted(() => {});
 
 async function changeStatusPedido(id: number, newStatus: 1 | 2 | 3) {
   // console.log(`id ${id} change to ${newStatus}!`);
