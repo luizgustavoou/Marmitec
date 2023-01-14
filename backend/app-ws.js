@@ -9,10 +9,16 @@ const MySQLEvents = require("@rodrigogs/mysql-events");
 module.exports = (app) => {
   const expressWs = require("express-ws")(app);
 
-  app.ws("/echo", (ws, req) => {
+  app.ws("/pedidos", (ws, req) => {
     ws.on("message", (msg) => {
       ws.send(msg);
     });
+
+    console.log("Iniciou!");
+
+    // ws.on("close", () => {
+    //   // connection.destroy();
+    // });
 
     const program = async () => {
       const instance = new MySQLEvents(connection, {
@@ -35,8 +41,13 @@ module.exports = (app) => {
         },
       });
 
-      instance.on(MySQLEvents.EVENTS.CONNECTION_ERROR, console.error);
-      instance.on(MySQLEvents.EVENTS.ZONGJI_ERROR, console.error);
+      instance.on(MySQLEvents.EVENTS.CONNECTION_ERROR, (err) =>
+        console.log("Connection error", err)
+      );
+      instance.on(MySQLEvents.EVENTS.ZONGJI_ERROR, (err) =>
+        // console.log("ZongJi error", err)
+        console.log("ZongJi error")
+      );
     };
 
     program()
