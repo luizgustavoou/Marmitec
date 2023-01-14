@@ -16,17 +16,13 @@ module.exports = (app) => {
 
     console.log("Iniciou!");
 
-    // ws.on("close", () => {
-    //   // connection.destroy();
-    // });
-
     const program = async () => {
       const instance = new MySQLEvents(connection, {
         startAtEnd: true,
         excludedSchemas: {
           mysql: true,
         },
-        serverId: Date.now(),
+        serverId: Date.now(), //resolver erro
       });
 
       await instance.start();
@@ -46,8 +42,7 @@ module.exports = (app) => {
         console.log("Connection error", err)
       );
       instance.on(MySQLEvents.EVENTS.ZONGJI_ERROR, (err) =>
-        // console.log("ZongJi error", err)
-        console.log("ZongJi error")
+        console.log("ZongJi error", err)
       );
     };
 

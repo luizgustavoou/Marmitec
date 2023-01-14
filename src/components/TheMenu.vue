@@ -1,16 +1,28 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { onMounted, ref } from "vue";
 
-const activeIndex = ref("home");
-const activeIndex2 = ref("pedidos");
+const route = useRoute();
+
+const router = useRouter();
+
+const active = ref();
 const handleSelect = (key: string, keyPath: string[]) => {
-  //console.log(key, keyPath);
+  // console.log(key, keyPath);
+  router.push({ name: key });
+
+  // console.log(route.path);
 };
+
+onMounted(() => {
+  // console.log(route.name);
+  active.value = route.name;
+});
 </script>
 
 <template>
   <el-menu
-    :default-active="activeIndex2"
+    :default-active="active"
     class="el-menu-demo"
     mode="horizontal"
     background-color="#337ecc"
@@ -19,17 +31,20 @@ const handleSelect = (key: string, keyPath: string[]) => {
     @select="handleSelect"
   >
     <el-menu-item index="home">
-      <router-link to="/home" style="text-decoration: none">Home</router-link>
+      <!-- <router-link to="/home" style="text-decoration: none">Home</router-link> -->
+      Home
     </el-menu-item>
     <el-menu-item index="addpedidos">
-      <router-link to="/addpedidos" style="text-decoration: none"
+      <!-- <router-link to="/addpedidos" style="text-decoration: none"
         >Fazer pedido</router-link
-      >
+      > -->
+      Fazer pedido
     </el-menu-item>
     <el-menu-item index="pedidos">
-      <router-link to="/pedidos" style="text-decoration: none"
+      <!-- <router-link to="/pedidos" style="text-decoration: none"
         >Pedidos</router-link
-      >
+      > -->
+      Pedidos
     </el-menu-item>
   </el-menu>
 </template>
