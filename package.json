@@ -9,6 +9,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
     "@popperjs/core": "^2.11.6",
+    "@rodrigogs/mysql-events": "^0.6.0",
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
@@ -16,6 +17,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "element-plus": "^2.2.27",
+    "express-ws": "^5.0.2",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuedraggable": "^4.1.0"

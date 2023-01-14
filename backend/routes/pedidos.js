@@ -17,7 +17,7 @@ router.use(express.json());
 
 router.post("/", (req, res) => {
   const { proteinas, acompanhamentos, feijao, desc } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
 
   conn.query(
     {

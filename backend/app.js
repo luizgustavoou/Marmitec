@@ -4,6 +4,10 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
+const appWs = require("./app-ws");
+
+appWs(app);
+
 const pedidos = require("./routes/pedidos");
 
 const corsOptions = {
