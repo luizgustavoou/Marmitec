@@ -58,7 +58,10 @@ router.get("/", (req, res) => {
       if (error) {
         res.statusCode = 500;
         res.send();
-      } else res.send(results);
+      } else {
+        res.send(results);
+        // console.log(results);
+      }
     }
   );
 });

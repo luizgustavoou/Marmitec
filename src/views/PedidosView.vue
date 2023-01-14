@@ -39,9 +39,20 @@ onMounted(async () => {
     console.log("Conexão estabelecida com o socket.");
   };
 
-  // ws.close();
+  ws.onerror = (event) => {
+    console.log("Ocorreu um erro no webSocket!");
+  };
+  ws.onmessage = (event) => {
+    const data = event.data;
+    const value: IPedidos | [] = JSON.parse(data)[0];
 
-  // ws.close();
+    requestedPedidos.value = value.filter((pedido) => pedido.statusPedido == 1);
+
+    processPedidos.value = value.filter((pedido) => pedido.statusPedido == 2);
+
+    finishPedidos.value = value.filter((pedido) => pedido.statusPedido == 3);
+  };
+
   try {
     const res = await api.get("/pedidos");
 

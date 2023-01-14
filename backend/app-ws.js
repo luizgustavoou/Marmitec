@@ -33,8 +33,19 @@ module.exports = (app) => {
         statement: MySQLEvents.STATEMENTS.ALL,
         onEvent: (event) => {
           // You will receive the events here
-          console.log(event);
-          ws.send("Ação ocorrida no banco de dados!");
+          // console.log(event);
+
+          connection.query(
+            {
+              sql: "CALL sp_ShowPedidos();",
+            },
+            (error, results, fields) => {
+              if (error) {
+              } else {
+                ws.send(JSON.stringify(results));
+              }
+            }
+          );
         },
       });
 
