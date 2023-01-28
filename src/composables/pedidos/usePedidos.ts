@@ -1,4 +1,5 @@
 import { pedidosAPI } from "@/network/api";
+import { Form } from "@/types/Forms";
 
 export function usePedidos() {
   async function getPedidos() {
@@ -7,7 +8,7 @@ export function usePedidos() {
     return req.data[0];
   }
 
-  async function addPedido(pedido: any) {
+  async function addPedido(pedido: Form) {
     const req = await pedidosAPI().post("", pedido);
 
     return req;
