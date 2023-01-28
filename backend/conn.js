@@ -7,8 +7,9 @@ var connection = mysql.createConnection({
   database: process.env.DB_DATABASE,
 });
 
+
 connection.connect((error) => {
-  if (error) console.log("Houve um erroro: " + error);
+  if (error) console.log("Ocorreu um error: " + error);
   else console.log("Banco de dados conectado com sucesso!");
 });
 

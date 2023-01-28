@@ -63,19 +63,3 @@ module.exports = (app) => {
   });
 };
 
-// connection{
-//   type: 'INSERT',
-//   schema: 'marmitaria',
-//   table: 'tbUsuario',
-//   affectedRows: [ { after: [Object], before: undefined } ],
-//   affectedColumns: [
-//     'idUsuario',
-//     'nomeUsuario',
-//     'cpfUsuario',
-//     'endUsuario',
-//     'telUsuario'
-//   ],
-//   timestamp: 1673653953000,
-//   nextPosition: 480,
-//   binlogName: 'binlog.000062'
-// }

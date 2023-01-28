@@ -20,6 +20,10 @@ onMounted(() => {
 });
 </script>
 
+<!-- TODO:
+  Fazer um objeto constante mapeando as rotas. Dessa forma, poderá colocar um v-for no el-menu
+
+-->
 <template>
   <el-menu
     :default-active="active"

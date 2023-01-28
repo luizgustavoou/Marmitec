@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { StatusPedido, Teste } from "@/components";
 import { ElMessage } from "element-plus";
-// import Draggable from "vue3-draggable";
-import draggable from "vuedraggable";
-import type { IPedidos, objChange, teste } from "@/types/Pedidos";
-import api from "@/services/api";
+import type { IPedidos, objChange } from "@/types/Pedidos";
 import { Ref, computed, onMounted, onUnmounted, ref } from "vue";
+
+import { usePedidos } from "@/composables/pedidos/usePedidos";
 
 const emit = defineEmits<{
   (e: "changeShowMenu", change: boolean): void;
@@ -54,9 +53,12 @@ onMounted(async () => {
   };
 
   try {
-    const res = await api.get("/pedidos");
+    const { getPedidos } = usePedidos();
 
-    const data: IPedidos | [] = res.data[0];
+    console.log(typeof await getPedidos());
+    
+    const data: IPedidos | [] = await getPedidos();
+
 
     requestedPedidos.value = data.filter((pedido) => pedido.statusPedido == 1);
 
@@ -72,11 +74,12 @@ onMounted(async () => {
 
 onUnmounted(() => {});
 
-async function changeStatusPedido(id: number, newStatus: 1 | 2 | 3) {
+async function changeStatus(id: number, newStatus: 1 | 2 | 3) {
   // console.log(`id ${id} change to ${newStatus}!`);
 
+  const { changeStatusPedido } = usePedidos();
   try {
-    const req = await api.put(`/pedidos/status/${id}`, { newStatus });
+    const req = await changeStatusPedido(id, newStatus);
   } catch (error) {
     openMsg("Ocorreu algum error ao atualizar o status do pedido.", "error");
   }
@@ -84,17 +87,17 @@ async function changeStatusPedido(id: number, newStatus: 1 | 2 | 3) {
 
 const changeRequest = (e: objChange, id: number) => {
   if (Object.prototype.hasOwnProperty.call(e, "added"))
-    changeStatusPedido(e.added.element.idPedido, 1);
+    changeStatus(e.added.element.idPedido, 1);
 };
 
 const changeProcess = (e: objChange, id: number) => {
   if (Object.prototype.hasOwnProperty.call(e, "added"))
-    changeStatusPedido(e.added.element.idPedido, 2);
+    changeStatus(e.added.element.idPedido, 2);
 };
 
 const changeFinish = (e: objChange, id: number) => {
   if (Object.prototype.hasOwnProperty.call(e, "added"))
-    changeStatusPedido(e.added.element.idPedido, 3);
+    changeStatus(e.added.element.idPedido, 3);
 };
 </script>
 

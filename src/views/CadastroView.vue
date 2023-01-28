@@ -8,7 +8,7 @@ import {
 import { ElMessage } from "element-plus";
 import axios, { AxiosError } from "axios";
 import { FormPedido } from "@/components";
-import api from "@/services/api";
+import { usePedidos } from "@/composables/pedidos/usePedidos";
 import { Form } from "@/types/Forms";
 
 import { reactive, ref } from "vue";
@@ -70,8 +70,10 @@ async function submit(resetForm: () => void) {
   // console.log(form);
 
   try {
+    const { addPedido } = usePedidos();
+
     loading.value = true;
-    const req = await api.post("/pedidos", form);
+    const req = await addPedido(form);
 
     if (req.status == 200) {
       openMsg("Pedido cadastrado com sucesso.", "success");
