@@ -18,6 +18,7 @@
     "dotenv": "^16.0.3",
     "element-plus": "^2.2.27",
     "express-ws": "^5.0.2",
+    "pinia": "^2.0.29",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuedraggable": "^4.1.0"

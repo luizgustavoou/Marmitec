@@ -5,10 +5,13 @@ const api = (protocol: "http" | "ws", url: string = ""): AxiosInstance => {
 
   return axios.create({
     baseURL: `${protocol}://${host}/${url}`,
-    
   });
 };
 
 export const pedidosAPI = () => {
   return api("http", "pedidos");
+};
+
+export const authAPI = () => {
+  return api("http", "auth");
 };

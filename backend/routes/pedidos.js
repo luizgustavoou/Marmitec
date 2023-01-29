@@ -7,15 +7,16 @@ const corsOptions = {
   origin: "*",
 };
 
-router.use(cors(corsOptions));
 
 //INÍCIO CONFIGURAÇÃO
 
+router.use(cors(corsOptions));
 router.use(express.json());
 
 //FIM CONFIGURAÇÃO
 
 router.post("/", (req, res) => {
+  
   const { proteinas, acompanhamentos, feijao, desc } = req.body;
   // console.log(req.body);
 
