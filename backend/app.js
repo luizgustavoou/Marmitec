@@ -2,20 +2,24 @@
 
 const express = require("express");
 const cors = require("cors");
+
+const pedidos = require("./routes/pedidos");
+const auth = require("./routes/auth");
+
 const app = express();
 
 const appWs = require("./app-ws");
 
 appWs(app);
 
-const pedidos = require("./routes/pedidos");
-
 const corsOptions = {
   origin: "*",
 };
 
 //INICÍO Configuração
+
 app.use("/pedidos", pedidos);
+app.use("/auth", auth);
 
 app.use(express.json());
 

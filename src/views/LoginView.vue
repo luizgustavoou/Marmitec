@@ -43,26 +43,27 @@ const formProcess = reactive({
 
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  formEl.validate((valid) => {
+  formEl.validate(async (valid) => {
     if (valid) {
       formProcess.isRequesting = true;
-      console.log(formLogin);
+      try {
+        const res = await user.signIn(formLogin);
 
-      // userStore
-      //   .login(formLogin)
-      //   .then(() => {
-      //     formProcess.hasErro = false;
-      //     router.push({ path: "/home" });
-      //   })
-      //   .catch((err: AxiosError) => {
-      //     if (err.response?.data.statusCode == 401) {
-      //       formProcess.message = "Usuário ou senha incorretos";
-      //       formProcess.hasErro = true;
-      //     }
-      //   })
-      //   .finally(() => {
-      //     formProcess.isRequesting = false;
-      //   });
+        formProcess.hasErro = false;
+
+        console.log(res);
+
+        // router.push({ path: "/home" });
+      } catch (e) {
+        formProcess.hasErro = true;
+        if (e.response?.data.statusCode == 401) {
+          formProcess.message = "Usuário ou senha incorretos";
+        } else {
+          formProcess.message = "Ocorreu algum erro";
+        }
+      } finally {
+        formProcess.isRequesting = false;
+      }
     } else {
       console.log("error submit!");
       return false;

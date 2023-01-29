@@ -1,23 +1,34 @@
 import { authAPI } from "@/network/api";
-import { User } from "@/types/Auth";
+import { Profile, User } from "@/types/Auth";
 import { defineStore } from "pinia";
 import { computed, reactive, ref } from "vue";
 
+import jwt_decode from "jwt-decode";
+
 export const useUserStore = defineStore("user", () => {
   const profile = reactive({
+    id: null,
     name: "",
+    email: "",
   });
 
-  async function signIn(user: User) {
+  async function signIn(user: User): Promise<Profile | null> {
+    // return authAPI()
+    //   .post("", user)
+    //   .then((res) => {
+    //     return jwt_decode(res.data.access_token);
+    //   });
+
+    let decoded: Profile | null;
     try {
       const res = await authAPI().post("", user);
-      console.log(res);
+
+      decoded = jwt_decode(res.data.access_token);
     } catch (e) {
-      console.log("Ocorreu um erro: " + e);
       throw e;
-    } finally {
-      console.log("Fim da autenticação!");
     }
+
+    return decoded;
   }
 
   return { profile, signIn };
