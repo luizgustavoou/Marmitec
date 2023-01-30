@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router";
 import { View, Hide } from "@element-plus/icons-vue";
 import { FormInstance, FormRules } from "element-plus";
 import { onMounted, reactive, ref } from "vue";
 import { useUserStore } from "@/stores/user";
 
+const router = useRouter();
 const user = useUserStore();
 
 const emit = defineEmits<{
@@ -53,7 +55,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
 
         console.log(res);
 
-        // router.push({ path: "/home" });
+        router.push({ path: "/home" });
       } catch (e) {
         formProcess.hasErro = true;
         if (e.response?.data.statusCode == 401) {
@@ -96,6 +98,7 @@ onMounted(() => {
         class="d-flex flex-column justify-content-center align-items-center h-100"
       >
         <div style="min-width: 50%">
+          {{ user.profile }}
           <div class="text-center">
             <h3>Entrar</h3>
           </div>

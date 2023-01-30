@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { useUserStore } from "./stores/user";
 import { TheMenu, Layout, Footer } from "@/components";
 
 import { onMounted, ref } from "vue";
+
+const user = useUserStore();
 
 const showMenu = ref(false);
 
@@ -13,6 +16,7 @@ onMounted(() => {});
       <TheMenu v-if="showMenu"></TheMenu>
     </template>
     <template #main>
+      {{ user.profile }}
       <RouterView
         @change-show-menu="(change: boolean) => (showMenu = change)"
       ></RouterView>
