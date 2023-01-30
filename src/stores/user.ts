@@ -1,3 +1,6 @@
+//Use: https://www.npmjs.com/package/vue3-cookies
+//Use: https://www.npmjs.com/package/jwt-decode
+
 import { useCookies } from "vue3-cookies";
 import { authAPI } from "@/network/api";
 import { Profile, Token, User } from "@/types/Auth";
@@ -17,7 +20,7 @@ export const useUserStore = defineStore("user", () => {
 
   async function signIn(user: User): Promise<Profile | null> {
     let decoded: Profile | null;
-    
+
     try {
       const res = await authAPI().post("", user);
 

@@ -1,14 +1,15 @@
 <script setup lang="ts">
+import { useCookies } from "vue3-cookies";
 import { useUserStore } from "./stores/user";
 import { TheMenu, Layout, Footer } from "@/components";
 
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
 const user = useUserStore();
 
 const showMenu = ref(false);
 
-onMounted(() => {});
+const { cookies } = useCookies();
 </script>
 <template>
   <Layout>
@@ -17,6 +18,9 @@ onMounted(() => {});
     </template>
     <template #main>
       {{ user.profile }}
+      <br />
+      <!-- <button @click="() => cookies.remove('access_token')">Remover</button> -->
+
       <RouterView
         @change-show-menu="(change: boolean) => (showMenu = change)"
       ></RouterView>

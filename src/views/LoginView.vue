@@ -53,8 +53,6 @@ const submitForm = (formEl: FormInstance | undefined) => {
 
         formProcess.hasErro = false;
 
-        console.log(res);
-
         router.push({ path: "/home" });
       } catch (e) {
         formProcess.hasErro = true;
@@ -98,7 +96,6 @@ onMounted(() => {
         class="d-flex flex-column justify-content-center align-items-center h-100"
       >
         <div style="min-width: 50%">
-          {{ user.profile }}
           <div class="text-center">
             <h3>Entrar</h3>
           </div>
