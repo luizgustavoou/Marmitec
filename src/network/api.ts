@@ -1,10 +1,13 @@
 import axios, { AxiosInstance } from "axios";
 
-const api = (protocol: "http" | "ws", url: string = ""): AxiosInstance => {
-  const host = "localhost:8124";
+const host = process.env.VUE_APP_HOST;
+const port = process.env.VUE_APP_PORT;
 
+export const domain = `${host}:${port}`;
+
+const api = (protocol: "http" | "ws", url: string = ""): AxiosInstance => {
   return axios.create({
-    baseURL: `${protocol}://${host}/${url}`,
+    baseURL: `${protocol}://${domain}/${url}`,
   });
 };
 

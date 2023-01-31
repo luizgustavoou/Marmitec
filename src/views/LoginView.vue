@@ -73,6 +73,9 @@ const submitForm = (formEl: FormInstance | undefined) => {
 
 onMounted(() => {
   emit("changeShowMenu", false);
+  console.log(process.env.VUE_APP_HOST);
+  console.log(process.env.VUE_APP_PORT);
+  
 });
 </script>
 <template>

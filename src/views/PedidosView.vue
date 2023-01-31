@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { domain } from "@/network/api";
 import { StatusPedido, Teste } from "@/components";
 import { ElMessage } from "element-plus";
 import type { IPedidos, objChange } from "@/types/Pedidos";
@@ -32,7 +33,7 @@ const openMsg = (
 
 onMounted(async () => {
   emit("changeShowMenu", true);
-  const ws = new WebSocket("ws://localhost:8124/pedidos");
+  const ws = new WebSocket(`ws://${domain}/pedidos`);
 
   ws.onopen = (e) => {
     console.log("Conexão estabelecida com o socket.");
@@ -55,10 +56,9 @@ onMounted(async () => {
   try {
     const { getPedidos } = usePedidos();
 
-    console.log(typeof await getPedidos());
-    
-    const data: IPedidos | [] = await getPedidos();
+    console.log(typeof (await getPedidos()));
 
+    const data: IPedidos | [] = await getPedidos();
 
     requestedPedidos.value = data.filter((pedido) => pedido.statusPedido == 1);
 
