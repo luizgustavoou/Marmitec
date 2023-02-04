@@ -24,7 +24,12 @@ router.post("/", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  fetchAllPedidos(req, res);
+  const cb = (value, st = 200) => {
+    res.statusCode = st;
+    res.send(value);
+  };
+
+  fetchAllPedidos(req, cb);
 });
 
 router.put("/status/:id", (req, res) => {

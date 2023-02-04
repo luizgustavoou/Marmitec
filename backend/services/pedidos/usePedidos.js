@@ -51,17 +51,19 @@ exports.insertPedido = (
   );
 };
 
-exports.fetchAllPedidos = (req, res) => {
+exports.fetchAllPedidos = (req, send) => {
   conn.query(
     {
       sql: "CALL sp_ShowPedidos();",
     },
     (error, results, fields) => {
       if (error) {
-        res.statusCode = 500;
-        res.send();
+        // res.statusCode = 500;
+        // res.send();
+
+        send("", 500);
       } else {
-        res.send(results);
+        send(results);
         // console.log(results);
       }
     }

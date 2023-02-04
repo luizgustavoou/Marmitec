@@ -2,12 +2,13 @@
 //Jeito feito com express-ws: https://www.npmjs.com/package/express-ws
 //Eventos listenning do MySQL: https://www.npmjs.com/package/@rodrigogs/mysql-events
 
+const { fetchAllPedidos } = require("./services/pedidos/usePedidos");
 const connection = require("./conn");
 
 const MySQLEvents = require("@rodrigogs/mysql-events");
 
 module.exports = (app) => {
-  const expressWs = require("express-ws")(app);
+  const expressWs = require("express-ws")(app); //isso é importante viu!
 
   app.ws("/pedidos", (ws, req) => {
     ws.on("message", (msg) => {
@@ -35,17 +36,25 @@ module.exports = (app) => {
           // You will receive the events here
           // console.log(event);
 
-          connection.query(
-            {
-              sql: "CALL sp_ShowPedidos();",
-            },
-            (error, results, fields) => {
-              if (error) {
-              } else {
-                ws.send(JSON.stringify(results));
-              }
-            }
-          );
+          const cb = (value, st = 200) => {
+            ws.statusCode = st;
+            ws.send(JSON.stringify(value));
+          };
+
+          console.log(ws);
+          fetchAllPedidos(req, cb);
+
+          // connection.query(
+          //   {
+          //     sql: "CALL sp_ShowPedidos();",
+          //   },
+          //   (error, results, fields) => {
+          //     if (error) {
+          //     } else {
+          //       ws.send(JSON.stringify(results));
+          //     }
+          //   }
+          // );
         },
       });
 
@@ -62,4 +71,3 @@ module.exports = (app) => {
       .catch(console.error);
   });
 };
-
