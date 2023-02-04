@@ -1,26 +1,17 @@
 const conn = require("../../conn");
 
-exports.updateStatusPedido = (id, newStatus, req, res) => {
+exports.updateStatusPedido = (id, newStatus, cb) => {
   conn.query(
     {
       sql: "UPDATE tbPedido SET statusPedido = ? WHERE idPedido = ?",
       values: [newStatus, id],
     },
-    (error, results, fields) => {
-      if (error) {
-        res.statusCode = 500;
-        res.send();
-      } else res.send(results);
-    }
+    cb
   );
 };
 
 //TODO: Quando estiver finalizado o login no Vue, será setado ao invés de 1 e 1 os valores dinâmicos do usuario e entregador.
-exports.insertPedido = (
-  { proteinas, acompanhamentos, feijao, desc },
-  req,
-  res
-) => {
+exports.insertPedido = ({ proteinas, acompanhamentos, feijao, desc }, cb) => {
   conn.query(
     {
       sql: "INSERT INTO tbPedido(idUsuario, idEntregador, descPedido, fraMilanesa, fraAssado, figaAce, bisSuiAce, fraMolho, arrozRefo, arrozLeite, macarrao, legSalte, salaCrua, macaCozida, feijao) VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -42,30 +33,15 @@ exports.insertPedido = (
         feijao,
       ],
     },
-    (error, results, fields) => {
-      if (error) {
-        res.statusCode = 500;
-        res.send();
-      } else res.send(results);
-    }
+    cb
   );
 };
 
-exports.fetchAllPedidos = (req, send) => {
+exports.fetchAllPedidos = (cb) => {
   conn.query(
     {
       sql: "CALL sp_ShowPedidos();",
     },
-    (error, results, fields) => {
-      if (error) {
-        // res.statusCode = 500;
-        // res.send();
-
-        send("", 500);
-      } else {
-        send(results);
-        // console.log(results);
-      }
-    }
+    cb
   );
 };

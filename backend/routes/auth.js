@@ -1,3 +1,5 @@
+const { findUser } = require("../services/auth/useAuth");
+const conn = require("../conn");
 const express = require("express");
 const cors = require("cors");
 
@@ -35,19 +37,19 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { usernamec, password } = req.body;
+  const { username, password } = req.body;
 
-  try {
-    const user = false;
+  const cb = (error, results, fields) => {
+    if (results.length <= 0) {
+      res.statusCode = 401;
 
-    if (!user) {
-      return res.send(401);
+      return res.send();
     }
 
-    res.send(user);
-  } catch (error) {
-    res.send(error);
-  }
+    res.send(results);
+  };
+
+  findUser(username, password, cb);
 });
 
 module.exports = router;

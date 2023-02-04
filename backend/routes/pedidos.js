@@ -20,23 +20,41 @@ router.use(express.json());
 //FIM CONFIGURAÇÃO
 
 router.post("/", (req, res) => {
-  insertPedido(req.body, req, res);
+  const cb = (error, results, fields) => {
+    if (error) {
+      res.statusCode = 500;
+      res.send();
+    } else res.send(results);
+  };
+
+  insertPedido(req.body, cb);
 });
 
 router.get("/", (req, res) => {
-  const cb = (value, st = 200) => {
-    res.statusCode = st;
-    res.send(value);
+  const cb = (error, results, fields) => {
+    if (error) {
+      res.statusCode = 500;
+      res.send();
+    } else {
+      res.send(results);
+    }
   };
 
-  fetchAllPedidos(req, cb);
+  fetchAllPedidos(cb);
 });
 
 router.put("/status/:id", (req, res) => {
   const id = req.params.id;
   const newStatus = req.body.newStatus;
 
-  updateStatusPedido(id, newStatus, req, res);
+  const cb = (error, results, fields) => {
+    if (error) {
+      res.statusCode = 500;
+      res.send();
+    } else res.send(results);
+  };
+
+  updateStatusPedido(id, newStatus, cb);
 });
 
 module.exports = router;

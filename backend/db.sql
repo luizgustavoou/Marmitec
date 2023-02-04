@@ -120,6 +120,8 @@ DROP TABLE IF EXISTS `tbUsuario`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbUsuario` (
   `idUsuario` int NOT NULL AUTO_INCREMENT,
+  `username`varchar(30) NOT NULL,
+  `password`varchar(30) NOT NULL,
   `nomeUsuario` varchar(100) NOT NULL,
   `cpfUsuario` varchar(12) DEFAULT NULL,
   `endUsuario` varchar(255) NOT NULL,
@@ -134,7 +136,7 @@ CREATE TABLE `tbUsuario` (
 
 LOCK TABLES `tbUsuario` WRITE;
 /*!40000 ALTER TABLE `tbUsuario` DISABLE KEYS */;
-INSERT INTO `tbUsuario` VALUES (1,'Luiz Gustavo','99999999999','Rua Aeroporto de Navegantes 249','1111111111');
+INSERT INTO `tbUsuario` VALUES (1,'luizgustavoo', '123', 'Luiz Gustavo','99999999999','Rua Aeroporto de Navegantes 249','1111111111');
 /*!40000 ALTER TABLE `tbUsuario` ENABLE KEYS */;
 UNLOCK TABLES;
 

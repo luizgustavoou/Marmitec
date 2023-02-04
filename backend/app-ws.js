@@ -36,13 +36,15 @@ module.exports = (app) => {
           // You will receive the events here
           // console.log(event);
 
-          const cb = (value, st = 200) => {
-            ws.statusCode = st;
-            ws.send(JSON.stringify(value));
+          const cb = (error, results, fields) => {
+            if (error) {
+              ws.send();
+            } else {
+              ws.send(JSON.stringify(results));
+            }
           };
 
-          console.log(ws);
-          fetchAllPedidos(req, cb);
+          fetchAllPedidos(cb);
 
           // connection.query(
           //   {
