@@ -24,4 +24,30 @@ router.post("/", (req, res) => {
   res.send(token);
 });
 
+router.post("/signup", async (req, res) => {
+  try {
+    const user = false;
+
+    res.send(user);
+  } catch (error) {
+    res.send(400, error);
+  }
+});
+
+router.post("/login", async (req, res) => {
+  const { usernamec, password } = req.body;
+
+  try {
+    const user = false;
+
+    if (!user) {
+      return res.send(401);
+    }
+
+    res.send(user);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 module.exports = router;
