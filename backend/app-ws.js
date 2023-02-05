@@ -45,18 +45,6 @@ module.exports = (app) => {
           };
 
           fetchAllPedidos(cb);
-
-          // connection.query(
-          //   {
-          //     sql: "CALL sp_ShowPedidos();",
-          //   },
-          //   (error, results, fields) => {
-          //     if (error) {
-          //     } else {
-          //       ws.send(JSON.stringify(results));
-          //     }
-          //   }
-          // );
         },
       });
 
