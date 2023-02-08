@@ -26,5 +26,5 @@ export interface Form {
   proteinas: Proteinas;
   feijao: number;
   acompanhamentos: Acompanhamentos;
-  desc: string;
+  description: string;
 }

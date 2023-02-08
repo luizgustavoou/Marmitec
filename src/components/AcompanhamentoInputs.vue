@@ -12,12 +12,12 @@ const props = defineProps<{
 }>();
 
 const acompanhamentosForm = reactive({
-  arroz_refogado: 0,
-  arroz_leite: 0,
+  arrozRefo: 0,
+  arrozLeite: 0,
   macarrao: 0,
-  leg_salteados: 0,
-  sala_crua: 0,
-  maca_cozida: 0,
+  legSalte: 0,
+  salaCrua: 0,
+  macaCozida: 0,
 });
 
 const emit = defineEmits<{
@@ -38,11 +38,11 @@ watch(acompanhamentosForm, (obj) => {
 
 const desc = computed({
   get() {
-    return props.modelValue.desc;
+    return props.modelValue.description;
   },
   set(newDesc) {
     let newForm = { ...props.modelValue };
-    newForm.desc = newDesc;
+    newForm.description = newDesc;
     emit("update:modelValue", newForm);
   },
 });
@@ -55,7 +55,7 @@ const acompanhamentosChosen = computed(() => {
 });
 
 watch(props.modelValue, (newProps) => {
-  desc.value = props.modelValue.desc;
+  desc.value = props.modelValue.description;
   Object.assign(acompanhamentosForm, newProps.acompanhamentos);
 });
 

@@ -1,10 +1,10 @@
 const acompanhamentos = {
-  arroz_refogado: "Arroz Refogado",
-  arroz_leite: "Arroz de leite",
+  arrozRefo: "Arroz Refogado",
+  arrozLeite: "Arroz de leite",
   macarrao: "Macarrão",
-  leg_salteados: "Legumes salteados",
-  sala_crua: "Salada crua",
-  maca_cozida: "Macaxeira cozida",
+  legSalte: "Legumes salteados",
+  salaCrua: "Salada crua",
+  macaCozida: "Macaxeira cozida",
 };
 
 export default acompanhamentos;

@@ -12,7 +12,7 @@ export const api = (protocol: "http" | "ws", url: string = ""): AxiosInstance =>
 };
 
 export const pedidosAPI = () => {
-  return api("http", "pedidos");
+  return api("http", "orders");
 };
 
 export const authAPI = () => {

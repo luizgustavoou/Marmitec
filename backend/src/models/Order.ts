@@ -8,53 +8,54 @@ const Order = sequelize.define("Order", {
     type: DataTypes.STRING,
   },
   fraMilanesa: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.SMALLINT,
   },
   fraAssado: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.SMALLINT,
   },
   figaAce: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.SMALLINT,
   },
   bisSuiAce: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.SMALLINT,
   },
   fraMolho: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.SMALLINT,
   },
   arrozRefo: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.SMALLINT,
   },
   arrozLeite: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.SMALLINT,
   },
   macarrao: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.SMALLINT,
   },
   legSalte: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.SMALLINT,
   },
   salaCrua: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.SMALLINT,
   },
   macaCozida: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.SMALLINT,
   },
   feijao: {
-    type: DataTypes.STRING,
+    type: DataTypes.SMALLINT,
   },
   status: {
     type: DataTypes.SMALLINT,
+    defaultValue: 0,
     allowNull: false,
   },
   canceled: {
     type: DataTypes.SMALLINT,
+    defaultValue: 0,
     allowNull: false,
   },
 });
 
 Order.belongsTo(User);
 Order.belongsTo(Deliveryman);
-
 
 export default Order;

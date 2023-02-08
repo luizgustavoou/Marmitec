@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Order from "../models/Order";
+import { OrderRequest } from "../interfaces/Order";
 
 class UserController {
   public async index(req: Request, res: Response): Promise<Response> {
@@ -13,9 +14,20 @@ class UserController {
 
   public async store(req: Request, res: Response): Promise<Response> {
     try {
-      const user = await Order.create(req.body);
+      const { proteinas, acompanhamentos, ...restOrder }: OrderRequest =
+        req.body;
+
+      const order = { ...proteinas, ...acompanhamentos, ...restOrder };
+
+      console.log(order);
+      const user = await Order.create(order);
+
+      
+
       return res.json(user);
     } catch (error) {
+      console.log(error);
+
       res.sendStatus(400);
     }
   }

@@ -12,11 +12,11 @@ const props = defineProps<{
 }>();
 
 const proteinForm = reactive({
-  fra_milanesa: 0,
-  fra_assado: 0,
-  figa_ace: 0,
-  bis_sui_ace: 0,
-  fra_molho: 0,
+  fraMilanesa: 0,
+  fraAssado: 0,
+  figaAce: 0,
+  bisSuiAce: 0,
+  fraMolho: 0,
 });
 
 const emit = defineEmits<{

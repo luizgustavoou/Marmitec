@@ -13,9 +13,9 @@ const showMenu = ref(false);
 const { cookies } = useCookies();
 
 onMounted(async () => {
-  const res = await api("http", "orders").get("");
+  // const res = await api("http", "orders").get("");
 
-  console.log(res);
+  // console.log(res);
 });
 </script>
 <template>

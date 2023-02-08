@@ -1,26 +1,26 @@
 import type { Form } from "@/types/Forms";
 
 export interface IPedido {
-  idPedido: number;
-  nomeEntregador: string;
-  statusPedido: 1 | 2 | 3;
-  canceladoPedido: 0 | 1;
-  descPedido: string;
-  nomeUsuario: string;
-  endUsuario: string;
-  telUsuario: string;
-  arrozLeite: number;
-  arrozRefo: number;
-  bisSuiAce: number;
-  feijao: number;
-  figaAce: number;
-  fraAssado: number;
-  fraMilanesa: number;
-  fraMolho: number;
-  legSalte: number;
-  macaCozida: number;
-  macarrao: number;
-  salaCrua: number;
+  id: number;
+  description: number | null;
+  fraMilanesa: number | null;
+  fraAssado: number | null;
+  figaAce: number | null;
+  bisSuiAce: number | null;
+  fraMolho: number | null;
+  arrozRefo: number | null;
+  arrozLeite: number | null;
+  macarrao: number | null;
+  legSalte: number | null;
+  salaCrua: number | null;
+  macaCozida: number | null;
+  feijao: number | null;
+  status: number;
+  canceled: number;
+  createdAt: string;
+  updatedAt: string;
+  UserId: number | null;
+  DeliverymanId: number | null;
 }
 
 type nameAction = "added" | "removed" | "moved";

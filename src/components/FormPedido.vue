@@ -22,27 +22,26 @@ const emit = defineEmits<{
   (e: "update:active", num: number): void;
 }>();
 
-
 const ruleFormRef = ref<FormInstance>();
 
 const ruleForm = reactive({
   proteinas: {
-    fra_milanesa: 0,
-    fra_assado: 0,
-    figa_ace: 0,
-    bis_sui_ace: 0,
-    fra_molho: 0,
+    fraMilanesa: 0,
+    fraAssado: 0,
+    figaAce: 0,
+    bisSuiAce: 0,
+    fraMolho: 0,
   },
   acompanhamentos: {
-    arroz_refogado: 0,
-    arroz_leite: 0,
+    arrozRefo: 0,
+    arrozLeite: 0,
     macarrao: 0,
-    leg_salteados: 0,
-    sala_crua: 0,
-    maca_cozida: 0,
+    legSalte: 0,
+    salaCrua: 0,
+    macaCozida: 0,
   },
   feijao: 1,
-  desc: "",
+  description: "",
 });
 
 function updateActiveProps(num: number) {
@@ -117,7 +116,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
 // };
 
 const resetForm = () => {
-  ruleForm.desc = "";
+  ruleForm.description = "";
   ruleForm.feijao = 1;
 
   Object.keys(ruleForm).forEach((key_) => {

@@ -3,10 +3,9 @@ import {
   AcompanhamentoInputs,
   FeijaoInputs,
   ProteinaInputs,
-  Teste,
 } from "@/components";
 import { ElMessage } from "element-plus";
-import axios, { AxiosError } from "axios";
+
 import { FormPedido } from "@/components";
 import { usePedidos } from "@/composables/pedidos/usePedidos";
 import { Form } from "@/types/Forms";
@@ -29,8 +28,8 @@ const objectComponent = (component: any, label: string) => {
 
 const inputsForm = [
   objectComponent(ProteinaInputs, "Proteínas"),
-  objectComponent(FeijaoInputs, "Feijão"),
   objectComponent(AcompanhamentoInputs, "Acompanhamentos"),
+  objectComponent(FeijaoInputs, "Feijão"),
 ];
 
 const openMsg = (
@@ -48,24 +47,23 @@ const loading = ref(false);
 
 const form = reactive({
   proteinas: {
-    fra_milanesa: 0,
-    fra_assado: 0,
-    figa_ace: 0,
-    bis_sui_ace: 0,
-    fra_molho: 0,
+    fraMilanesa: 0,
+    fraAssado: 0,
+    figaAce: 0,
+    bisSuiAce: 0,
+    fraMolho: 0,
   },
   acompanhamentos: {
-    arroz_refogado: 0,
-    arroz_leite: 0,
+    arrozRefo: 0,
+    arrozLeite: 0,
     macarrao: 0,
-    leg_salteados: 0,
-    sala_crua: 0,
-    maca_cozida: 0,
+    legSalte: 0,
+    salaCrua: 0,
+    macaCozida: 0,
   },
-  feijao: 1,
-  desc: "",
+  feijao: 0,
+  description: "",
 });
-
 
 async function submit(resetForm: () => void) {
   // console.log(form);
@@ -74,6 +72,8 @@ async function submit(resetForm: () => void) {
     const { addPedido } = usePedidos();
 
     loading.value = true;
+    console.log(form);
+
     const req = await addPedido(form);
 
     if (req.status == 200) {
@@ -84,6 +84,8 @@ async function submit(resetForm: () => void) {
 
     active.value = 0;
   } catch (error) {
+    console.log(error);
+
     openMsg("Ocorreu algum error ao cadastrar o pedido.", "error");
     // if (error.response) {
     //   // Request made but the server responded with an error
@@ -111,9 +113,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- <Teste></Teste> -->
-  <!-- {{ form }} -->
-
   <div class="d-flex justify-content-center align-items-center container h-100">
     <div class="card w-100" style="background-color: #e9e9eb">
       <div class="card-header text-center"><h2>Pedido</h2></div>
