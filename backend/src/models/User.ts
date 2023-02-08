@@ -2,6 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "./db";
 
 interface User extends Model {
+  id: number;
   username: string;
   password: string;
   firstName?: string;
