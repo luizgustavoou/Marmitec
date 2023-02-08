@@ -5,7 +5,7 @@ const port = process.env.VUE_APP_PORT;
 
 export const domain = `${host}:${port}`;
 
-const api = (protocol: "http" | "ws", url: string = ""): AxiosInstance => {
+export const api = (protocol: "http" | "ws", url: string = ""): AxiosInstance => {
   return axios.create({
     baseURL: `${protocol}://${domain}/${url}`,
   });

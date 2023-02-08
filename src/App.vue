@@ -3,13 +3,20 @@ import { useCookies } from "vue3-cookies";
 import { useUserStore } from "./stores/user";
 import { TheMenu, Layout, Footer } from "@/components";
 
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { api } from "./network/api";
 
 const user = useUserStore();
 
 const showMenu = ref(false);
 
 const { cookies } = useCookies();
+
+onMounted(async () => {
+  const res = await api("http", "orders").get("");
+
+  console.log(res);
+});
 </script>
 <template>
   <Layout>
