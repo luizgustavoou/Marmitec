@@ -25,7 +25,8 @@ routes.post("/signup", async (req, res) => {
 
     res.send({ token, user });
 
-    //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoxLCJpYXQiOjE2NzU4OTAwMTQsImV4cCI6MTY3NTk3NjQxNH0.9ZKLMRjm450OSJuauaPJjDMvbRKB9znMVXQB8wGCxR8
+    //id: 1
+    //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoxLCJpYXQiOjE2NzU4OTk5MDUsImV4cCI6MTY3NTk4NjMwNX0.kxxDBbhunpLpNGn4ERlsiVYPlxKepBmq73Ig6gJ-ONU
   } catch (error) {
     res.sendStatus(400);
   }

@@ -3,23 +3,23 @@ import { Form } from "@/types/Forms";
 
 export function usePedidos() {
   async function getPedidos() {
-    const req = await pedidosAPI().get("");
+    const res = await pedidosAPI().get("");
 
-    return req.data[0];
+    return res.data[0];
   }
 
   async function addPedido(pedido: Form) {
-    const req = await pedidosAPI().post("", pedido);
+    const res = await pedidosAPI().post("", pedido);
 
-    return req;
+    return res;
   }
 
   async function changeStatusPedido(id: number, newStatus: 1 | 2 | 3) {
     const statusPedidoURL = `status/${id}`;
 
-    const req = await pedidosAPI().put(statusPedidoURL, { newStatus });
+    const res = await pedidosAPI().put(statusPedidoURL, { newStatus });
 
-    return req;
+    return res;
   }
 
   return { addPedido, getPedidos, changeStatusPedido };

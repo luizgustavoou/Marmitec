@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { routes as routesOrder } from "./router/Order";
 import { routes as routerUser } from "./router/User";
-import { routes as routerDeliveryMan } from "./router/User";
+import { routes as routerDeliveryMan } from "./router/DeliveryMan";
 import { routes as routerAuth } from "./router/auth";
 
 import sequelize from "./models/db";
