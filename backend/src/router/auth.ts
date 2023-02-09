@@ -1,11 +1,9 @@
 import { Router } from "express";
 
 import AuthController from "../controllers/AuthController";
-
-import User from "../models/User";
-import { sign } from "../services/auth";
 import { authMiddleware } from "../utils/middlewares";
 import { Req } from "../interfaces/utils";
+
 const routes = Router();
 
 routes.post("/signup", AuthController.signup);

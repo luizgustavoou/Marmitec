@@ -1,11 +1,13 @@
 import { pedidosAPI } from "@/network/api";
 import { Form } from "@/types/Forms";
+import { IPedido } from "@/types/Pedidos";
+import { AxiosResponse } from "axios";
 
 export function usePedidos() {
-  async function getPedidos() {
-    const res = await pedidosAPI().get("");
+  async function getPedidos(): Promise<AxiosResponse<IPedido[]>> {
+    const res = await pedidosAPI().get<IPedido[]>("");
 
-    return res.data[0];
+    return res;
   }
 
   async function addPedido(pedido: Form) {

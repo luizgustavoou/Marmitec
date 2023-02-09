@@ -45,7 +45,7 @@ const Order = sequelize.define("Order", {
   },
   status: {
     type: DataTypes.SMALLINT,
-    defaultValue: 0,
+    defaultValue: 1,
     allowNull: false,
   },
   canceled: {

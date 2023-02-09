@@ -1,8 +1,23 @@
 import type { Form } from "@/types/Forms";
 
+export interface IForeignKeyUser {
+  id: number;
+  firstName: string | null;
+  lastName: string | null;
+  adress: string | null;
+  phone: string | null;
+}
+
+export interface IForeignKeyDeliveryman {
+  id: number;
+  firstName: string | null;
+  lastName: string | null;
+  phone: string | null;
+}
+
 export interface IPedido {
   id: number;
-  description: number | null;
+  description: string | null;
   fraMilanesa: number | null;
   fraAssado: number | null;
   figaAce: number | null;
@@ -19,8 +34,8 @@ export interface IPedido {
   canceled: number;
   createdAt: string;
   updatedAt: string;
-  UserId: number | null;
-  DeliverymanId: number | null;
+  User: IForeignKeyUser | null;
+  Deliveryman: IForeignKeyDeliveryman | null;
 }
 
 type nameAction = "added" | "removed" | "moved";

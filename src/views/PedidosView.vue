@@ -2,7 +2,7 @@
 import { domain } from "@/network/api";
 import { StatusPedido, Teste } from "@/components";
 import { ElMessage } from "element-plus";
-import type { IPedidos, objChange } from "@/types/Pedidos";
+import type { IPedido, objChange } from "@/types/Pedidos";
 import { Ref, computed, onMounted, onUnmounted, ref } from "vue";
 
 import { usePedidos } from "@/composables/pedidos/usePedidos";
@@ -11,13 +11,13 @@ const emit = defineEmits<{
   (e: "changeShowMenu", change: boolean): void;
 }>();
 
-const tableData: Ref<IPedidos | []> = ref([]);
+const tableData: Ref<IPedido[] | []> = ref([]);
 
-const requestedPedidos: Ref<IPedidos | []> = ref([]);
+const requestedPedidos: Ref<IPedido[] | []> = ref([]);
 
-const processPedidos: Ref<IPedidos | []> = ref([]);
+const processPedidos: Ref<IPedido[] | []> = ref([]);
 
-const finishPedidos: Ref<IPedidos | []> = ref([]);
+const finishPedidos: Ref<IPedido[] | []> = ref([]);
 
 const openMsg = (
   msg: string,
@@ -33,76 +33,74 @@ const openMsg = (
 
 onMounted(async () => {
   emit("changeShowMenu", true);
-  const ws = new WebSocket(`ws://${domain}/pedidos`);
+  // const ws = new WebSocket(`ws://${domain}/pedidos`);
 
-  ws.onopen = (e) => {
-    console.log("Conexão estabelecida com o socket.");
-  };
+  // ws.onopen = (e) => {
+  //   console.log("Conexão estabelecida com o socket.");
+  // };
 
-  ws.onerror = (event) => {
-    console.log("Ocorreu um erro no webSocket!");
-  };
-  ws.onmessage = (event) => {
-    const data = event.data;
-    const value: IPedidos | [] = JSON.parse(data)[0];
+  // ws.onerror = (event) => {
+  //   console.log("Ocorreu um erro no webSocket!");
+  // };
+  // ws.onmessage = (event) => {
+  //   const data = event.data;
+  //   const value: IPedido[] | [] = JSON.parse(data)[0];
 
-    requestedPedidos.value = value.filter((pedido) => pedido.statusPedido == 1);
+  //   requestedPedidos.value = value.filter((pedido) => pedido.status == 1);
 
-    processPedidos.value = value.filter((pedido) => pedido.statusPedido == 2);
+  //   processPedidos.value = value.filter((pedido) => pedido.status == 2);
 
-    finishPedidos.value = value.filter((pedido) => pedido.statusPedido == 3);
-  };
+  //   finishPedidos.value = value.filter((pedido) => pedido.status == 3);
+  // };
 
   try {
     const { getPedidos } = usePedidos();
 
-    console.log(typeof (await getPedidos()));
+    const res = await getPedidos();
 
-    const data: IPedidos | [] = await getPedidos();
+    const orders = res.data;
 
-    requestedPedidos.value = data.filter((pedido) => pedido.statusPedido == 1);
+    requestedPedidos.value = orders.filter((pedido) => pedido.status == 1);
 
-    processPedidos.value = data.filter((pedido) => pedido.statusPedido == 2);
+    processPedidos.value = orders.filter((pedido) => pedido.status == 2);
 
-    finishPedidos.value = data.filter((pedido) => pedido.statusPedido == 3);
+    finishPedidos.value = orders.filter((pedido) => pedido.status == 3);
 
-    tableData.value = data;
+    // tableData.value = orders;
   } catch (error) {
-    console.log("Ocorreu um erro!");
+    console.log(error);
   }
 });
 
-onUnmounted(() => {});
-
 async function changeStatus(id: number, newStatus: 1 | 2 | 3) {
   // console.log(`id ${id} change to ${newStatus}!`);
-
-  const { changeStatusPedido } = usePedidos();
-  try {
-    const req = await changeStatusPedido(id, newStatus);
-  } catch (error) {
-    openMsg("Ocorreu algum error ao atualizar o status do pedido.", "error");
-  }
+  // const { changeStatusPedido } = usePedidos();
+  // try {
+  //   const req = await changeStatusPedido(id, newStatus);
+  // } catch (error) {
+  //   openMsg("Ocorreu algum error ao atualizar o status do pedido.", "error");
+  // }
 }
 
 const changeRequest = (e: objChange, id: number) => {
   if (Object.prototype.hasOwnProperty.call(e, "added"))
-    changeStatus(e.added.element.idPedido, 1);
+    changeStatus(e.added.element.id, 1);
 };
 
 const changeProcess = (e: objChange, id: number) => {
   if (Object.prototype.hasOwnProperty.call(e, "added"))
-    changeStatus(e.added.element.idPedido, 2);
+    changeStatus(e.added.element.id, 2);
 };
 
 const changeFinish = (e: objChange, id: number) => {
   if (Object.prototype.hasOwnProperty.call(e, "added"))
-    changeStatus(e.added.element.idPedido, 3);
+    changeStatus(e.added.element.id, 3);
 };
 </script>
 
 <template>
   <div>
+    {{ requestedPedidos }}
     <!-- style="overflow-y: scroll;" -->
 
     <div class="d-flex gap-3 p-4" style="height: 750px; overflow-y: scroll">

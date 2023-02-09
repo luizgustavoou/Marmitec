@@ -28,15 +28,6 @@ class AuthController {
 
   public async signup(req: Request, res: Response) {
     try {
-      //   {
-      //     "username": "luiz",
-      //     "password": "123",
-      //     "firstName": "Luiz",
-      //     "lastName": "Umbelino",
-      //     "adress": "Rua Aeroporto de Navegantes - 249",
-      //     "phone": "84 999999999"
-      //   }
-
       const result = await User.create(req.body);
 
       const { password, ...user } = result.toJSON<User>();
@@ -44,9 +35,6 @@ class AuthController {
       const token = sign({ user: user.id });
 
       res.send({ token, user });
-
-      //id: 1
-      //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoxLCJpYXQiOjE2NzU4OTk5MDUsImV4cCI6MTY3NTk4NjMwNX0.kxxDBbhunpLpNGn4ERlsiVYPlxKepBmq73Ig6gJ-ONU
     } catch (error) {
       res.sendStatus(400);
     }

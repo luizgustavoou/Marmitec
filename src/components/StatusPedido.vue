@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import draggable from "vuedraggable";
 import { CardPedido, Teste } from "@/components";
-import type { IPedidos, objChange } from "@/types/Pedidos";
+import type { IPedido, objChange } from "@/types/Pedidos";
 
 const props = defineProps<{
-  pedidos: IPedidos | [];
+  pedidos: IPedido[] | [];
   change: (e: objChange, id: number) => void;
   title: string;
 }>();
