@@ -3,15 +3,16 @@ import Deliveryman from "../models/Deliveryman";
 
 class UserController {
   public async index(req: Request, res: Response): Promise<Response> {
-    const users = await Deliveryman.findAll();
+    const deliverymen = await Deliveryman.findAll();
 
-    return res.json(users);
+    return res.json(deliverymen);
   }
 
   public async store(req: Request, res: Response): Promise<Response> {
-    const user = await Deliveryman.create(req.body);
+    const deliveryman = await Deliveryman.create(req.body);
 
-    return res.json(user);
+    
+    return res.json(deliveryman);
   }
 }
 

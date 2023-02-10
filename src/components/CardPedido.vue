@@ -23,6 +23,7 @@ const show = ref(true);
         <InfoUser
           :adress="(props.pedido.User?.adress as string)"
           :tel="(props.pedido.User?.phone as string)"
+          
         ></InfoUser>
         <el-icon size="22" @click="show = !show" class="ms-3">
           <ArrowUpBold v-if="show" />

@@ -1,17 +1,8 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "./db";
+import { UserModel } from "../interfaces/User";
 
-interface User extends Model {
-  id: number;
-  username: string;
-  password: string;
-  firstName?: string;
-  lastName?: string;
-  adress?: string;
-  phone?: string;
-}
-
-const User = sequelize.define<User>("User", {
+const User = sequelize.define<UserModel>("User", {
   username: {
     type: DataTypes.STRING,
     allowNull: false,

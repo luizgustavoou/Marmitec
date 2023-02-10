@@ -1,7 +1,8 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import sequelize from "./db";
+import { DeliverymanModel } from "../interfaces/Deliveryman";
 
-const Deliveryman = sequelize.define("Deliveryman", {
+const Deliveryman = sequelize.define<DeliverymanModel>("Deliveryman", {
   firstName: {
     type: DataTypes.STRING,
   },
@@ -13,5 +14,11 @@ const Deliveryman = sequelize.define("Deliveryman", {
   },
 });
 
+Deliveryman.addHook("afterCreate", (deliveryman: DeliverymanModel, options) => {
+  console.log(deliveryman.createdAt);
+  
+  console.log("CU E BUCETA");
+  
+})
 
 export default Deliveryman;

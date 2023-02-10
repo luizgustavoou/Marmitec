@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import User from "../models/User";
+
 import { sign } from "../services/auth";
+import { TUser } from "../interfaces/User";
 
 class AuthController {
   public async login(req: Request, res: Response) {
@@ -30,7 +32,7 @@ class AuthController {
     try {
       const result = await User.create(req.body);
 
-      const { password, ...user } = result.toJSON<User>();
+      const { password, ...user } = result.toJSON<TUser>();
 
       const token = sign({ user: user.id });
 

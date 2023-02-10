@@ -2,8 +2,9 @@ import { DataTypes } from "sequelize";
 import sequelize from "./db";
 import User from "./User";
 import Deliveryman from "./Deliveryman";
+import { OrderModel } from "../interfaces/Order";
 
-const Order = sequelize.define("Order", {
+const Order = sequelize.define<OrderModel>("Order", {
   description: {
     type: DataTypes.STRING,
   },
