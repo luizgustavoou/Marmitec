@@ -17,6 +17,8 @@ export function usePedidos() {
   }
 
   async function changeStatusPedido(id: number, newStatus: 1 | 2 | 3) {
+    //http://localhost:3333/orders/status/13
+
     const statusPedidoURL = `status/${id}`;
 
     const res = await pedidosAPI().put(statusPedidoURL, { newStatus });

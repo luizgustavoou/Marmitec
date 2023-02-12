@@ -5,7 +5,7 @@
     <header>
       <slot name="header"></slot>
     </header>
-    <main class="flex-grow-1" style="overflow: auto">
+    <main class="flex-grow-1">
       <slot name="main"></slot>
     </main>
     <footer

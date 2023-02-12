@@ -5,8 +5,6 @@ import { routes as routerUser } from "./router/User";
 import { routes as routerDeliveryMan } from "./router/DeliveryMan";
 import { routes as routerAuth } from "./router/auth";
 
-import sequelize from "./models/db";
-
 (async () => {
   // await sequelize.sync({ force: true });
 })();

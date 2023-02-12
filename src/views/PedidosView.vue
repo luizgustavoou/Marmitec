@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { domain } from "@/network/api";
 import { StatusPedido, Teste } from "@/components";
 import { ElMessage } from "element-plus";
 import type { IPedido, objChange } from "@/types/Pedidos";
-import { Ref, computed, onMounted, onUnmounted, ref } from "vue";
+import { Ref, onMounted, ref } from "vue";
+import { io } from "socket.io-client";
 
 import { usePedidos } from "@/composables/pedidos/usePedidos";
 
@@ -33,6 +33,13 @@ const openMsg = (
 
 onMounted(async () => {
   emit("changeShowMenu", true);
+
+  // const socket = io("ws://localhost:3333");
+
+  // socket.on("orders", (orders: IPedido[]) => {
+  //   console.log("recebido: " + orders[0]);
+  // });
+
   // const ws = new WebSocket(`ws://${domain}/pedidos`);
 
   // ws.onopen = (e) => {
@@ -74,12 +81,12 @@ onMounted(async () => {
 
 async function changeStatus(id: number, newStatus: 1 | 2 | 3) {
   // console.log(`id ${id} change to ${newStatus}!`);
-  // const { changeStatusPedido } = usePedidos();
-  // try {
-  //   const req = await changeStatusPedido(id, newStatus);
-  // } catch (error) {
-  //   openMsg("Ocorreu algum error ao atualizar o status do pedido.", "error");
-  // }
+  const { changeStatusPedido } = usePedidos();
+  try {
+    const req = await changeStatusPedido(id, newStatus);
+  } catch (error) {
+    openMsg("Ocorreu algum error ao atualizar o status do pedido.", "error");
+  }
 }
 
 const changeRequest = (e: objChange, id: number) => {
@@ -100,7 +107,6 @@ const changeFinish = (e: objChange, id: number) => {
 
 <template>
   <div>
-    {{ requestedPedidos }}
     <!-- style="overflow-y: scroll;" -->
 
     <div class="d-flex gap-3 p-4" style="height: 750px; overflow-y: scroll">

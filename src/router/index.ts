@@ -27,8 +27,10 @@ const userIsLoged = (
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  if (verifyAcessToken()) next();
-  else next({ name: "auth" });
+  // if (verifyAcessToken()) next();
+  // else next({ name: "auth" });
+
+  next();
 };
 
 const routes: Array<RouteRecordRaw> = [

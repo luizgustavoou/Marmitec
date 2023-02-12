@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useCookies } from "vue3-cookies";
+
 import { useUserStore } from "./stores/user";
-import { TheMenu, Layout, Footer } from "@/components";
+import { TheMenu, Layout, Footer, Teste } from "@/components";
 
 import { onMounted, ref } from "vue";
-import { api } from "./network/api";
 
 const user = useUserStore();
 
@@ -12,11 +12,7 @@ const showMenu = ref(false);
 
 const { cookies } = useCookies();
 
-onMounted(async () => {
-  // const res = await api("http", "orders").get("");
-
-  // console.log(res);
-});
+onMounted(() => {});
 </script>
 <template>
   <Layout>
@@ -24,10 +20,9 @@ onMounted(async () => {
       <TheMenu v-if="showMenu"></TheMenu>
     </template>
     <template #main>
-      {{ user.profile }}
-      <br />
+      <!-- {{ user.profile }} -->
       <!-- <button @click="() => cookies.remove('access_token')">Remover</button> -->
-
+      <!-- <Teste></Teste> -->
       <RouterView
         @change-show-menu="(change: boolean) => (showMenu = change)"
       ></RouterView>
@@ -45,6 +40,7 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 
 #app {

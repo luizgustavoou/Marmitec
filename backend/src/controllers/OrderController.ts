@@ -4,10 +4,10 @@ import { OrderRequest } from "../interfaces/Order";
 import User from "../models/User";
 import Deliveryman from "../models/Deliveryman";
 
-class UserController {
+class OrderController {
   public async index(req: Request, res: Response): Promise<Response> {
     try {
-      const users = await Order.findAll({
+      const orders = await Order.findAll({
         attributes: {
           exclude: ["UserId", "DeliverymanId"],
         },
@@ -22,7 +22,7 @@ class UserController {
           },
         ],
       });
-      return res.json(users);
+      return res.json(orders);
     } catch (error) {
       res.sendStatus(400);
     }
@@ -45,6 +45,28 @@ class UserController {
       res.sendStatus(400);
     }
   }
+
+  public async updateStatus(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params;
+      const { newStatus } = req.body;
+
+      const order = await Order.update(
+        { status: newStatus },
+        {
+          where: {
+            id,
+          },
+        }
+      );
+
+      return res.send(order);
+    } catch (error) {
+      console.log(error);
+
+      res.sendStatus(400);
+    }
+  }
 }
 
-export default new UserController();
+export default new OrderController();

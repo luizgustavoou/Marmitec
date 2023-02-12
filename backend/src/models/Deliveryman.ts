@@ -14,11 +14,4 @@ const Deliveryman = sequelize.define<DeliverymanModel>("Deliveryman", {
   },
 });
 
-Deliveryman.addHook("afterCreate", (deliveryman: DeliverymanModel, options) => {
-  console.log(deliveryman.createdAt);
-  
-  console.log("CU E BUCETA");
-  
-})
-
 export default Deliveryman;
