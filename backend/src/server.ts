@@ -9,9 +9,6 @@ io.on("connection", (socket) => {
   console.log("Conectado!");
 
   emitterOrder.on("orderAction", (orders) => {
-    console.log("chegou");
-    
-    console.log(orders)
     socket.emit("orders", orders);
   });
 });

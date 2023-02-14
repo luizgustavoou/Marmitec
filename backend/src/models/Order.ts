@@ -58,7 +58,7 @@ const Order = sequelize.define<OrderModel>("Order", {
   },
 });
 
-Order.addHook("afterUpdate", async (instance: OrderModel, options) => {
+async function processEmit() {
   const orders = await Order.findAll({
     attributes: {
       exclude: ["UserId", "DeliverymanId"],
@@ -75,10 +75,19 @@ Order.addHook("afterUpdate", async (instance: OrderModel, options) => {
     ],
   });
 
-  console.log("opa!");
-  
-
   emitterOrder.emit("orderAction", orders);
+}
+
+Order.addHook("afterUpdate", async (instance: OrderModel, options) => {
+  await processEmit();
+});
+
+Order.addHook("afterDestroy", async (instance: OrderModel, options) => {
+  await processEmit();
+});
+
+Order.addHook("afterCreate", async (options) => {
+  await processEmit();
 });
 
 Order.belongsTo(User);
