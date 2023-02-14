@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import User from "../models/User";
+import User from "../users/user.model";
 
-import { sign } from "../services/auth";
-import { TUser } from "../interfaces/User";
+import { sign } from "./auth.service";
+import { TUser } from "../../interfaces/User";
 
 class AuthController {
   public async login(req: Request, res: Response) {

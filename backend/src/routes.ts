@@ -1,10 +1,10 @@
 import { Router } from "express";
 
-import { routes as routesOrder } from "./router/Order";
-import { routes as routerUser } from "./router/User";
-import { routes as routerDeliveryMan } from "./router/DeliveryMan";
-import { routes as routerAuth } from "./router/auth";
-import sequelize from "./models/db";
+import { routes as routesOrder } from "./api/orders/order.routes";
+import { routes as routerUser } from "./api/users/user.routes";
+import { routes as routerDeliveryMan } from "./api/deliverymans/deliveryman.routes";
+import { routes as routerAuth } from "./api/auths/auth.routes";
+import sequelize from "./config/db";
 
 (async () => {
   // await sequelize.sync({ force: true });

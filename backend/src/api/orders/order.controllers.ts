@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import Order from "../models/Order";
-import { OrderRequest } from "../interfaces/Order";
-import User from "../models/User";
-import Deliveryman from "../models/Deliveryman";
+import Order from "./order.model";
+import { OrderRequest } from "../../interfaces/Order";
+import User from "../users/user.model";
+import Deliveryman from "../deliverymans/deliveryman.model";
 
 class OrderController {
   public async index(req: Request, res: Response): Promise<Response> {

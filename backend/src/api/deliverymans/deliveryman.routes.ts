@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import DeliveryManController from "../controllers/DeliveryManController";
+import DeliveryManController from "./deliveryman.controllers";
 
 const routes = Router();
 

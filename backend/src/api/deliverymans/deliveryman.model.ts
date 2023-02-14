@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "./db";
-import { DeliverymanModel } from "../interfaces/Deliveryman";
+import sequelize from "../../config/db";
+import { DeliverymanModel } from "../../interfaces/Deliveryman";
 
 const Deliveryman = sequelize.define<DeliverymanModel>("Deliveryman", {
   firstName: {

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Deliveryman from "../models/Deliveryman";
+import Deliveryman from "./deliveryman.model";
 
 class DeliverymanController {
   public async index(req: Request, res: Response): Promise<Response> {

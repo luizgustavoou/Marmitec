@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
 import { Req } from "../interfaces/utils";
-import { verify } from "../services/auth";
-import User from "../models/User";
+import { verify } from "../api/auths/auth.service";
+import User from "../api/users/user.model";
 
 export const authMiddleware = async (
   req: Req,
