@@ -21,9 +21,8 @@ const show = ref(true);
         </div>
 
         <InfoUser
-          :adress="(props.pedido.User?.adress as string)"
-          :tel="(props.pedido.User?.phone as string)"
-          
+          :adress="props.pedido.User?.adress || null"
+          :tel="props.pedido.User?.phone || null"
         ></InfoUser>
         <el-icon size="22" @click="show = !show" class="ms-3">
           <ArrowUpBold v-if="show" />
@@ -37,7 +36,7 @@ const show = ref(true);
         v-if="Object.prototype.hasOwnProperty.call(Show, key)"
         class="d-flex mb-3 justify-content-between"
       >
-        <label>{{ Show[key].label}} </label>
+        <label>{{ Show[key].label }} </label>
         <label>{{ props.pedido[key] }}</label>
       </div>
     </div>

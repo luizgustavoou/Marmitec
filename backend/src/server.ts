@@ -8,13 +8,10 @@ const io = new Server(server, { cors: { origin: "*" } });
 io.on("connection", (socket) => {
   console.log("Conectado!");
 
-  socket.on("teste", (data) => {
-    console.log("data");
-  });
-
   emitterOrder.on("orderAction", (orders) => {
-    // console.log(orders);
+    console.log("chegou");
     
+    console.log(orders)
     socket.emit("orders", orders);
   });
 });

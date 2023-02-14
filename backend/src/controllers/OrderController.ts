@@ -35,7 +35,6 @@ class OrderController {
 
       const order = { ...proteinas, ...acompanhamentos, ...restOrder };
 
-      console.log(order);
       const user = await Order.create(order, {});
 
       return res.json(user);
@@ -57,6 +56,7 @@ class OrderController {
           where: {
             id,
           },
+          individualHooks: true,
         }
       );
 

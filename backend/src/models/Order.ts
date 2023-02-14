@@ -58,7 +58,7 @@ const Order = sequelize.define<OrderModel>("Order", {
   },
 });
 
-Order.addHook("afterValidate", async (instance: OrderModel, options) => {
+Order.addHook("afterUpdate", async (instance: OrderModel, options) => {
   const orders = await Order.findAll({
     attributes: {
       exclude: ["UserId", "DeliverymanId"],
@@ -74,6 +74,9 @@ Order.addHook("afterValidate", async (instance: OrderModel, options) => {
       },
     ],
   });
+
+  console.log("opa!");
+  
 
   emitterOrder.emit("orderAction", orders);
 });

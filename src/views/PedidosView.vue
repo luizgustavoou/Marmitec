@@ -11,8 +11,6 @@ const emit = defineEmits<{
   (e: "changeShowMenu", change: boolean): void;
 }>();
 
-const tableData: Ref<IPedido[] | []> = ref([]);
-
 const requestedPedidos: Ref<IPedido[] | []> = ref([]);
 
 const processPedidos: Ref<IPedido[] | []> = ref([]);
@@ -34,31 +32,15 @@ const openMsg = (
 onMounted(async () => {
   emit("changeShowMenu", true);
 
-  // const socket = io("ws://localhost:3333");
+  const socket = io("ws://localhost:3333");
 
-  // socket.on("orders", (orders: IPedido[]) => {
-  //   console.log("recebido: " + orders[0]);
-  // });
+  socket.on("orders", (orders: IPedido[]) => {
+    requestedPedidos.value = orders.filter((pedido) => pedido.status == 1);
 
-  // const ws = new WebSocket(`ws://${domain}/pedidos`);
+    processPedidos.value = orders.filter((pedido) => pedido.status == 2);
 
-  // ws.onopen = (e) => {
-  //   console.log("Conexão estabelecida com o socket.");
-  // };
-
-  // ws.onerror = (event) => {
-  //   console.log("Ocorreu um erro no webSocket!");
-  // };
-  // ws.onmessage = (event) => {
-  //   const data = event.data;
-  //   const value: IPedido[] | [] = JSON.parse(data)[0];
-
-  //   requestedPedidos.value = value.filter((pedido) => pedido.status == 1);
-
-  //   processPedidos.value = value.filter((pedido) => pedido.status == 2);
-
-  //   finishPedidos.value = value.filter((pedido) => pedido.status == 3);
-  // };
+    finishPedidos.value = orders.filter((pedido) => pedido.status == 3);
+  });
 
   try {
     const { getPedidos } = usePedidos();
@@ -72,8 +54,6 @@ onMounted(async () => {
     processPedidos.value = orders.filter((pedido) => pedido.status == 2);
 
     finishPedidos.value = orders.filter((pedido) => pedido.status == 3);
-
-    // tableData.value = orders;
   } catch (error) {
     console.log(error);
   }

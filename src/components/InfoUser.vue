@@ -2,8 +2,8 @@
 import { More, InfoFilled } from "@element-plus/icons-vue";
 
 const props = defineProps<{
-  adress: string;
-  tel: string;
+  adress: string | null;
+  tel: string | null;
 }>();
 </script>
 
