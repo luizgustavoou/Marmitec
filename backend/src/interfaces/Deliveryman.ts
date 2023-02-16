@@ -1,6 +1,6 @@
 import Model from "sequelize/types/model";
 
-export interface TDeliveryman {
+export interface IDeliveryman {
   id: number;
   createdAt: number;
   updatedAt: number;
@@ -8,4 +8,4 @@ export interface TDeliveryman {
   lastName?: string;
   phone?: string;
 }
-export interface DeliverymanModel extends Model, TDeliveryman {}
+export interface DeliverymanModel extends Model, IDeliveryman {}

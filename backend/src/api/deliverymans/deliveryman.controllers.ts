@@ -1,34 +1,55 @@
 import { Request, Response } from "express";
-import Deliveryman from "./deliveryman.model";
+import { DeliverymanService } from "./deliveryman.service";
 
-class DeliverymanController {
-  public async index(req: Request, res: Response): Promise<Response> {
-    const deliverymen = await Deliveryman.findAll();
+export class DeliverymanController {
+  constructor(private readonly deliverymanService: DeliverymanService) {}
 
-    return res.json(deliverymen);
+  public async save(req: Request, res: Response): Promise<Response> {
+    const { firstName, lastName, adress, phone } = req.body;
+
+    try {
+      const deliveryman = await this.deliverymanService.createDeliveryman({
+        firstName,
+        lastName,
+        adress,
+        phone,
+      });
+
+      return res.sendStatus(201);
+    } catch (err) {
+      return res.status(400).json({
+        message: err.message || "Unexpected error create deliveryman.",
+      });
+    }
   }
 
-  public async store(req: Request, res: Response): Promise<Response> {
-    const deliveryman = await Deliveryman.create(req.body);
+  public async findMany(req: Request, res: Response): Promise<Response> {
+    try {
+      const deliverymen = await this.deliverymanService.findDeliverymen();
 
-    // deliveryman.update({firstName: "cudoido"})
-
-    return res.json(deliveryman);
+      res.json(deliverymen);
+    } catch (err) {
+      return res.status(400).json({
+        message: err.message || "Unexpected error find deliverymen.",
+      });
+    }
   }
 
   public async update(req: Request, res: Response) {
-    const deliveryman = await Deliveryman.update(
-      { firstName: req.body.firstName },
-      {
-        where: {
-          id: req.params.id,
-        },
-        individualHooks: true, //padrao eh false. se colocar true o hook after|beforeUpdate será acionado. No entanto, é melhor usar o after|BulkUpdate como hook.
-      }
-    );
+    const id = req.params.id;
+    const { firstName } = req.body;
 
-    res.send();
+    try {
+      const deliveryman = await this.deliverymanService.updateDeliveryman({
+        id,
+        firstName,
+      });
+
+      res.sendStatus(201);
+    } catch (err) {
+      return res.status(400).json({
+        message: err.message || "Unexpected error update deliveryman.",
+      });
+    }
   }
 }
-
-export default new DeliverymanController();

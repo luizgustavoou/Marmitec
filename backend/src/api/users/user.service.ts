@@ -2,7 +2,7 @@ import { ICreateUserRequestDTO } from "./dtos/ICreateUserRequestDTO";
 import { IUserRepository } from "./repositories/IUserRepository";
 
 export class UserService {
-  constructor(private UserRepository: IUserRepository) {}
+  constructor(private readonly UserRepository: IUserRepository) {}
 
   async createUser(data: ICreateUserRequestDTO) {    
     await this.UserRepository.save(data);

@@ -1,10 +1,18 @@
 import { Router } from "express";
-
-import DeliveryManController from "./deliveryman.controllers";
+import { deliverymanController } from "./index";
 
 const routes = Router();
 
-routes.get("/", DeliveryManController.index);
-routes.post("/", DeliveryManController.store);
-routes.put("/:id", DeliveryManController.update);
+routes.get("/", (req, res) => {
+  return deliverymanController.findMany(req, res);
+});
+
+routes.post("/", (req, res) => {
+  return deliverymanController.save(req, res);
+});
+
+routes.put("/:id", (req, res) => {
+  return deliverymanController.update(req, res);
+});
+
 export { routes };
