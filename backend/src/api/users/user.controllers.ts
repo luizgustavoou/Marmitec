@@ -1,18 +1,32 @@
 import { Request, Response } from "express";
-import User from "./user.model";
+import { UserService } from "./user.service";
 
-class UserController {
-  public async index(req: Request, res: Response): Promise<Response> {
-    const users = await User.findAll();
+export class UserController {
+  constructor(private userService: UserService) {}
 
-    return res.json(users);
+  async save(req: Request, res: Response): Promise<Response> {
+    try {
+      await this.userService.createUser(req.body);
+      return res.sendStatus(201);
+    } catch (err) {
+      return res.status(400).json({
+        message: err.message || "Unexpected error creating user.",
+      });
+    }
   }
 
-  public async store(req: Request, res: Response): Promise<Response> {
-    const user = await User.create(req.body);
+  async findMany(req: Request, res: Response): Promise<Response> {
+    try {
+      const users = await this.userService.findUsers();
 
-    return res.json(user);
+      return res.json(users);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json({
+        message: err.message || "Unexpected error finding users.",
+      });
+    }
   }
 }
 
-export default new UserController();
+// export default new UserController();

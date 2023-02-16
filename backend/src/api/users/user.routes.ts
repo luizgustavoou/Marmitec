@@ -1,10 +1,13 @@
 import { Router } from "express";
-
-import UserController from "./user.controllers";
+import { userController } from "./index";
 
 const routes = Router();
 
-routes.get("/", UserController.index);
-routes.post("/", UserController.store);
+routes.get("/", (req, res) => {
+  return userController.findMany(req, res);
+});
+routes.post("/", (req, res) => {
+  return userController.save(req, res);
+});
 
 export { routes };

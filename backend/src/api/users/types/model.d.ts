@@ -1,6 +1,6 @@
 import Model from "sequelize/types/model";
 
-export interface TUser {
+export interface IUser {
   id: number;
   createdAt: number;
   updatedAt: number;
@@ -11,4 +11,4 @@ export interface TUser {
   adress?: string;
   phone?: string;
 }
-export interface UserModel extends Model, TUser {}
+export interface UserModel extends Model, IUser {}

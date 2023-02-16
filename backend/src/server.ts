@@ -4,9 +4,6 @@ import emitterOrder from "./utils/emitterOrder";
 import { config } from "dotenv";
 config();
 
-
-console.log(process.env.PORT);
-
 const server = app.express.listen(3333);
 const io = new Server(server, { cors: { origin: "*" } });
 
