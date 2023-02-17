@@ -11,6 +11,7 @@ export function usePedidos() {
   }
 
   async function addPedido(pedido: Form) {
+
     const res = await pedidosAPI().post("", pedido);
 
     return res;

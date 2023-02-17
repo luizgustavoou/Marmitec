@@ -72,11 +72,11 @@ async function submit(resetForm: () => void) {
     const { addPedido } = usePedidos();
 
     loading.value = true;
-    console.log(form);
+
 
     const req = await addPedido(form);
 
-    if (req.status == 200) {
+    if (req) {
       openMsg("Pedido cadastrado com sucesso.", "success");
       resetForm();
     }

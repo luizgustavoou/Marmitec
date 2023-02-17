@@ -3,70 +3,55 @@ import Order from "./order.model";
 import { OrderRequest } from "../../interfaces/Order";
 import User from "../users/user.model";
 import Deliveryman from "../deliverymans/deliveryman.model";
+import { OrderService } from "./order.service";
 
-class OrderController {
-  public async index(req: Request, res: Response): Promise<Response> {
-    try {
-      const orders = await Order.findAll({
-        attributes: {
-          exclude: ["UserId", "DeliverymanId"],
-        },
-        include: [
-          {
-            model: User,
-            attributes: ["id", "firstName", "lastName", "adress", "phone"],
-          },
-          {
-            model: Deliveryman,
-            attributes: ["id", "firstName", "lastName", "phone"],
-          },
-        ],
-      });
-      return res.json(orders);
-    } catch (error) {
-      res.sendStatus(400);
-    }
-  }
+export class OrderController {
+  constructor(private readonly orderService: OrderService) {}
 
-  public async store(req: Request, res: Response): Promise<Response> {
+  public async save(req: Request, res: Response): Promise<Response> {
+    console.log(req.body);
     try {
-      const { proteinas, acompanhamentos, ...restOrder }: OrderRequest =
-        req.body;
+      const { proteinas, acompanhamentos, ...restOrder } = req.body;
 
       const order = { ...proteinas, ...acompanhamentos, ...restOrder };
 
-      const user = await Order.create(order, {});
+      const user = await this.orderService.createOrder(order);
 
-      return res.json(user);
-    } catch (error) {
-      console.log(error);
-
-      res.sendStatus(400);
+      return res.sendStatus(201);
+    } catch (err) {
+      return res.status(400).json({
+        message: err.messaage || "Unexpected error find orders",
+      });
     }
   }
 
-  public async updateStatus(req: Request, res: Response): Promise<Response> {
+  public async findMany(req: Request, res: Response): Promise<Response> {
+    try {
+      const orders = await this.orderService.findOrders();
+
+      return res.json(orders);
+    } catch (err) {
+      return res.status(400).json({
+        message: err.messaage || "Unexpected error find orders",
+      });
+    }
+  }
+
+  public async updateByStatus(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
       const { newStatus } = req.body;
 
-      const order = await Order.update(
-        { status: newStatus },
-        {
-          where: {
-            id,
-          },
-          individualHooks: true,
-        }
-      );
+      const order = await this.orderService.updateOrderByStatus({
+        id,
+        newStatus,
+      });
 
-      return res.send(order);
-    } catch (error) {
-      console.log(error);
-
-      res.sendStatus(400);
+      return res.sendStatus(201);
+    } catch (err) {
+      return res.status(400).json({
+        message: err.messaage || "Unexpected error update orders by status",
+      });
     }
   }
 }
-
-export default new OrderController();
