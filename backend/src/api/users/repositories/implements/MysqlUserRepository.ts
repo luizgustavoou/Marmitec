@@ -13,4 +13,14 @@ export class MysqlUserRepository implements IUserRepository {
 
     return users;
   }
+
+  async findOneByEmail(email: string): Promise<IUser> {
+    const result = await User.findOne({
+      where: { email },
+    });
+
+    const user = result.toJSON<IUser>();
+
+    return user;
+  }
 }

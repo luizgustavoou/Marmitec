@@ -5,4 +5,5 @@ import { IUser } from "../types/model";
 export interface IUserRepository {
   save(CreateUserDTO: ICreateUserRequestDTO): Promise<void>;
   findMany(): Promise<IUser[]>;
+  findOneByEmail(email: string): Promise<IUser>;
 }
