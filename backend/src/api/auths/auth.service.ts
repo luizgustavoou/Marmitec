@@ -1,9 +1,52 @@
-import jwt from "jsonwebtoken";
+import { CryptService } from "../../services/crypt/crypt.service";
+import { JWTService } from "../../services/jwt/jwt.service";
+import { ICreateUserRequestDTO } from "../users/dtos/ICreateUserRequestDTO";
+import { UserService } from "../users/user.service";
 
-const secret =
-  "3A14D22CB3E05589F6A068A2A83CD92293BD9D8475E597E0CE85008B24871ED3";
+export class AuthService {
+  constructor(
+    private readonly userService: UserService,
+    private readonly cryptService: CryptService,
+    private readonly jwtService: JWTService
+  ) {}
 
-export const sign = (payload: any) =>
-  jwt.sign(payload, secret, { expiresIn: 86400 });
+  async login(email: string, password: string) {
+    const user = await this.userService.findUserByEmail(email);
 
-export const verify = (token: string) => jwt.verify(token, secret);
+    if (!user) throw new Error("Username not found.");
+
+    const checkPassword = await this.cryptService.comparePassword(
+      password,
+      user.password
+    );
+
+    if (!checkPassword) throw new Error("Error validating password.");
+
+    const token = await this.jwtService.sign({ user: user?.id });
+
+    return { user, token };
+  }
+
+  async signup(createUserRequestDTO: ICreateUserRequestDTO) {
+    const passwordHash = await this.cryptService.generateHash(
+      createUserRequestDTO.password
+    );
+
+    const user = await this.userService.createUser({
+      email: createUserRequestDTO.email,
+      password: passwordHash,
+      firstName: createUserRequestDTO.firstName,
+      lastName: createUserRequestDTO.lastName,
+      adress: createUserRequestDTO.adress,
+      phone: createUserRequestDTO.phone,
+    });
+
+    delete user.password;
+    delete user.createdAt;
+    delete user.updatedAt;
+
+    const token = await this.jwtService.sign({ user: user.id });
+
+    return { token, user };
+  }
+}

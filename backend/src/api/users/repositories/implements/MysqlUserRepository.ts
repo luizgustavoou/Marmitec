@@ -4,8 +4,12 @@ import User from "../../user.model";
 import { IUserRepository } from "../IUserRepository";
 
 export class MysqlUserRepository implements IUserRepository {
-  async save(CreateUserDTO: ICreateUserRequestDTO): Promise<void> {
-    const user = await User.create({ ...CreateUserDTO });
+  async save(CreateUserDTO: ICreateUserRequestDTO): Promise<IUser> {
+    const result = await User.create({ ...CreateUserDTO });
+
+    const user = result.toJSON<IUser>();
+
+    return user;
   }
 
   async findMany(): Promise<IUser[]> {
@@ -18,6 +22,8 @@ export class MysqlUserRepository implements IUserRepository {
     const result = await User.findOne({
       where: { email },
     });
+
+    if (!result) throw new Error("Not found user by email.");
 
     const user = result.toJSON<IUser>();
 

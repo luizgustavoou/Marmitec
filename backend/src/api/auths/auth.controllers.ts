@@ -1,34 +1,20 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
+import { AuthService } from "./auth.service";
 
-import User from "../users/user.model";
-
-import { sign } from "./auth.service";
-import { IUser } from "../users/types/model";
-
-class AuthController {
+export class AuthController {
+  constructor(private readonly authService: AuthService) {}
   public async login(req: Request, res: Response) {
     const [hashType, hash] = (req.headers.authorization as string).split(" ");
 
     const [email, password] = Buffer.from(hash, "base64").toString().split(":");
 
     try {
-      const result = await User.findOne({
-        where: { email },
-      });
+      const response = await this.authService.login(email, password);
 
-      if (!result) throw new Error("Username not found.");
-
-      const user = result.toJSON<IUser>();
-
-      const checkPassword = await bcrypt.compareSync(password, user.password);
-
-      if (!checkPassword) throw new Error("Error validating password.");
-
-      const token = sign({ user: user?.id });
-
-      res.json({ user, token });
+      res.json(response);
     } catch (err) {
+      console.log(err.message);
+
       res.status(401).json({
         message: err.message || "Unexpected error login.",
       });
@@ -36,29 +22,18 @@ class AuthController {
   }
 
   public async signup(req: Request, res: Response) {
+    const { email, password, firstName, lastName, adress, phone } = req.body;
     try {
-      const { email, password, firstName, lastName, adress, phone } = req.body;
-
-      const saltRounds = 10;
-
-      const passwordHash = await bcrypt.hashSync(password, saltRounds);
-
-      const result = await User.create({
+      const response = await this.authService.signup({
         email,
-        password: passwordHash,
+        password,
         firstName,
         lastName,
         adress,
         phone,
       });
 
-      const user = result.toJSON<IUser>();
-
-      delete user.password;
-
-      const token = sign({ user: user.id });
-
-      res.json({ token, user });
+      res.json(response);
     } catch (err) {
       res.status(400).json({
         message: err.message || "Unexpected error signup user.",
@@ -66,15 +41,13 @@ class AuthController {
     }
   }
 
-  public async getUsers(req: Request, res: Response) {
-    try {
-      const users = await User.findAll();
+  // public async getUsers(req: Request, res: Response) {
+  //   try {
+  //     const users = await User.findAll();
 
-      res.json(users);
-    } catch (error) {
-      res.send(error);
-    }
-  }
+  //     res.json(users);
+  //   } catch (error) {
+  //     res.send(error);
+  //   }
+  // }
 }
-
-export default new AuthController();

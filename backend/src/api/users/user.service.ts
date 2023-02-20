@@ -5,7 +5,9 @@ export class UserService {
   constructor(private readonly UserRepository: IUserRepository) {}
 
   async createUser(data: ICreateUserRequestDTO) {
-    await this.UserRepository.save(data);
+    const user = await this.UserRepository.save(data);
+
+    return user;
   }
 
   async findUsers() {

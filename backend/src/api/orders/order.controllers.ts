@@ -25,7 +25,7 @@ export class OrderController {
     try {
       const orders = await this.orderService.findOrders();
 
-      console.log(orders);
+      // console.log(orders);
       
       return res.json(orders);
     } catch (err) {
