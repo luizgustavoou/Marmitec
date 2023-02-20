@@ -1,10 +1,10 @@
-import { NextFunction, Response } from "express";
-import { Req } from "../interfaces/utils";
+import { NextFunction, Request, Response } from "express";
+
 import { verify } from "../api/auths/auth.service";
 import User from "../api/users/user.model";
 
 export const authMiddleware = async (
-  req: Req,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
@@ -17,14 +17,14 @@ export const authMiddleware = async (
       (payload as { user: number; [key: string]: any }).user,
       {
         attributes: {
-          exclude: ["username", "password"],
+          exclude: ["password"],
         },
       }
     );
 
     if (!user) return res.sendStatus(401);
 
-    req.auth = user;
+    // req.auth = user;
 
     next();
   } catch (error) {

@@ -2,9 +2,10 @@ import { DataTypes } from "sequelize";
 import sequelize from "../../config/db";
 import User from "../users/user.model";
 import Deliveryman from "../deliverymans/deliveryman.model";
-import { OrderModel } from "../../interfaces/Order";
+
 import { ValidationOptions } from "sequelize/types/instance-validator";
 import emitterOrder from "../../utils/emitterOrder";
+import { OrderModel } from "./types/model";
 
 const Order = sequelize.define<OrderModel>("Order", {
   description: {

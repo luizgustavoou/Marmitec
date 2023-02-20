@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import bcrypt from "bcrypt";
+
 import User from "../users/user.model";
 
 import { sign } from "./auth.service";
@@ -8,14 +10,12 @@ class AuthController {
   public async login(req: Request, res: Response) {
     const [hashType, hash] = (req.headers.authorization as string).split(" ");
 
-    const [username, password] = Buffer.from(hash, "base64")
-      .toString()
-      .split(":");
+    const [email, password] = Buffer.from(hash, "base64").toString().split(":");
 
     try {
       const user = await User.findOne({
-        where: { username, password },
-        attributes: { exclude: ["username", "password"] },
+        where: { email, password },
+        attributes: { exclude: ["password"] },
       });
 
       if (!user) return res.sendStatus(401);

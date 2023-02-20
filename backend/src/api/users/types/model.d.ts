@@ -2,13 +2,13 @@ import Model from "sequelize/types/model";
 
 export interface IUser {
   id: number;
-  createdAt: number;
-  updatedAt: number;
-  username: string;
+  email: string;
   password: string;
   firstName?: string;
   lastName?: string;
   adress?: string;
   phone?: string;
+  createdAt: number;
+  updatedAt: number;
 }
 export interface UserModel extends Model, IUser {}

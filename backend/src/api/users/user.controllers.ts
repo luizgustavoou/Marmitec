@@ -18,7 +18,7 @@ export class UserController {
   async findMany(req: Request, res: Response): Promise<Response> {
     try {
       const users = await this.userService.findUsers();
-
+      
       return res.json(users);
     } catch (err) {
       console.log(err);

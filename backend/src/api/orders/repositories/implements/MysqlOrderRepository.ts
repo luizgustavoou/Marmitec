@@ -1,9 +1,9 @@
-import { OrderModel } from "../../../../interfaces/Order";
 import Deliveryman from "../../../deliverymans/deliveryman.model";
 import User from "../../../users/user.model";
 import { ICreateOrderDTO } from "../../dtos/ICreateOrderDTO";
 import { IUpdateOrderByStatusDTO } from "../../dtos/IUpdateOrderByStatusDTO";
 import Order from "../../order.model";
+import { IOrder } from "../../types/model";
 import { IOrderRepository } from "../IOrderRepository";
 
 export class MysqlOrderRepository implements IOrderRepository {
@@ -11,8 +11,9 @@ export class MysqlOrderRepository implements IOrderRepository {
     await Order.create({ ...CreateOrderDTO });
   }
 
-  async findMany(): Promise<OrderModel[]> {
+  async findMany(): Promise<IOrder[]> {
     const orders = await Order.findAll({
+      raw: true,
       attributes: {
         exclude: ["UserId", "DeliverymanId"],
       },

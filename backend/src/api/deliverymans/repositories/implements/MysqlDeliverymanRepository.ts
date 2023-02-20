@@ -1,7 +1,7 @@
-import { DeliverymanModel } from "../../../../interfaces/Deliveryman";
 import Deliveryman from "../../deliveryman.model";
 import { ICreateDeliveryManDTO } from "../../dtos/CreateDeliveryManDTO";
 import { IUpdateDeliverymanDTO } from "../../dtos/UpdateDeliverymanDTO";
+import { IDeliveryman } from "../../types/model";
 import { IDeliverymanRepository } from "../IDeliverymanRepository";
 
 export class MysqlDeliverymanRepository implements IDeliverymanRepository {
@@ -9,8 +9,8 @@ export class MysqlDeliverymanRepository implements IDeliverymanRepository {
     const deliveryman = await Deliveryman.create({ ...createDeliveryManDTO });
   }
 
-  async findMany(): Promise<DeliverymanModel[]> {
-    const deliverymen = await Deliveryman.findAll();
+  async findMany(): Promise<IDeliveryman[]> {
+    const deliverymen = await Deliveryman.findAll({ raw: true });
 
     return deliverymen;
   }

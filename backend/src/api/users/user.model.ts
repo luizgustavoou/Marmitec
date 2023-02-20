@@ -3,7 +3,7 @@ import sequelize from "../../config/db";
 import { UserModel } from "./types/model";
 
 const User = sequelize.define<UserModel>("User", {
-  username: {
+  email: {
     type: DataTypes.STRING,
     allowNull: false,
   },

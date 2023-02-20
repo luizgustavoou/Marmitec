@@ -5,10 +5,12 @@ export class DeliverymanController {
   constructor(private readonly deliverymanService: DeliverymanService) {}
 
   public async save(req: Request, res: Response): Promise<Response> {
-    const { firstName, lastName, adress, phone } = req.body;
+    const { email, password, firstName, lastName, adress, phone } = req.body;
 
     try {
       const deliveryman = await this.deliverymanService.createDeliveryman({
+        email,
+        password,
         firstName,
         lastName,
         adress,

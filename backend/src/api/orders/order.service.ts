@@ -10,7 +10,7 @@ export class OrderService {
   }
 
   async findOrders() {
-    const orders = this.OrderRepository.findMany();
+    const orders = await this.OrderRepository.findMany();
 
     return orders;
   }
