@@ -13,32 +13,56 @@ class AuthController {
     const [email, password] = Buffer.from(hash, "base64").toString().split(":");
 
     try {
-      const user = await User.findOne({
-        where: { email, password },
-        attributes: { exclude: ["password"] },
+      const result = await User.findOne({
+        where: { email },
       });
 
-      if (!user) return res.sendStatus(401);
+      if (!result) throw new Error("Username not found.");
+
+      const user = result.toJSON<IUser>();
+
+      const checkPassword = await bcrypt.compareSync(password, user.password);
+
+      if (!checkPassword) throw new Error("Error validating password.");
 
       const token = sign({ user: user?.id });
 
-      res.send({ user, token });
-    } catch (error) {
-      res.send(error);
+      res.json({ user, token });
+    } catch (err) {
+      res.status(401).json({
+        message: err.message || "Unexpected error login.",
+      });
     }
   }
 
   public async signup(req: Request, res: Response) {
     try {
-      const result = await User.create(req.body);
+      const { email, password, firstName, lastName, adress, phone } = req.body;
 
-      const { password, ...user } = result.toJSON<IUser>();
+      const saltRounds = 10;
+
+      const passwordHash = await bcrypt.hashSync(password, saltRounds);
+
+      const result = await User.create({
+        email,
+        password: passwordHash,
+        firstName,
+        lastName,
+        adress,
+        phone,
+      });
+
+      const user = result.toJSON<IUser>();
+
+      delete user.password;
 
       const token = sign({ user: user.id });
 
-      res.send({ token, user });
-    } catch (error) {
-      res.sendStatus(400);
+      res.json({ token, user });
+    } catch (err) {
+      res.status(400).json({
+        message: err.message || "Unexpected error signup user.",
+      });
     }
   }
 
@@ -46,7 +70,7 @@ class AuthController {
     try {
       const users = await User.findAll();
 
-      res.send(users);
+      res.json(users);
     } catch (error) {
       res.send(error);
     }

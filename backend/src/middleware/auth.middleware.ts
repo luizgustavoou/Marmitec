@@ -8,7 +8,9 @@ export const authMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
-  const [hashType, token] = (req.headers.authorization as string).split(" ");
+  const authHeader = req.headers.authorization;
+
+  const [hashType, token] = authHeader && authHeader.split(" ");
 
   try {
     const payload = await verify(token);
