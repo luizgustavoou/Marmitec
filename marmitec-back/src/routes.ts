@@ -12,4 +12,8 @@ routes.use("/orders", routesOrder);
 routes.use("/deliverys", routerDeliveryMan);
 routes.use("/auth", routerAuth);
 
+routes.get("/docker", (req, res) => {
+  res.send("Hello Docker!");
+});
+
 export default routes;

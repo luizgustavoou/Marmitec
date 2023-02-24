@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  frontend:
+    container_name: marmitec-frontend
+    build:
+      context: ./marmitec-front
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./marmitec-front:/usr/app
+  backend:
+    container_name: marmitec-backend
+    build:
+      context: ./marmitec-back
+      dockerfile: Dockerfile
+    ports:
+      - 3333:3333
+    volumes:
+      - ./marmitec-back:/usr/app
+    

@@ -11,7 +11,10 @@ config();
 })();
 
 
+console.log(process.env);
+
 const server = app.express.listen(3333);
+
 const io = new Server(server, { cors: { origin: "*" } });
 
 io.on("connection", (socket) => {
