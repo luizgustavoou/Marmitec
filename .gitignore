@@ -6,7 +6,7 @@
 data
 
 # local env files
-**/.env
+./**/.env
 
 
 # Log files
