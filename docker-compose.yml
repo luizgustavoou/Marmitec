@@ -19,5 +19,18 @@ services:
       - 3333:3333
     volumes:
       - ./marmitec-back:/usr/app
+    depends_on:
+      - db
+  db:
+    container_name: marmitec-mysql
+    image: mysql
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 14032001
+      MYSQL_DATABASE: marmitariav2
+    volumes:
+      - ./data:/var/lib/mysql
+
     
-    # TODO: Fazer container do MySQL
+
