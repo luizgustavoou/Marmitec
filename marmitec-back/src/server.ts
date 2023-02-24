@@ -10,10 +10,11 @@ config();
   // await sequelize.sync({ force: true });
 })();
 
-
-console.log(process.env);
-
-const server = app.express.listen(3333);
+const server = app.express.listen(process.env.API_PORT, () => {
+  console.log(
+    `Servidor iniciado http://${process.env.DB_HOST}:${process.env.API_PORT}`
+  );
+});
 
 const io = new Server(server, { cors: { origin: "*" } });
 

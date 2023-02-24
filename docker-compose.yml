@@ -20,3 +20,4 @@ services:
     volumes:
       - ./marmitec-back:/usr/app
     
+    # TODO: Fazer container do MySQL
