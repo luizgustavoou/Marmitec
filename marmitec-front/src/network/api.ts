@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
-const host = process.env.VUE_APP_HOST;
-const port = process.env.VUE_APP_PORT;
+const host = process.env.VUE_APP_API_HOST;
+const port = process.env.VUE_APP_API_PORT;
 
 export const domain = `${host}:${port}`;
 

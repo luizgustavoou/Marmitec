@@ -5,4 +5,5 @@ const sequelize = new Sequelize("marmitariav2", "root", "14032001", {
   dialect: "mysql",
 });
 
+
 export default sequelize;

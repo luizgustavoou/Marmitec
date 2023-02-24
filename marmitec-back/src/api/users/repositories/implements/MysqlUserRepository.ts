@@ -7,6 +7,8 @@ export class MysqlUserRepository implements IUserRepository {
   async save(CreateUserDTO: ICreateUserRequestDTO): Promise<IUser> {
     const result = await User.create({ ...CreateUserDTO });
 
+    if (!result) throw new Error("Error create user.");
+
     const user = result.toJSON<IUser>();
 
     return user;
