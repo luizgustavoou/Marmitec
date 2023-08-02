@@ -10,6 +10,12 @@ export class UserService {
     return user;
   }
 
+  async findUserByPk(id: number) {
+    const user = await this.UserRepository.findByPk(id);
+
+    return user;
+  }
+
   async findUsers() {
     const users = await this.UserRepository.findMany();
 

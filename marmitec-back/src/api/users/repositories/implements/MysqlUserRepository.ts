@@ -20,6 +20,21 @@ export class MysqlUserRepository implements IUserRepository {
     return users;
   }
 
+  async findByPk(id: number): Promise<IUser> {
+    const result = await User.findByPk(id, {
+      attributes: {
+        exclude: ["password"],
+      },
+    })
+
+    if (!result) throw new Error("Not found user by id.");
+
+    const user = result.toJSON<IUser>();
+
+
+    return user;
+  }
+
   async findOneByEmail(email: string): Promise<IUser> {
     const result = await User.findOne({
       where: { email },

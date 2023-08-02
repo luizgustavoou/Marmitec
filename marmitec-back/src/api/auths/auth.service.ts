@@ -3,6 +3,8 @@ import { JWTService } from "../../services/jwt/jwt.service";
 import { ICreateUserRequestDTO } from "../users/dtos/ICreateUserRequestDTO";
 import { UserService } from "../users/user.service";
 
+//chave: 3A14D22CB3E05589F6A068A2A83CD92293BD9D8475E597E0CE85008B24871ED3
+//token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoxLCJpYXQiOjE2OTEwMTIxMzQsImV4cCI6MTY5MTA5ODUzNH0.Sk2ZhJjkBApW1D6bUnsBSRUEbLaOg_kW3XZF4kxAR2k
 export class AuthService {
   constructor(
     private readonly userService: UserService,
@@ -15,6 +17,7 @@ export class AuthService {
 
     if (!user) throw new Error("Username not found.");
 
+    console.log({password, up: user.password})
     const checkPassword = await this.cryptService.comparePassword(
       password,
       user.password

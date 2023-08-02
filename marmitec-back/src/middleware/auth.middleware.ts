@@ -1,35 +1,37 @@
 import { NextFunction, Request, Response } from "express";
 
-import { verify } from "../api/auths/auth.service";
-import User from "../api/users/user.model";
+import { JWTService } from "../services/jwt/jwt.service";
+import { UserService } from '../api/users/user.service';
 
-export const authMiddleware = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const authHeader = req.headers.authorization;
+//token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoxLCJpYXQiOjE2OTEwMTQ3MjAsImV4cCI6MTY5MTEwMTEyMH0.CNnOnRbF3xHuKDtTObqKaR5MqcVJTLMlCB5jS5nvpB4
 
-  const [hashType, token] = authHeader && authHeader.split(" ");
+export class AuthMiddleware {
+  constructor(private readonly jwtService: JWTService, private readonly userService: UserService
+  ) { }
 
-  try {
-    const payload = await verify(token);
+  async checkAuth(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    const authHeader = req.headers.authorization;
 
-    const user = await User.findByPk(
-      (payload as { user: number; [key: string]: any }).user,
-      {
-        attributes: {
-          exclude: ["password"],
-        },
-      }
-    );
+    const [hashType, token] = authHeader && authHeader.split(" ");
 
-    if (!user) return res.sendStatus(401);
+    try {
+      const payload = await this.jwtService.verify(token);
 
-    // req.auth = user;
+      const user = await this.userService.findUserByPk((payload as { user: number;[key: string]: any }).user);
 
-    next();
-  } catch (error) {
-    res.sendStatus(401);
-  }
-};
+      if (!user) return res.sendStatus(401);
+
+      (req as any).auth = user;
+
+      next();
+    } catch (error) {
+      res.sendStatus(401);
+    }
+  };
+
+
+}

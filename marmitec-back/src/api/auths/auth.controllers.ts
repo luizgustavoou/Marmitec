@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { AuthService } from "./auth.service";
 
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
   public async login(req: Request, res: Response) {
     const [hashType, hash] = (req.headers.authorization as string).split(" ");
 

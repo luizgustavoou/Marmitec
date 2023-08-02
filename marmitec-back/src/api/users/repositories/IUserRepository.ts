@@ -6,4 +6,5 @@ export interface IUserRepository {
   save(CreateUserDTO: ICreateUserRequestDTO): Promise<IUser>;
   findMany(): Promise<IUser[]>;
   findOneByEmail(email: string): Promise<IUser>;
+  findByPk(id: number): Promise<IUser>;
 }

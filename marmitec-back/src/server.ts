@@ -12,7 +12,7 @@ config();
 
 const server = app.express.listen(process.env.API_PORT, () => {
   console.log(
-    `Servidor iniciado http://${process.env.DB_HOST}:${process.env.API_PORT}`
+    `Servidor iniciado http://localhost:${process.env.API_PORT}`
   );
 });
 
