@@ -13,10 +13,6 @@ routes.use("/orders", routesOrder);
 routes.use("/deliverys", routerDeliveryMan);
 routes.use("/auth", routerAuth);
 
-routes.get("/docker", (req, res) => {
-  res.send("Hello Docker!");
-});
-
 routes.get('/me', authMiddleware.checkAuth.bind(authMiddleware), (req, res) => {
   res.json({auth: (req as any).auth})
 })
