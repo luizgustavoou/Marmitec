@@ -4,6 +4,7 @@ import { View, Hide } from "@element-plus/icons-vue";
 import { FormInstance, FormRules } from "element-plus";
 import { onMounted, reactive, ref } from "vue";
 import { useUserStore } from "@/stores/user";
+import { authService } from "../services/auth"
 
 const router = useRouter();
 const user = useUserStore();
@@ -49,12 +50,12 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (valid) {
       formProcess.isRequesting = true;
       try {
-        const res = await user.signIn(formLogin);
+        const res = await authService.signIn({ ...formLogin });
 
         formProcess.hasErro = false;
 
-        router.push({ path: "/home" });
-      } catch (e) {
+        // router.push({ path: "/home" });
+      } catch (e: any) {
         formProcess.hasErro = true;
         if (e.response?.data.statusCode == 401) {
           formProcess.message = "Usuário ou senha incorretos";

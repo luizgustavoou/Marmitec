@@ -4,12 +4,12 @@ export interface User {
 }
 
 export interface Profile {
-  id: number;
-  name: string;
+  adress: string;
   email: string;
+  firstName: string;
+  id: number;
+  lastName: string;
+  phone: string
 }
 
-export interface Token {
-  access_token: string;
-  refresh_token: string;
-}
+

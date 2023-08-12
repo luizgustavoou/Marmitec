@@ -10,14 +10,13 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly cryptService: CryptService,
     private readonly jwtService: JWTService
-  ) {}
+  ) { }
 
   async login(email: string, password: string) {
     const user = await this.userService.findUserByEmail(email);
 
     if (!user) throw new Error("Username not found.");
 
-    console.log({password, up: user.password})
     const checkPassword = await this.cryptService.comparePassword(
       password,
       user.password
@@ -27,6 +26,10 @@ export class AuthService {
 
     const token = await this.jwtService.sign({ user: user?.id });
 
+    delete user.password;
+    delete user.createdAt;
+    delete user.updatedAt;
+    
     return { user, token };
   }
 

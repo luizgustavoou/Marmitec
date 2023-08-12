@@ -38,6 +38,7 @@ export class MysqlUserRepository implements IUserRepository {
   async findOneByEmail(email: string): Promise<IUser> {
     const result = await User.findOne({
       where: { email },
+      
     });
 
     if (!result) throw new Error("Not found user by email.");
