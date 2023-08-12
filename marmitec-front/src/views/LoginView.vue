@@ -4,10 +4,7 @@ import { View, Hide } from "@element-plus/icons-vue";
 import { FormInstance, FormRules } from "element-plus";
 import { onMounted, reactive, ref } from "vue";
 import { useUserStore } from "@/stores/user";
-import { authService } from "../services/auth"
-
-const router = useRouter();
-const user = useUserStore();
+import { authService } from "../services/auth";
 
 const emit = defineEmits<{
   (e: "changeShowMenu", change: boolean): void;
@@ -57,7 +54,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
         // router.push({ path: "/home" });
       } catch (e: any) {
         formProcess.hasErro = true;
-        if (e.response?.data.statusCode == 401) {
+        if (e.response?.status == 401) {
           formProcess.message = "Usuário ou senha incorretos";
         } else {
           formProcess.message = "Ocorreu algum erro";

@@ -4,6 +4,7 @@ import {
   NavigationGuardNext,
   RouteLocationNormalized,
   RouteRecordRaw,
+  
 } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import CadastroView from "../views/CadastroView.vue";

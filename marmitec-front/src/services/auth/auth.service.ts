@@ -3,6 +3,7 @@ import { authAPI } from '../../network/api';
 import { JWTService } from '../jwt/jwt.service';
 import { CookiesService } from '../cookies/cookies.service';
 import { useUserStore } from '@/stores/user';
+import router from '@/router';
 
 interface IAPISignIn {
     token: string;
@@ -15,8 +16,6 @@ interface IAPISignIn {
         phone: string
     },
 }
-
-
 export class AuthService {
     constructor(private readonly jwtService: JWTService, private readonly cookiesService: CookiesService) { }
 
@@ -36,13 +35,15 @@ export class AuthService {
     async signIn(user: User) {
         const userStore = useUserStore();
 
-
         try {
             const data = await this.requestSignIn(user);
 
-
             this.cookiesService.setCookies("access_token", data.token);
-            userStore.setProfile(data.user)
+            userStore.setProfile(data.user);
+
+            router.push("/home");
+
+
 
         } catch (e) {
             throw e;
