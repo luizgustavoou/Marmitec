@@ -29,7 +29,7 @@ export class AuthService {
     delete user.password;
     delete user.createdAt;
     delete user.updatedAt;
-    
+
     return { user, token };
   }
 

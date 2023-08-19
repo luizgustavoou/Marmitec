@@ -6,7 +6,6 @@ export class AuthController {
   public async login(req: Request, res: Response) {
     const [hashType, hash] = (req.headers.authorization as string).split(" ");
 
-    console.log({ hashType, hash })
     const [email, password] = Buffer.from(hash, "base64").toString().split(":");
 
     try {
