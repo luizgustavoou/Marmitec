@@ -24,7 +24,16 @@ export class AuthService {
 
     if (!checkPassword) throw new Error("Error validating password.");
 
-    const token = await this.jwtService.sign({ user: user?.id });
+    const token = await this.jwtService.sign({
+      user: {
+        id: user?.id,
+        email: user?.email,
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+        adress: user?.adress,
+        phone: user?.phone,
+      }
+    });
 
     delete user.password;
     delete user.createdAt;
@@ -51,8 +60,17 @@ export class AuthService {
     delete user.createdAt;
     delete user.updatedAt;
 
-    const token = await this.jwtService.sign({ user: user.id });
+    const token = await this.jwtService.sign({
+      user: {
+        id: user?.id,
+        email: user?.email,
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+        adress: user?.adress,
+        phone: user?.phone,
+      }
+    });
 
-    return { token, user };
+    return { user, token };
   }
 }

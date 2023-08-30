@@ -40,14 +40,4 @@ export class AuthController {
       });
     }
   }
-
-  // public async getUsers(req: Request, res: Response) {
-  //   try {
-  //     const users = await User.findAll();
-
-  //     res.json(users);
-  //   } catch (error) {
-  //     res.send(error);
-  //   }
-  // }
 }

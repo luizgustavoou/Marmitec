@@ -16,6 +16,7 @@ interface IAPISignIn {
         phone: string
     },
 }
+
 export class AuthService {
     constructor(private readonly jwtService: JWTService, private readonly cookiesService: CookiesService) { }
 
@@ -28,6 +29,7 @@ export class AuthService {
         });
 
         const { data } = res;
+
 
         return data;
     }
