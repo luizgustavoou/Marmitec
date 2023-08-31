@@ -50,11 +50,13 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from) => {
+  //TODO: Essa rotina parece estar 'feia'. Rever/verificar se está boa.
   const userStore = useUserStore();
 
   const token = cookiesService.getCookies("access_token");
 
   if (!token && to.name != "auth") return "auth"
+  else if (!token && to.name == "auth") return true;
 
   const decode = jwtService.decode(token);
 

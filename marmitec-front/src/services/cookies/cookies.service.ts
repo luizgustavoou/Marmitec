@@ -9,11 +9,15 @@ export class CookiesService {
 
     getCookies(keyName: string) {
         const cookie = cookies.get(keyName)
-
+        
         return cookie;
     }
 
     existCookie(keyName: string) {
         return cookies.isKey(keyName);
+    }
+
+    remove(keyName: string) {
+        cookies.remove(keyName)
     }
 }

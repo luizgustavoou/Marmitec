@@ -52,4 +52,14 @@ export class AuthService {
         }
 
     }
+
+    async logout() {
+        const userStore = useUserStore();
+
+        this.cookiesService.remove("access_token");
+        this.cookiesService.remove("refresh_token");
+
+        userStore.$reset();
+        router.push("auth");
+    }
 }

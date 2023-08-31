@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter, useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
+import { authService } from "@/services/auth";
 
 const route = useRoute();
 
@@ -12,6 +13,10 @@ const handleSelect = (key: string, keyPath: string[]) => {
   router.push({ name: key });
 
   // console.log(route.path);
+};
+
+const handleLogout = (el: any) => {
+  authService.logout();
 };
 
 onMounted(() => {
@@ -27,7 +32,7 @@ onMounted(() => {
 <template>
   <el-menu
     :default-active="active"
-    class="el-menu-demo"
+    class="d-flex el-menu-demo"
     mode="horizontal"
     background-color="#337ecc"
     text-color="#CDD0D6"
@@ -49,6 +54,12 @@ onMounted(() => {
         >Pedidos</router-link
       > -->
       Pedidos
+    </el-menu-item>
+    <el-menu-item class="ms-auto" @click="handleLogout">
+      <!-- <router-link to="/pedidos" style="text-decoration: none"
+        >Pedidos</router-link
+      > -->
+      Sair
     </el-menu-item>
   </el-menu>
 </template>

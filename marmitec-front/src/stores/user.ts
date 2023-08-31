@@ -17,5 +17,14 @@ export const useUserStore = defineStore("user", () => {
     Object.assign(profile, newProfile);
   }
 
-  return { profile, setProfile };
+  function $reset() {
+    profile.adress = "";
+    profile.email = "";
+    profile.firstName = "";
+    profile.id = null;
+    profile.lastName = "";
+    profile.phone = "";
+  }
+
+  return { profile, setProfile, $reset };
 });
