@@ -1,8 +1,5 @@
-# Marmitec
-Um projeto para aplicar e explorar conceitos que estudei no Vue (Pinia ,etc...), Node, Typescript, ORM (Sequelize), MySQL. Além disso, Dockerizando o projeto e usando alguns princípios do S.O.L.I.D no backend.
-
 ## :memo: Descrição
-Um projeto pessoal para gerenciamento de pedidos de uma marmitaria.
+Um projeto pessoal de gerenciamento de pedidos de uma marmitaria. Aplicar e explorar conceitos que estudei no Vue (Pinia ,etc...), Node, Typescript, ORM (Sequelize), MySQL. Além disso, Dockerizando o projeto e usando alguns princípios do S.O.L.I.D no backend.
 
 ## :books: Funcionalidades
 * <b>Funcionalidade 1</b>: O que essa funcionalidade faz?
