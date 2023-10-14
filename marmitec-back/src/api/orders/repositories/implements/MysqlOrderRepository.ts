@@ -13,7 +13,7 @@ export class MysqlOrderRepository implements IOrderRepository {
 
   async findMany(): Promise<IOrder[]> {
     const orders = await Order.findAll({
-      raw: true,
+      // raw: true,
       attributes: {
         exclude: ["UserId", "DeliverymanId"],
       },
