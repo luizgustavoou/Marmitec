@@ -10,7 +10,7 @@ export class JWTService {
   constructor(private readonly secret: string) { }
 
   async sign(payload: any) {
-    return jwt.sign(payload, this.secret, { expiresIn: TIME.MINUTES_30 });
+    return jwt.sign(payload, this.secret, { expiresIn: TIME.HOURS_24 });
   }
 
   async verify(token: string) {

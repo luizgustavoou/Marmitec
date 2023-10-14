@@ -19,9 +19,10 @@ export class AuthMiddleware {
     const [hashType, token] = authHeader && authHeader.split(" ");
 
     try {
+
       const payload = await this.jwtService.verify(token);
 
-      const user = await this.userService.findUserByPk((payload as { user: number;[key: string]: any }).user);
+      const user = await this.userService.findUserByPk((payload as { user: { [key: string]: any } }).user.id);
 
       if (!user) return res.sendStatus(401);
 
@@ -29,6 +30,7 @@ export class AuthMiddleware {
 
       next();
     } catch (error) {
+      console.log(error);
       res.sendStatus(401);
     }
   };
