@@ -8,13 +8,19 @@ export const domain = `${host}:${port}`;
 
 export const api: AxiosInstance = axios.create({
   baseURL: `http://${domain}`,
-  headers: {
-    'Authorization': `Bearer ${cookiesService.getCookies("access_token")}`
-  }
 });
 
+api.interceptors.request.use(
+  config => {
+    if (config.headers) {
+      config.headers['Authorization'] = `Bearer ${cookiesService.getCookies("access_token")}`;
 
+    }
 
+    return config;
 
+  }, error => {
+    return Promise.reject(error);
+  });
 
 
