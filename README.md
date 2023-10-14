@@ -27,8 +27,8 @@ docker compose up -d
   <tr>
     <td align="center">
       <a href="https://github.com/luizgustavoou">
-<!--         <img src="https://avatars.githubusercontent.com/u/56259137?v=4" width="100px;" alt="Foto de Tati Alves no GitHub"/><br> -->
-        <sub>
+        <img src="https://avatars.githubusercontent.com/u/89609312?v=4" width="100px;" alt="Foto de Tati Alves no GitHub"/><br>
+        <sub>https://avatars.githubusercontent.com
           <b>luizgustavoou</b>
         </sub>
       </a>
