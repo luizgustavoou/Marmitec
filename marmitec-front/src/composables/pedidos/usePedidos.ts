@@ -1,28 +1,25 @@
-import { pedidosAPI } from "@/network/api";
+import { api } from "@/network/api";
 import { Form } from "@/types/Forms";
 import { IPedido } from "@/types/Pedidos";
 import { AxiosResponse } from "axios";
 
 export function usePedidos() {
+  const url = "/orders";
   async function getPedidos(): Promise<AxiosResponse<IPedido[]>> {
-    const res = await pedidosAPI().get<IPedido[]>("");
+    const res = await api.get<IPedido[]>(url);
 
     return res;
   }
 
   async function addPedido(pedido: Form) {
 
-    const res = await pedidosAPI().post("", pedido);
+    const res = await api.post(url, pedido);
 
     return res;
   }
 
   async function changeStatusPedido(id: number, newStatus: 1 | 2 | 3) {
-    //http://localhost:3333/orders/status/13
-
-    const statusPedidoURL = `status/${id}`;
-
-    const res = await pedidosAPI().put(statusPedidoURL, { newStatus });
+    const res = await api.put(`${url}/status/${id}`, { newStatus });
 
     return res;
   }

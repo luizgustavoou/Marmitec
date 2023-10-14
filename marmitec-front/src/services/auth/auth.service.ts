@@ -1,9 +1,9 @@
 import { User } from '../../types/Auth';
-import { authAPI } from '../../network/api';
 import { JWTService } from '../jwt/jwt.service';
 import { CookiesService } from '../cookies/cookies.service';
 import { useUserStore } from '@/stores/user';
 import router from '@/router';
+import { api } from '@/network/api';
 
 interface IAPISignIn {
     token: string;
@@ -18,10 +18,12 @@ interface IAPISignIn {
 }
 
 export class AuthService {
+    private url = "auth/";
+
     constructor(private readonly jwtService: JWTService, private readonly cookiesService: CookiesService) { }
 
     private async requestSignIn(user: User): Promise<IAPISignIn> {
-        const res = await authAPI().get<IAPISignIn>("login", {
+        const res = await api.get<IAPISignIn>(`${this.url}/login`, {
             auth: {
                 username: user.username,
                 password: user.password
