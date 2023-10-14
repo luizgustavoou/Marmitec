@@ -4,7 +4,7 @@ Um projeto para aplicar e explorar conceitos que estudei no Vue (Pinia ,etc...),
 <h1 align="center">:file_cabinet: Exemplo de README.md</h1>
 
 ## :memo: Descrição
-Escreva uma descrição do seu projeto
+Um projeto pessoal para gerenciamento de pedidos de uma marmitaria.
 
 ## :books: Funcionalidades
 * <b>Funcionalidade 1</b>: O que essa funcionalidade faz?
@@ -14,8 +14,9 @@ Escreva uma descrição do seu projeto
 
 ## :rocket: Rodando o projeto
 Para rodar o repositório é necessário clonar o mesmo, dar o seguinte comando para iniciar o projeto:
+
 ```
-<linha de comando>
+docker compose up -d
 ```
 
 ## :soon: Implementação futura
@@ -25,10 +26,10 @@ Para rodar o repositório é necessário clonar o mesmo, dar o seguinte comando 
 <table>
   <tr>
     <td align="center">
-      <a href="http://github.com/tatialveso">
-        <img src="https://avatars.githubusercontent.com/u/56259137?v=4" width="100px;" alt="Foto de Tati Alves no GitHub"/><br>
+      <a href="https://github.com/luizgustavoou">
+<!--         <img src="https://avatars.githubusercontent.com/u/56259137?v=4" width="100px;" alt="Foto de Tati Alves no GitHub"/><br> -->
         <sub>
-          <b>tatialveso</b>
+          <b>luizgustavoou</b>
         </sub>
       </a>
     </td>
