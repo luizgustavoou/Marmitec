@@ -55,7 +55,10 @@ onMounted(async () => {
 
     finishPedidos.value = orders.filter((pedido) => pedido.status == 3);
   } catch (error) {
-    console.log(error);
+    openMsg(
+      `Ocorreu algum error ao consultar todos os pedidos. Erro: ${error.message}`,
+      "error"
+    );
   }
 });
 

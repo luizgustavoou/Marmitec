@@ -9,12 +9,12 @@ import { authMiddleware } from "./middleware";
 const routes = Router();
 
 routes.use("/users", routerUser);
-routes.use("/orders", routesOrder);
+routes.use("/orders", authMiddleware.checkAuth.bind(authMiddleware), routesOrder);
 routes.use("/deliverys", routerDeliveryMan);
 routes.use("/auth", routerAuth);
 
 routes.get('/me', authMiddleware.checkAuth.bind(authMiddleware), (req, res) => {
-  res.json({auth: (req as any).auth})
+  res.json({ auth: (req as any).auth })
 })
 
 export default routes;

@@ -14,7 +14,7 @@ export class AuthMiddleware {
     res: Response,
     next: NextFunction
   ) {
-    const authHeader = req.headers.authorization;
+    const authHeader = req.headers.authorization || "";
 
     const [hashType, token] = authHeader && authHeader.split(" ");
 
