@@ -2,7 +2,10 @@
 Um projeto pessoal de gerenciamento de pedidos de uma marmitaria. Aplicar e explorar conceitos que estudei no Vue (Pinia ,etc...), Node, Typescript, ORM (Sequelize), MySQL. Além disso, Dockerizando o projeto e usando alguns princípios do S.O.L.I.D no backend.
 
 ## :books: Funcionalidades
-* <b>Funcionalidade 1</b>: O que essa funcionalidade faz?
+* <b>Autenticação</b>;
+* <b>Adicionar pedido</b>;
+* <b>Visualizar pedidos</b>;
+* <b>Alterar estado do pedido para Solicitado, Andamento ou Finalizado</b>;
 
 ## :wrench: Tecnologias utilizadas
 * VueJS;
@@ -35,3 +38,4 @@ docker compose up -d
 </table>
 
 ## :dart: Status do projeto
+Finalizado
