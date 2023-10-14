@@ -1,7 +1,5 @@
 # Marmitec
 Um projeto para aplicar e explorar conceitos que estudei no Vue (Pinia ,etc...), Node, Typescript, ORM (Sequelize), MySQL. Além disso, Dockerizando o projeto e usando alguns princípios do S.O.L.I.D no backend.
-# readme-model
-<h1 align="center">:file_cabinet: Exemplo de README.md</h1>
 
 ## :memo: Descrição
 Um projeto pessoal para gerenciamento de pedidos de uma marmitaria.
