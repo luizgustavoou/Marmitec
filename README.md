@@ -5,7 +5,10 @@ Um projeto pessoal de gerenciamento de pedidos de uma marmitaria. Aplicar e expl
 * <b>Funcionalidade 1</b>: O que essa funcionalidade faz?
 
 ## :wrench: Tecnologias utilizadas
-* Tecnologia;
+* VueJS;
+* NodeJS;
+* MySQL;
+* Docker;
 
 ## :rocket: Rodando o projeto
 Para rodar o repositório é necessário clonar o mesmo, dar o seguinte comando para iniciar o projeto:
