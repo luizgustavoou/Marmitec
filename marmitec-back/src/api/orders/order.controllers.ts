@@ -3,13 +3,18 @@ import { Request, Response } from "express";
 import { OrderService } from "./order.service";
 
 export class OrderController {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(private readonly orderService: OrderService) { }
 
   public async save(req: Request, res: Response): Promise<Response> {
     try {
+      const idUser = (req as any).auth.id;
+
       const { proteinas, acompanhamentos, ...restOrder } = req.body;
 
       const orderRequest = { ...proteinas, ...acompanhamentos, ...restOrder };
+
+      if (idUser)
+        orderRequest['UserId'] = idUser;
 
       const order = await this.orderService.createOrder(orderRequest);
 
@@ -26,7 +31,7 @@ export class OrderController {
       const orders = await this.orderService.findOrders();
 
       // console.log(orders);
-      
+
       return res.json(orders);
     } catch (err) {
       return res.status(400).json({

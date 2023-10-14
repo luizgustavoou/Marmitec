@@ -18,7 +18,6 @@ export class AuthMiddleware {
 
     const [hashType, token] = authHeader && authHeader.split(" ");
 
-    console.log({ hashType, token })
     try {
 
       const payload = await this.jwtService.verify(token);

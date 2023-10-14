@@ -5,6 +5,7 @@ import { AxiosResponse } from "axios";
 
 export function usePedidos() {
   const url = "/orders";
+  
   async function getPedidos(): Promise<AxiosResponse<IPedido[]>> {
     const res = await api.get<IPedido[]>(url);
 
