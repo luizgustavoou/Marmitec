@@ -21,7 +21,7 @@ docker compose up -d
 ```
 
 ## :soon: Implementação futura
-* O que será implementado na próxima sprint?
+* <b>Gerenciar a atualizações dos pedidos por meio de filas</b>;
 
 ## :handshake: Colaboradores
 <table>
