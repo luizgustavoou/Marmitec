@@ -15,7 +15,7 @@ Um projeto pessoal de gerenciamento de pedidos de uma marmitaria. Aplicar e expl
 * Docker;
 ## Front end
 * VueJS;
-## :wrench: Ferramentas utilizadas
+## Infraestrutura
 * Docker;
 
 ## :rocket: Rodando o projeto
