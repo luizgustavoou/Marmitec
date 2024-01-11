@@ -27,12 +27,26 @@ Um projeto pessoal de gerenciamento de pedidos de uma marmitaria. Aplicar e expl
 * Docker;
 
 ## :rocket: Rodando o projeto
+Pré-requisitos: npm / yarn
 ```bash
 # clonar repositório
 git clone https://github.com/luizgustavoou/Marmitec.git
 
 # entrar na pasta do projeto front end web
 cd Marmitec
+
+cd marmitec-back/
+
+# instalar depedências do frontend
+npm i
+
+cd ../
+
+cd marmitec-front/
+
+# instalar depedências do frontend
+npm i
+cd ../
 
 # rodar aplicação
 docker compose up -d
