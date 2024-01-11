@@ -1,6 +1,10 @@
 ## :memo: Descrição
 Um projeto pessoal de gerenciamento de pedidos de uma marmitaria. Aplicar e explorar conceitos que estudei no Vue (Pinia ,etc...), Node, Typescript, ORM (Sequelize), MySQL. Além disso, Dockerizando o projeto e usando alguns princípios do S.O.L.I.D no backend.
 
+## Layout web
+![login-marmitec](https://github.com/luizgustavoou/Marmitec/assets/89609312/8d35f3b6-84ff-4d92-b77e-26231ad73612)
+
+
 ## :books: Funcionalidades
 * <b>Autenticação</b>;
 * <b>Adicionar pedido</b>;
