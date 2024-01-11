@@ -3,6 +3,9 @@ Um projeto pessoal de gerenciamento de pedidos de uma marmitaria. Aplicar e expl
 
 ## Layout web
 ![login-marmitec](https://github.com/luizgustavoou/Marmitec/assets/89609312/8d35f3b6-84ff-4d92-b77e-26231ad73612)
+![fazer-pedidos-marmitec](https://github.com/luizgustavoou/Marmitec/assets/89609312/375e6d98-3113-4b97-bf40-b4318d6fdc04)
+![finalizar-pedido-marmitec](https://github.com/luizgustavoou/Marmitec/assets/89609312/e78560f7-1df8-4224-aee4-2cfa4635e46a)
+![dashboard-pedido-marmitec](https://github.com/luizgustavoou/Marmitec/assets/89609312/72a056f6-fcef-4bd6-9d31-a69eb7837b83)
 
 
 ## :books: Funcionalidades
