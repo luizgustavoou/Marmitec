@@ -7,10 +7,15 @@ Um projeto pessoal de gerenciamento de pedidos de uma marmitaria. Aplicar e expl
 * <b>Visualizar pedidos</b>;
 * <b>Alterar estado do pedido para Solicitado, Andamento ou Finalizado</b>;
 
-## :wrench: Tecnologias utilizadas
-* VueJS;
+
+# :wrench: Tecnologias utilizadas
+## Back end
 * NodeJS;
 * MySQL;
+* Docker;
+## Front end
+* VueJS;
+## :wrench: Ferramentas utilizadas
 * Docker;
 
 ## :rocket: Rodando o projeto
