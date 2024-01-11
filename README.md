@@ -2,6 +2,7 @@
 Um projeto pessoal de gerenciamento de pedidos de uma marmitaria. Aplicar e explorar conceitos que estudei no Vue (Pinia ,etc...), Node, Typescript, ORM (Sequelize), MySQL. Além disso, Dockerizando o projeto e usando alguns princípios do S.O.L.I.D no backend.
 
 ## Layout web
+[demonstracao-dashboard-pedido.webm](https://github.com/luizgustavoou/Marmitec/assets/89609312/bf47cf59-210f-479e-9c8d-2cf471d5b3c9)
 ![login-marmitec](https://github.com/luizgustavoou/Marmitec/assets/89609312/8d35f3b6-84ff-4d92-b77e-26231ad73612)
 ![fazer-pedidos-marmitec](https://github.com/luizgustavoou/Marmitec/assets/89609312/375e6d98-3113-4b97-bf40-b4318d6fdc04)
 ![finalizar-pedido-marmitec](https://github.com/luizgustavoou/Marmitec/assets/89609312/e78560f7-1df8-4224-aee4-2cfa4635e46a)
