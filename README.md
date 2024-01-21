@@ -27,7 +27,8 @@ Um projeto pessoal de gerenciamento de pedidos de uma marmitaria. Aplicar e expl
 * Docker;
 
 ## :rocket: Rodando o projeto
-Pré-requisitos: npm / yarn
+Pré-requisitos: npm / yarn e Docker instalado
+
 ```bash
 # clonar repositório
 git clone https://github.com/luizgustavoou/Marmitec.git
