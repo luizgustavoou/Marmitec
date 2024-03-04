@@ -1,5 +1,5 @@
 ## :memo: Descrição
-Um projeto pessoal de gerenciamento de pedidos de uma marmitaria. Aplicar e explorar conceitos que estudei no Vue (Pinia ,etc...), Node, Typescript, ORM (Sequelize), MySQL. Além disso, Dockerizando o projeto e usando alguns princípios do S.O.L.I.D no backend.
+A aplicação consiste em um gerenciamento de pedidos de uma marmitaria.
 
 ## Layout web
 [demonstracao-dashboard-pedido.webm](https://github.com/luizgustavoou/Marmitec/assets/89609312/bf47cf59-210f-479e-9c8d-2cf471d5b3c9)
@@ -20,9 +20,18 @@ Um projeto pessoal de gerenciamento de pedidos de uma marmitaria. Aplicar e expl
 ## Back end
 * NodeJS;
 * MySQL;
-* Docker;
+* Socket io server;
 ## Front end
 * VueJS;
+* Pinia;
+* Socket io client;
+* Bootstrap;
+* Elemntplus
+* jsonwebtoken;
+* jwt-decode;
+* vue3-cookies;
+* vuedraggable;
+  
 ## Infraestrutura
 * Docker;
 
