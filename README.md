@@ -1,5 +1,5 @@
 ## :memo: Descrição
-A aplicação consiste em um gerenciamento de pedidos de uma marmitaria.
+Aplicação desenvolvida para facilitar o processo de recebimento, acompanhamento e conclusão de pedidos em um estabelecimento de alimentação. Com um sistema intuitivo e funcionalidades bem definidas, o projeto visa otimizar a gestão de pedidos.
 
 ## Layout web
 [demonstracao-dashboard-pedido.webm](https://github.com/luizgustavoou/Marmitec/assets/89609312/bf47cf59-210f-479e-9c8d-2cf471d5b3c9)
