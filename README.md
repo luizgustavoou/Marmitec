@@ -1,83 +1,77 @@
-## :memo: Descrição
-Aplicação desenvolvida para facilitar o processo de recebimento, acompanhamento e conclusão de pedidos em um estabelecimento de alimentação. Com um sistema intuitivo e funcionalidades bem definidas, o projeto visa otimizar a gestão de pedidos.
+# Marmitec
 
-## Layout web
+## :memo: Description
+Marmitec is an application developed to streamline the process of receiving, tracking, and completing orders in a food establishment. With an intuitive system and well-defined features, the project aims to optimize order management.
+
+## Web Layout
 [demonstracao-dashboard-pedido.webm](https://github.com/luizgustavoou/Marmitec/assets/89609312/bf47cf59-210f-479e-9c8d-2cf471d5b3c9)
 ![login-marmitec](https://github.com/luizgustavoou/Marmitec/assets/89609312/8d35f3b6-84ff-4d92-b77e-26231ad73612)
 ![fazer-pedidos-marmitec](https://github.com/luizgustavoou/Marmitec/assets/89609312/375e6d98-3113-4b97-bf40-b4318d6fdc04)
 ![finalizar-pedido-marmitec](https://github.com/luizgustavoou/Marmitec/assets/89609312/e78560f7-1df8-4224-aee4-2cfa4635e46a)
 ![dashboard-pedido-marmitec](https://github.com/luizgustavoou/Marmitec/assets/89609312/72a056f6-fcef-4bd6-9d31-a69eb7837b83)
 
+## :books: Features
+* **Authentication**
+* **Add Order**
+* **View Orders**
+* **Change order status to Requested, In Progress, or Completed**
 
-## :books: Funcionalidades
-* <b>Autenticação</b>;
-* <b>Adicionar pedido</b>;
-* <b>Visualizar pedidos</b>;
-* <b>Alterar estado do pedido para Solicitado, Andamento ou Finalizado</b>;
+# :wrench: Technologies Used
+## Backend
+* NodeJS
+* MySQL
+* Socket.io server
 
+## Frontend
+* VueJS
+* Pinia
+* Socket.io client
+* Bootstrap
+* ElementPlus
+* jsonwebtoken
+* jwt-decode
+* vue3-cookies
+* vuedraggable
 
-# :wrench: Tecnologias utilizadas
-## Back end
-* NodeJS;
-* MySQL;
-* Socket io server;
-## Front end
-* VueJS;
-* Pinia;
-* Socket io client;
-* Bootstrap;
-* Elemntplus
-* jsonwebtoken;
-* jwt-decode;
-* vue3-cookies;
-* vuedraggable;
-  
-## Infraestrutura
-* Docker;
+## Infrastructure
+* Docker
 
-## :rocket: Rodando o projeto
-Pré-requisitos: npm / yarn e Docker instalado
+## :rocket: Running the Project
+Prerequisites: npm / yarn and Docker installed
 
 ```bash
-# clonar repositório
+# clone the repository
 git clone https://github.com/luizgustavoou/Marmitec.git
 
-# entrar na pasta do projeto front end web
+# navigate to the project directory
 cd Marmitec
 
+# install backend dependencies
 cd marmitec-back/
 
-# instalar depedências do frontend
 npm i
 
+
+
+# install frontend dependencies
 cd ../
 
 cd marmitec-front/
 
-# instalar depedências do frontend
 npm i
+
+
+# run the application
 cd ../
 
-# rodar aplicação
 docker compose up -d
 ```
 
-## :soon: Implementação futura
-* <b>Gerenciar a atualizações dos pedidos por meio de filas</b>;
+## :soon: Future Implementations
+* **Manage order updates via queues**
 
-## :handshake: Colaboradores
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/luizgustavoou">
-        <img src="https://avatars.githubusercontent.com/u/89609312?v=4" width="100px;" alt="Foto de Tati Alves no GitHub"/><br>
-        <sub>https://avatars.githubusercontent.com
-          <b>luizgustavoou</b>
-        </sub>
-      </a>
-    </td>
-  </tr>
-</table>
+## :handshake: Collaborators
+<a href="https://github.com/luizgustavoou">Luiz Gustavo de Oliveira Umbelino</a><br>
 
-## :dart: Status do projeto
-Finalizado
+## :dart: Project Status
+Completed
